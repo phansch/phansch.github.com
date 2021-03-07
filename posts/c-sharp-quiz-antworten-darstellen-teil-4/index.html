@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>C# Quiz - Antworten darstellen (Teil 4)</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="C# Quiz - Antworten darstellen (Teil 4)">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">C# Quiz - Antworten darstellen (Teil 4)</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;c-sharp-quiz-antworten-darstellen-teil-4&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2010-09-18">18 Sep 2010</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  5  min read
+</em>
+      </p>
+      <div class="e-content"><p>Nachdem wir die <a href="http://phansch.net/2010/07/22/c-sharp-quiz-fragen-auslesen-teil-3">Fragen anzeigen lassen</a> können, werden wir uns jetzt um die Antworten kümmern.</p>
+<p>Die Antworten sind ebenfalls im .xml Format gespeichert:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">antworten</span><span style="color:#c0c5ce;">&gt;
+  &lt;</span><span style="color:#bf616a;">antwort id</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">1</span><span style="color:#c0c5ce;">&quot;&gt;</span><span style="color:#bf616a;">Fast immer</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">antwort</span><span style="color:#c0c5ce;">&gt;
+  &lt;</span><span style="color:#bf616a;">antwort id</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">2</span><span style="color:#c0c5ce;">&quot;&gt;</span><span style="color:#bf616a;">Oft</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">antwort</span><span style="color:#c0c5ce;">&gt;
+  &lt;</span><span style="color:#bf616a;">antwort id</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">3</span><span style="color:#c0c5ce;">&quot;&gt;</span><span style="color:#bf616a;">Manchmal</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">antwort</span><span style="color:#c0c5ce;">&gt;
+  &lt;</span><span style="color:#bf616a;">antwort id</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">4</span><span style="color:#c0c5ce;">&quot;&gt;</span><span style="color:#bf616a;">Ganz selten</span><span style="color:#c0c5ce;">&lt;/</span><span style="color:#bf616a;">antwort</span><span style="color:#c0c5ce;">&gt;
+&lt;/</span><span style="color:#bf616a;">antworten</span><span style="color:#c0c5ce;">&gt;
+</span></code></pre>
+<p>Genauso wie die Fragen, sollen sich die Antworten anpassen und erweitern lassen.</p>
+<h2 id="die-klasse-answers">Die Klasse <em>Answers</em></h2>
+<p>Im letzten Teil haben wir die Basisklasse <em>QuizXml</em> erstellt. Diese können wir jetzt wieder für die Antworten verwenden.
+Das Grundgerüst sieht so aus:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">Answers </span><span style="color:#eff1f5;">: </span><span style="color:#a3be8c;">QuizXml
+</span><span style="color:#eff1f5;">{
+    </span><span style="color:#b48ead;">private string</span><span style="color:#eff1f5;">[] </span><span style="color:#bf616a;">str_answers</span><span style="color:#eff1f5;">;
+    </span><span style="color:#b48ead;">private </span><span style="color:#eff1f5;">RadioButton[] </span><span style="color:#bf616a;">rdb_answers</span><span style="color:#eff1f5;">;
+
+    </span><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+    /// Constructor
+    /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+    public Answers() { }
+
+    /// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+    /// Returns an array of RadioButton Controls
+    /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+    public RadioButton[] ArrAnswers { }
+
+    private void ToRadioButton() { }
+</span><span style="color:#eff1f5;">}
+</span></code></pre>
+<p>Der Konstruktor der abgeleiteten Klasse <em>Answers</em> legt sämtliche Properties fest und ruft die Methode <em>PopulateArray()</em> auf. Außerdem wird das Array initialisiert und selbiges in RadioButtons konvertiert.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">public </span><span style="color:#bf616a;">Answers</span><span style="color:#c0c5ce;">()
+{
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data </span><span style="color:#c0c5ce;">= new </span><span style="color:#b48ead;">string</span><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">];
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Path </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Antworten.xml</span><span style="color:#c0c5ce;">&quot;;
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">xmlElement </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">antworten</span><span style="color:#c0c5ce;">&quot;;
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">xmlSub </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">antwort</span><span style="color:#c0c5ce;">&quot;;
+
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">PopulateArray</span><span style="color:#c0c5ce;">();
+
+    </span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">str_answers </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ToRadioButton</span><span style="color:#c0c5ce;">();
+}
+</span></code></pre>
+<p>Neu ist eigentlich nur die Methode <em>ToRadioButton()</em>:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">ToRadioButton</span><span style="color:#c0c5ce;">()
+{
+    </span><span style="color:#bf616a;">rdb_answers </span><span style="color:#c0c5ce;">= new RadioButton[</span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Count</span><span style="color:#c0c5ce;">];
+    </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">index </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">string </span><span style="color:#bf616a;">answer </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">str_answers</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">rdb_answers</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">] = new RadioButton();
+        </span><span style="color:#bf616a;">rdb_answers</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">].</span><span style="color:#bf616a;">Name </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">rdb_</span><span style="color:#c0c5ce;">&quot; + </span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">;
+        </span><span style="color:#bf616a;">rdb_answers</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">].</span><span style="color:#bf616a;">Text </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">answer</span><span style="color:#c0c5ce;">;
+        </span><span style="color:#bf616a;">rdb_answers</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">].</span><span style="color:#bf616a;">Top </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">40 </span><span style="color:#c0c5ce;">+ (</span><span style="color:#bf616a;">index </span><span style="color:#c0c5ce;">* </span><span style="color:#d08770;">30</span><span style="color:#c0c5ce;">);
+        </span><span style="color:#bf616a;">rdb_answers</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">].</span><span style="color:#bf616a;">Left </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">20</span><span style="color:#c0c5ce;">;
+        </span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">++;
+    }
+}
+</span></code></pre>
+<p>Hier wird für jede vorhandene Antwort ein neuer <em>RadioButton</em> erzeugt. Außerdem wird ein <em>EventHandler</em> für das <em>Click</em>-Event festgelegt.</p>
+<p>Die Eigenschaft <em>ArrAnswers</em> gibt das komplette RadioButton Array zurück:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+/// Returns an array of RadioButton Controls
+/// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+public RadioButton[] ArrAnswers
+</span><span style="color:#c0c5ce;">{
+    </span><span style="color:#bf616a;">get
+    </span><span style="color:#c0c5ce;">{
+        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">rdb_answers</span><span style="color:#c0c5ce;">;
+    }
+}
+</span></code></pre><h2 id="anwendung-der-klasse-im-fragebogen">Anwendung der Klasse im Fragebogen</h2>
+<p>Die Anpassung der Form ist recht einfach. Wir fügen der Methode Form1_Load() folgende Zeile hinzu:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Controls</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">AddRange</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ArrAnswers</span><span style="color:#c0c5ce;">);
+</span></code></pre><!--[![button_next](http://wpimages.phansch.de/2010/06/button_next.png)](http://wpimages.phansch.de/2010/06/button_next.png)-->
+<p>Weiterhin soll man den Weiter-Button nicht benutzen können, bevor eine Antwort ausgewählt ist. Dazu wird die Eigenschaft <em>enabled</em> des Buttons <em>button_next</em> zunächst auf <em>false</em> gesetzt.</p>
+<p>Wenn nun eine Antwort ausgewählt wird, soll der Button aktiviert werden. Dazu müssen wir jedem unserer <em>RadioButtons</em> einen <em>EventHandler</em> zuweisen.</p>
+<p>Der EventHandler aktiviert den Button <em>button_next</em> wieder. Außerdem werden wir im letzten Teil dieser Reihe an dieser Stelle die Antworten sammeln.</p>
+<p>In der Methode Form1_Load fügen wir jedem RadioButton einen Click-Eventhandler hinzu:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">//Add an eventhandler for each radiobutton
+</span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(RadioButton </span><span style="color:#bf616a;">rdb </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ArrAnswers</span><span style="color:#c0c5ce;">)
+{
+    </span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Click </span><span style="color:#c0c5ce;">+= </span><span style="color:#bf616a;">Handler</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>Die Methode Handler aktiviert den Weiter-Button wieder wenn ein Click-Event von einem der RadioButtons ausgeht.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+/// Eventhandler for the Radiobuttons.
+/// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+/// &lt;</span><span style="color:#bf616a;">param </span><span style="color:#d08770;">name</span><span style="color:#65737e;">=</span><span style="color:#a3be8c;">&quot;sender&quot;</span><span style="color:#65737e;">&gt;&lt;/</span><span style="color:#bf616a;">param</span><span style="color:#65737e;">&gt;
+/// &lt;</span><span style="color:#bf616a;">param </span><span style="color:#d08770;">name</span><span style="color:#65737e;">=</span><span style="color:#a3be8c;">&quot;e&quot;</span><span style="color:#65737e;">&gt;&lt;/</span><span style="color:#bf616a;">param</span><span style="color:#65737e;">&gt;
+private void Handler(object sender, EventArgs e)
+</span><span style="color:#c0c5ce;">{
+    </span><span style="color:#bf616a;">button_next</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Enabled </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>Nun muss noch die Methode button_next_Click() erweitert werden. Dort wird die vorherige Antwort und der Weiter-Button wieder deaktiviert:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">button_next_Click</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">object </span><span style="color:#bf616a;">sender</span><span style="color:#c0c5ce;">, EventArgs </span><span style="color:#bf616a;">e</span><span style="color:#c0c5ce;">)
+{
+    </span><span style="color:#bf616a;">UpdateQuestion</span><span style="color:#c0c5ce;">();
+
+    </span><span style="color:#65737e;">//deselect the last answer
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(RadioButton </span><span style="color:#bf616a;">rdb </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ArrAnswers</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Checked </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">)
+        {
+            </span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Checked </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+            </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">;
+        }
+    }
+
+    </span><span style="color:#bf616a;">button_next</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Enabled </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>Um zu verhinden, dass nach der letzten Frage die Antworten angezeigt werden, müssen wir die Methoden <em>EndReached()</em> und <em>Restart()</em> erweitern:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">EndReached</span><span style="color:#c0c5ce;">()
+{
+    </span><span style="color:#65737e;">//.
+    //. //Skipped some lines here
+    //.
+
+    //Set all Answers invisible
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(RadioButton </span><span style="color:#bf616a;">rdb </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ArrAnswers</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Visible </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+    }
+}
+
+</span><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">Restart</span><span style="color:#c0c5ce;">()
+{
+    </span><span style="color:#65737e;">//.
+    //. //Skipped some lines here
+    //.
+
+    //Set all Answers visible
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(RadioButton </span><span style="color:#bf616a;">rdb </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ArrAnswers</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Visible </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+    }
+}
+</span></code></pre>
+<p>Das war's auch schon. Wir können nun beliebige Fragen und Antworten ausgeben lassen und den Test wiederholen. Damit haben wir schon über die Hälfte unserer Anforderungen an das Programm erfüllt. Nun fehlt nur noch eine grafische Darstellung der Testergebnisse.</p>
+<p>Die bisherige Lösung als .zip Datei: <!--[CSharpQuiz_4](http://wpimages.phansch.de/2010/06/CSharpQuiz_4.zip)--> Nicht mehr verfügbar.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

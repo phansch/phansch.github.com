@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Automating your deployments from Travis to Heroku</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Automating your deployments from Travis to Heroku">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Automating your deployments from Travis to Heroku</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;travis-heroku-rails&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2014-02-17">17 Feb 2014</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  5  min read
+</em>
+      </p>
+      <div class="e-content"><p>While this post might seem very concise and short, it really took some time until I was happy with the current setup.
+This setup is relatively simple in retrospect, but it was hard to find any documentation on how to set everything up correctly.</p>
+<p>This post is for people who have some basic experience with Ruby on Rails, Test Driven Development and also have a rough idea what Continuous Integration or Continuous Deployment are about.
+I assume you already know how to <a href="http://docs.travis-ci.com/user/getting-started/">connect a GitHub repository with Travis</a>. You will also need a <a href="http://heroku.com">Heroku</a> account.</p>
+<p>The goal is to automatically deploy successful builds from Travis to Heroku.</p>
+<small>
+Credit: A good part of this post was inspired by [this](http://stackoverflow.com/a/14788282/3298908) awesome Stack Overflow post.
+</small>
+<h2 id="the-problems-with-secrets-and-open-source">The problems with secrets and open source</h2>
+<p>When working on an open source project, how do you keep stuff like the Rails Secret Token an actual secret? Where do you put API keys that are required in production?
+You don't want to keep passwords and otherwise secret stuff in your GitHub repository. However, at the same time it should be easy for contributors to get started quickly.</p>
+<h2 id="the-joy-of-continuous-deployments">The joy of continuous deployments</h2>
+<p>Not so long ago, people used to upload their changed files via FTP to their servers. Luckily we don't have to do that anymore. Continuous deployments allow you to automate updating your production environment. Let's see how to do this with Travis CI and Heroku.</p>
+<h2 id="local-setup">Local setup</h2>
+<p>Starting with the local setup, first we need to setup the <code>secret_token.rb</code> and the <code>database.yml</code>.</p>
+<p><strong>config/initializers/secret_token.rb</strong></p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#ebcb8b;">App</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Application</span><span style="color:#c0c5ce;">.config.secret_key_base = </span><span style="color:#bf616a;">ENV</span><span style="color:#c0c5ce;">[&#39;</span><span style="color:#a3be8c;">SECRET_TOKEN</span><span style="color:#c0c5ce;">&#39;]
+</span></code></pre>
+<p><strong>config/database.yml</strong></p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">postgresql</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">&amp;</span><span style="color:#c0c5ce;">postgresql
+</span><span style="color:#bf616a;">adapter</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">postgresql
+database</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">&lt;%= ENV[&#39;DB_NAME&#39;] %&gt;
+username</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">&lt;%= ENV[&#39;DB_USER&#39;] %&gt;
+password</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">&lt;%= ENV[&#39;DB_PASSWORD&#39;] %&gt;
+min_messages</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">ERROR
+
+defaults</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">&amp;</span><span style="color:#c0c5ce;">defaults
+</span><span style="color:#bf616a;">pool</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">5
+</span><span style="color:#bf616a;">timeout</span><span style="color:#c0c5ce;">: </span><span style="color:#d08770;">5000
+</span><span style="color:#bf616a;">host</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">localhost
+</span><span style="color:#d08770;">&lt;&lt;</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">*</span><span style="color:#bf616a;">&lt;%= ENV[&#39;DB&#39;] || &quot;postgresql&quot; %&gt;
+
+development</span><span style="color:#c0c5ce;">:
+</span><span style="color:#d08770;">&lt;&lt;</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">*</span><span style="color:#bf616a;">defaults
+
+test</span><span style="color:#c0c5ce;">:
+</span><span style="color:#d08770;">&lt;&lt;</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">*</span><span style="color:#bf616a;">defaults
+
+production</span><span style="color:#c0c5ce;">:
+</span><span style="color:#d08770;">&lt;&lt;</span><span style="color:#c0c5ce;">: </span><span style="color:#b48ead;">*</span><span style="color:#bf616a;">defaults
+</span></code></pre>
+<p>There are a couple things to say about this file.</p>
+<ol>
+<li>It is parsed by Ruby's ERB interpreter (<a href="http://www.ruby-doc.org/stdlib-2.1.0/libdoc/erb/rdoc/ERB.html">yes, Ruby</a> — not Rails). This allows us to read the environment variables we will set up in the next step.</li>
+<li>We are using fancy yaml here in order to avoid repetition. Note the <code>*</code>, <code>&amp;</code> and <code>&lt;&lt;</code> in there. Using <code>&amp;</code> creates something like a constant. In yaml, this is called an anchor. We can access the value of this anchor by using the <code>*</code>.
+Finally, the <code>&lt;&lt;</code> inserts the content of that node.</li>
+</ol>
+<p><strong>Enter the dotenv gem</strong></p>
+<p>In order to set the environment variables on your local machine, I am using <a href="https://github.com/bkeepers/dotenv">dotenv</a>.
+Add this gem to the top of your gemfile and run <code>bundle install</code> afterwards.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#8fa1b3;">gem </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">dotenv-rails</span><span style="color:#c0c5ce;">&#39;</span><span style="color:#8fa1b3;">, </span><span style="color:#a3be8c;">:groups </span><span style="color:#8fa1b3;">=&gt; [</span><span style="color:#a3be8c;">:development</span><span style="color:#8fa1b3;">, </span><span style="color:#a3be8c;">:test</span><span style="color:#8fa1b3;">]
+</span></code></pre>
+<p>Dotenv creates environment variables from the contents of <code>.env</code> files. This is what we need in order to manage different databases and users for our test and development environment.</p>
+<p>The <code>.env</code> files look something like this:</p>
+<pre style="background-color:#2b303b;">
+<code># .env.development
+SECRET_TOKEN=generate this with &quot;rake secret&quot;
+DB_NAME=project_development
+DB_USER=username
+DB_PASSWORD=password
+</code></pre>
+<p>There are separate files for each environment. For the test environment, specify the test database:</p>
+<pre style="background-color:#2b303b;">
+<code># .env.test
+SECRET_TOKEN=generate this with &quot;rake secret&quot;
+DB_NAME=project_test
+DB_USER=username
+DB_PASSWORD=password
+</code></pre>
+<p>Don't forget to add these files to your .gitignore.</p>
+<h2 id="travis-ci-setup">Travis CI Setup</h2>
+<p>The travis setup is very simple. First you will have to encrypt your secret data with <code>travis encrypt</code>.</p>
+<pre style="background-color:#2b303b;">
+<code>gem install travis
+
+travis encrypt HEROKU_API_KEY=YOUR_HEROKU_API_KEY --add
+travis encrypt HEROKU_GIT_URL=YOUR_HEROKU_GIT_URL --add
+travis encrypt SECRET_TOKEN=YOUR_SECRET_TOKEN --add
+travis encrypt DB_NAME=YOUR_DB_NAME_UNDER_TEST --add
+travis encrypt DB_USER=YOUR_DB_USER_UNDER_TEST --add
+travis encrypt DB_PASSWORD=YOUR_DB_PASSWORD_UNDER_TEST --add
+</code></pre>
+<p>Your <em>Heroku API key</em> can be found <a href="https://dashboard.heroku.com/account#api-key">here</a> and the <em>Heroku Git Url</em> can be found in the settings of your Heroku project.</p>
+<p><strong>.travis.yml</strong></p>
+<p>This is where the integration with Heroku is configured. In the <code>after_success</code> section we push our changes to Heroku if the build was successful.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">rvm</span><span style="color:#c0c5ce;">:
+  - </span><span style="color:#d08770;">2.1.0
+</span><span style="color:#bf616a;">env</span><span style="color:#c0c5ce;">:
+  </span><span style="color:#bf616a;">global</span><span style="color:#c0c5ce;">:
+    </span><span style="color:#65737e;"># your encrypted values will have been added here.
+</span><span style="color:#bf616a;">matrix</span><span style="color:#c0c5ce;">:
+  - </span><span style="color:#bf616a;">DB</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">postgresql
+before_script</span><span style="color:#c0c5ce;">:
+  - </span><span style="color:#bf616a;">psql -c &quot;create database $DB_NAME;&quot; -U $DB_USER
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#bf616a;">RAILS_ENV=test bundle exec rake db:migrate
+script</span><span style="color:#c0c5ce;">:
+  - </span><span style="color:#bf616a;">bundle exec rspec spec/
+after_success</span><span style="color:#c0c5ce;">:
+  - </span><span style="color:#a3be8c;">gem install heroku
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">git remote add heroku $HEROKU_GIT_URL
+  </span><span style="color:#65737e;"># Turn off warnings about SSH keys:
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">echo &quot;Host heroku.com&quot; &gt;&gt; ~/.ssh/config
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">echo &quot; StrictHostKeyChecking no&quot; &gt;&gt; ~/.ssh/config
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">echo &quot; CheckHostIP no&quot; &gt;&gt; ~/.ssh/config
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">echo &quot; UserKnownHostsFile=/dev/null&quot; &gt;&gt; ~/.ssh/config
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">heroku keys:clear
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">yes | heroku keys:add
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#a3be8c;">yes | git push heroku master
+</span></code></pre>
+<p>An alternative to the <code>after_success</code> section is the <a href="http://docs.travis-ci.com/user/deployment/heroku/">deploy section</a>. But the current solution seem to be working fine right now.</p>
+<h2 id="heroku-setup">Heroku Setup</h2>
+<p>The Heroku setup is even simpler. First, install the heroku gem:</p>
+<pre style="background-color:#2b303b;">
+<code>gem install heroku
+</code></pre>
+<p>Then set up any environment variables you need:</p>
+<pre style="background-color:#2b303b;">
+<code>heroku config:set SECRET_TOKEN=YOUR_SECRET_TOKEN
+heroku config:set DB_NAME=YOUR_DB_NAME_UNDER_PRODUCTION # eg your_app_production
+heroku config:set DB_USER=YOUR_DB_USER_UNDER_PRODUCTION
+heroku config:set DB_PASSWORD=YOUR_DB_PASSWORD_UNDER_PRODUCTION
+</code></pre>
+<hr />
+<p><strong>And you're done!</strong> Now, whenever you push your changes to GitHub, the Travis build will be started. If the build was successful, the changes will automatically be pushed to Heroku.</p>
+<p>Let me know if that worked for you as well.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

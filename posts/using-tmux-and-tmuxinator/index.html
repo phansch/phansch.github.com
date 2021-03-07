@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Using tmux and tmuxinator</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Using tmux and tmuxinator">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Using tmux and tmuxinator</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;using-tmux-and-tmuxinator&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2014-03-10">10 Mar 2014</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  3  min read
+</em>
+      </p>
+      <div class="e-content"><p>This is what I have been using for a couple weeks now and it's so amazing, I have to share it with you.
+Up until a few months ago, I was using the standard command line of my OS. Now, there's nothing wrong with it, but I always like to work on improving my tools.</p>
+<p>For one, switching tabs in the terminal was inconvenient. Then the different tab setup every day made it hard to get used to a specific pattern.
+This is no longer a problem with <a href="http://en.wikipedia.org/wiki/Tmux">tmux</a> and <a href="https://github.com/tmuxinator/tmuxinator">tmuxinator</a>.</p>
+<p><em>Tmux</em> is short for terminal multiplexer which is a fancy way for saying that it allows you to switch between multiple programs in one terminal. Tmux can do much more, but I am going to focus on window management for this post.</p>
+<p><em>Tmuxinator</em> allows you to easily script tmux sessions. I am using tmuxinator to setup different window layouts for each of my projects.</p>
+<h2 id="tmux-windows-and-panes">Tmux windows and panes</h2>
+<p>The idea of tmux is that you have one single terminal window with multiple tabs inside. In each tab you have the ability to split up your window into multiple panes.
+To start a simple tmux session just run <code>tmux</code>.</p>
+<p>You can open new tabs with <kbd>ctrl</kbd> + <kbd>b</kbd> + <kbd>c</kbd> and close them with <kbd>ctrl</kbd> + <kbd>b</kbd> + <kbd>x</kbd>.</p>
+<p>To switch between tabs use <kbd>ctrl</kbd> +  <kbd>b</kbd> + <kbd>tab-number</kbd>.</p>
+<p>Open new panes with <kbd>ctrl</kbd> +  <kbd>b</kbd> + <kbd>%</kbd> / <kbd>&quot;</kbd>.</p>
+<p>To switch between panes use <kbd>ctrl</kbd> + <kbd>b</kbd> + <kbd>o</kbd></p>
+<h2 id="tmux-configuration">Tmux configuration</h2>
+<p>Tmux configuration is saved in <code>~/.tmux.conf</code>. I recommend adding the following lines to your configuration since the defaults aren't really nice.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-conf" data-lang="conf"><span style="color:#c0c5ce;"># Renumber windows sequentially after closing any of them.
+# Otherwise </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> you close the second tab of three, you end
+# up </span><span style="color:#b48ead;">with</span><span style="color:#c0c5ce;"> tabs numbered </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;"> and </span><span style="color:#d08770;">3</span><span style="color:#c0c5ce;">.
+</span><span style="color:#bf616a;">set </span><span style="color:#c0c5ce;">-g renumber-windows </span><span style="color:#d08770;">on
+
+</span><span style="color:#c0c5ce;"># set window and pane </span><span style="color:#b48ead;">index</span><span style="color:#c0c5ce;"> to </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;"> (</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;"> by default)
+</span><span style="color:#bf616a;">set-option </span><span style="color:#c0c5ce;">-g base-index </span><span style="color:#d08770;">1
+</span><span style="color:#bf616a;">setw </span><span style="color:#c0c5ce;">-g pane-base-index </span><span style="color:#d08770;">1
+
+</span><span style="color:#c0c5ce;"># Allows for faster key repetition
+</span><span style="color:#bf616a;">set </span><span style="color:#c0c5ce;">-s escape-time </span><span style="color:#d08770;">0
+</span></code></pre>
+<p>Also, <a href="https://gist.github.com/MohamedAlaa/2961058">here</a> is a great cheatsheet for the most important tmux shortcuts.</p>
+<h2 id="save-time-with-tmuxinator">Save time with tmuxinator</h2>
+<p>Tmux comes with an extensive command line interface, but it can be a little bit difficult to figure out. Tmuxinator makes use of the commands that tmux comes with, but it extracts all the complexity into a single yaml file:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#bf616a;">name</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">railsproject
+root</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">~/code/railsproject
+
+windows</span><span style="color:#c0c5ce;">:
+  - </span><span style="color:#bf616a;">editor</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">vim
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#bf616a;">console</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">rails c
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;">:
+  - </span><span style="color:#bf616a;">logs</span><span style="color:#c0c5ce;">:
+    </span><span style="color:#bf616a;">layout</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">even-horizontal
+    panes</span><span style="color:#c0c5ce;">:
+      - </span><span style="color:#bf616a;">tail -f log/development.log
+      </span><span style="color:#c0c5ce;">- </span><span style="color:#bf616a;">tail -f log/test.log
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#bf616a;">server</span><span style="color:#c0c5ce;">: </span><span style="color:#bf616a;">rails s
+  </span><span style="color:#c0c5ce;">- </span><span style="color:#bf616a;">heroku</span><span style="color:#c0c5ce;">: </span><span style="color:#a3be8c;">heroku logs -t
+</span></code></pre>
+<p>With this file in place, you can now run <code>mux railsproject</code> and everything will be started automatically.</p>
+<p>This is liberating in so many ways. In the morning, you don't have to remember what tools you need for the project you're working on. Throughout the day you can rely on keyboard shortcuts always bringing you back to the same program.
+And then you quickly get used to the patterns with your project specific settings. I found that I can stay focused way better this way. The tab for logs, server, console and editor are always the same.</p>
+<p>I encourage you to give tmux and tmuxinator a try. If you happen to run into problems, feel free to leave a comment and I will see what I can do.</p>
+<p>You can find my whole .tmux.conf <a href="https://gitlab.com/phansch/dotfiles/blob/master/tmux.conf">here</a>. Additionally some of my tmuxinator configuration files are located <a href="https://gitlab.com/phansch/dotfiles/tree/master/tmuxinator">here</a>.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

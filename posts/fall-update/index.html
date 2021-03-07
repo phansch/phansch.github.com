@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Fall update</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Fall update">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Fall update</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;fall-update&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2013-10-15">15 Oct 2013</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  4  min read
+</em>
+      </p>
+      <div class="e-content"><p>Things changed a lot but I didn't feel in the mood to really keep the blog up-to date. Now I'll have to pay for it. This will be quite a lengthy post. I'll go over the recent website changes first, then go on with my second foray into Guild Wars 2. I also started learning Ruby, so I'll go into more detail further down. And there's also an update about my netbook experience. Here's what happened in chronological order.</p>
+<h2 id="one-game-a-month">One Game A Month</h2>
+<p>I haven't finished any new games after February. I had a <a href="https://gitlab.com/phansch/shootingstar/tree/master">side-scroller</a> in the works but that project is still way too over ambitious in terms of content creation. I'm not sure if I will get around to finishing that one. I might start a new game from scratch instead.</p>
+<h2 id="guild-wars-2">Guild Wars 2</h2>
+<p>This topic is really hard for me to talk about because it really messed with my goals and plans for this year. Let this be a warning for future me. After finishing the winter semester at university I lost interest in creating games and started playing games instead. I was caught up in Guild Wars 2 again. The last time was crazy too. I even [had]({% post_url 2012-03-16-character-diversity-in-guild-wars-2 %}) a [blog]({% post_url 2012-03-05-sketchbook-fear-and-horror-in-mmos %}) [dedicated]({% post_url 2012-03-07-this-week-in-guild-wars-2-w10 %}) [to]({% post_url 2012-03-06-elementalist-introduction %}) [the]({% post_url 2012-03-05-this-week-in-guildwars2-w9 %}) [game]({% post_url 2012-03-14-this-week-in-guild-wars-2-w11 %}) before it came out.</p>
+<p>This time it took up 5 months of the year. I slowly grew more and more attached to my character. Until there was a point where it only made sense to keep playing. &quot;Otherwise the time I spent playing before that would have obviously been wasted&quot;, I reasoned. Meeting a group of nice players and slowly starting to carry responsibility for in-game stuff made it worse.</p>
+<p>Luckily there came a point where I grew sick of it. That was at at the end of August. I still remember that moment. I wish I knew what triggered it. It might have taken a few minutes, but I slowly lost all sense of attachment to my characters. It's as if there was a dense cover of fog suddenly removed from my vision. A few days after that I brought myself to delete my Guild Wars 2 characters as well as all my EVE Online characters. I never want to touch MMOs again.</p>
+<h2 id="ruby">Ruby</h2>
+<p>It took me a week to get things going again. I started learning Ruby. Because, why not? The first tutorial I took was the one at <a href="https://www.codeschool.com/courses/try-ruby">Codeschool</a>. After that I stuck with Codeschool and continued with the Ruby courses. However, I felt as if those tutorials skipped a lot of Ruby fundamentals. </p>
+<p>After the first month I un-enrolled from Codeschool to continue with <em><a href="https://gitlab.com/phansch/100-projects/tree/master">Projects</a></em>. Projects is a GitHub repository consisting of over 100 programming projects compiled by GitHub user <a href="https://github.com/thekarangoel">thekarangoel</a>. I'm not done with Projects yet but I decided it was about time to give Test Driven Development a try: <a href="https://gitlab.com/phansch/learn_ruby_solutions/tree/master">Learn Ruby (Solutions)</a> from <a href="http://testfirst.org/learn_ruby">testfirst.org/learn_ruby</a>. I never wrote tests before, so this was a really fun learning experience. </p>
+<hr />
+<p>My most recent journey into Ruby is <a href="https://github.com/phansch/jou">jou</a>.</p>
+<blockquote>
+<p>Jou is a simple command line utility that helps with maintaining a journal file in markdown syntax.</p>
+</blockquote>
+<p>I'm using a journal file to keep track of what I did each day. Like writing a blog post or making changes to the website. It's part of my <a href="http://en.wikipedia.org/wiki/Getting_Things_Done">gtd</a> process. At some point I got sick of locating and opening my journal file in a text editor, so it only made sense to make life easier. Feel free to give it a try by installing it with <code>gem install jou</code>.</p>
+<h2 id="website-changes">Website changes</h2>
+<p>As you might have noticed, the website underwent quite some changes:</p>
+<ul>
+<li>Using Bootstrap 3.0</li>
+<li>Proper <a href="http://phansch.net/">Portfolio</a></li>
+<li>Feedburner RSS feed has been replaced with a simple <a href="http://phansch.net/atom.xml">atom.xml</a></li>
+</ul>
+<h2 id="netbook-toolset-changes">Netbook / Toolset changes</h2>
+<p>So, this is the third and last part of my netbook experience. My requirements have changed a lot since I [first]({% post_url 2012-01-01-my-netbook-experience %}) wrote about it. I also modified the setup I described in the [second post]({% post_url 2012-12-28-re-my-netbook-experience %}) a bit.</p>
+<p>After using it for roughly two years, my netbook felt very underpowered. The processor was weak and watching HD videos was a thing of the past. The battery was dead and the touchpad was broken. Coupled with the fact that I'm not seriously playing games anymore, I want to get rid of my PC as well.</p>
+<h4 id="what-i-want">What I want</h4>
+<ul>
+<li>A simple, minimal and lightweight system</li>
+<li>Keyboard-heavy interface as it's faster</li>
+<li>As much screen real estate as possible</li>
+<li>Long battery life</li>
+<li>8G memory and a SSD</li>
+<li>Hardware fully supported by Linux</li>
+<li>2 Monitor support</li>
+</ul>
+<p>The solution is the Dell XPS 13. It's going to replace my netbook <em>and</em> my PC. And it will be able to run my current Linux environment.</p>
+<h3 id="my-current-environment">My current environment</h3>
+<ul>
+<li><a href="http://dwm.suckless.org/">dwm</a> on Linux Mint 15 Xfce with two 24&quot; screens.</li>
+<li>Mail: <a href="http://www.mutt.org/">mutt</a></li>
+<li>Todo: <a href="http://taskwarrior.org/docs/start.html">taskwarrior</a> + <a href="https://github.com/ralphbean/bugwarrior">bugwarrior</a></li>
+<li>Calendar: <a href="http://palcal.sourceforge.net/">pal</a></li>
+<li>Editor: Sublime Text 3</li>
+<li>Sync: Btsync</li>
+<li>IRC: <a href="http://www.weechat.org/">Weechat</a></li>
+<li>Other: Firefox, Skype, VLC, JDownloader</li>
+<li>My <a href="https://gitlab.com/phansch/dotfiles/tree/master">Dotfiles</a></li>
+</ul>
+<p>Finally, <a href="https://gist.github.com/phansch/6990647">here's a setup script</a> to install everything from a basic Linux Mint installation. (Use at your own risk.)</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

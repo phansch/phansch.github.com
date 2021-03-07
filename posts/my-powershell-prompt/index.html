@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>My PowerShell prompt</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="My PowerShell prompt">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">My PowerShell prompt</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;my-powershell-prompt&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2012-10-01">01 Oct 2012</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  3  min read
+</em>
+      </p>
+      <div class="e-content"><p>Today I took some time to work on my PowerShell configuration. Here is what it looks like now:</p>
+<p><img src="/assets/images/posts/2012-10-01-my-powershell-prompt/my-github-shell.png" alt="My GitHub Shell" /><br />
+In case you already know about customizing the PowerShell, you can get the file <a href="https://gist.github.com/3813881">here</a>. If not, read on.</p>
+<h2 id="shortening-the-prompt">Shortening The Prompt</h2>
+<p><img src="/assets/images/posts/2012-10-01-my-powershell-prompt/long-paths.png" alt="Long Paths" />
+This is the default git shell prompt. As you can see, the path takes about 75% of the prompt's width. Let's change that.</p>
+<p>Admittedly, until today I didn't know a lot about PowerShell. So, after a bit research, I found an article on <a href="http://winterdom.com/powershell/2008/08/13/mypowershellprompt.html">prompt shortening</a>. The following two functions need to be placed into <code>%USERPROFILE%\Documents\WindowsPowerShell\GitHub.PowerShell_profile.ps1</code></p>
+<pre style="background-color:#2b303b;">
+<code class="language-ps1" data-lang="ps1"><span style="color:#b48ead;">function </span><span style="color:#8fa1b3;">shorten-path</span><span style="color:#c0c5ce;">([</span><span style="color:#b48ead;">string</span><span style="color:#c0c5ce;">] $</span><span style="color:#bf616a;">path</span><span style="color:#c0c5ce;">) { 
+	$</span><span style="color:#bf616a;">loc </span><span style="color:#c0c5ce;">= $</span><span style="color:#bf616a;">path.Replace</span><span style="color:#c0c5ce;">($HOME, &#39;</span><span style="color:#a3be8c;">~</span><span style="color:#c0c5ce;">&#39;) 
+	</span><span style="color:#65737e;"># remove prefix for UNC paths 
+	</span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">loc </span><span style="color:#c0c5ce;">= $</span><span style="color:#bf616a;">loc </span><span style="color:#c0c5ce;">-replace &#39;</span><span style="color:#a3be8c;">^[^:]+::</span><span style="color:#c0c5ce;">&#39;, &#39;&#39; 
+	</span><span style="color:#65737e;"># make path shorter like tabs in Vim, 
+	# handle paths starting with \\ and . correctly 
+	</span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">($</span><span style="color:#bf616a;">loc </span><span style="color:#c0c5ce;">-replace &#39;</span><span style="color:#a3be8c;">\\(\.?)([^\\])[^\\]*(?=\\)</span><span style="color:#c0c5ce;">&#39;,&#39;</span><span style="color:#a3be8c;">\$1$2</span><span style="color:#c0c5ce;">&#39;) 
+}
+
+</span><span style="color:#b48ead;">function </span><span style="color:#8fa1b3;">prompt </span><span style="color:#c0c5ce;">{ 
+	</span><span style="color:#65737e;"># write status string (-n : NoNewLine; -f : ForegroundColor)
+	</span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">PS</span><span style="color:#c0c5ce;">&#39; -n -f White
+	</span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;"> {</span><span style="color:#c0c5ce;">&#39; -n -f Yellow
+	</span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">(shorten-path (pwd).Path) -n -f White
+	</span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">}</span><span style="color:#c0c5ce;">&#39; -n -f Yellow
+	</span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">&#39; &#39; 
+}</span><span style="color:#96b5b4;">``</span><span style="color:#c0c5ce;">`
+
+`shorten-path()` takes care of shortening the path </span><span style="color:#b48ead;">in</span><span style="color:#c0c5ce;"> a GVim manner and replacing the user profile path with a `~`.  
+`prompt()` is a built-in function that is used to format the prompt.  
+
+</span><span style="color:#65737e;">## Putting It Together
+
+</span><span style="color:#b48ead;">While</span><span style="color:#c0c5ce;"> this was working, it turned out that this got rid of the branch status. Luckily, someone wrote an article about [</span><span style="color:#b48ead;">displaying git data in the prompt</span><span style="color:#c0c5ce;">](http://</span><span style="color:#96b5b4;">tiredblogger.wordpress.com</span><span style="color:#c0c5ce;">/</span><span style="color:#d08770;">2009</span><span style="color:#c0c5ce;">/</span><span style="color:#d08770;">08</span><span style="color:#c0c5ce;">/</span><span style="color:#d08770;">21</span><span style="color:#c0c5ce;">/using-git-and-everything-else-through-powershell/). 
+I spent a good hour playing around with the code and eventually I got PowerShell to display the </span><span style="color:#b48ead;">data</span><span style="color:#c0c5ce;"> again.
+
+</span><span style="color:#96b5b4;">``</span><span style="color:#c0c5ce;">`ps1
+</span><span style="color:#b48ead;">function </span><span style="color:#8fa1b3;">prompt </span><span style="color:#c0c5ce;">{
+    </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;">(</span><span style="color:#96b5b4;">Test-Path</span><span style="color:#c0c5ce;"> .git) {
+        </span><span style="color:#65737e;"># retrieve branch name
+        </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">symbolicref </span><span style="color:#c0c5ce;">= (git symbolic-ref HEAD)
+        $</span><span style="color:#bf616a;">branch </span><span style="color:#c0c5ce;">= $</span><span style="color:#bf616a;">symbolicref.substring</span><span style="color:#c0c5ce;">($</span><span style="color:#bf616a;">symbolicref.LastIndexOf</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">/</span><span style="color:#c0c5ce;">&quot;) </span><span style="color:#d08770;">+1</span><span style="color:#c0c5ce;">)
+
+        </span><span style="color:#65737e;"># retrieve branch status
+        </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">differences </span><span style="color:#c0c5ce;">= (git diff-index HEAD --name-status)
+        $</span><span style="color:#bf616a;">git_mod_count </span><span style="color:#c0c5ce;">= [</span><span style="color:#b48ead;">regex</span><span style="color:#c0c5ce;">]::matches($</span><span style="color:#bf616a;">differences</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">M\s</span><span style="color:#c0c5ce;">&#39;).count
+        $</span><span style="color:#bf616a;">git_add_count </span><span style="color:#c0c5ce;">= [</span><span style="color:#b48ead;">regex</span><span style="color:#c0c5ce;">]::matches($</span><span style="color:#bf616a;">differences</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">A\s</span><span style="color:#c0c5ce;">&#39;).count
+        $</span><span style="color:#bf616a;">git_del_count </span><span style="color:#c0c5ce;">= [</span><span style="color:#b48ead;">regex</span><span style="color:#c0c5ce;">]::matches($</span><span style="color:#bf616a;">differences</span><span style="color:#c0c5ce;">, &#39;</span><span style="color:#a3be8c;">D\s</span><span style="color:#c0c5ce;">&#39;).count
+        $</span><span style="color:#bf616a;">branchData </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;"> +</span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">git_add_count</span><span style="color:#a3be8c;"> ~</span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">git_mod_count</span><span style="color:#a3be8c;"> -</span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">git_del_count</span><span style="color:#c0c5ce;">&quot;
+
+        </span><span style="color:#65737e;"># write status string (-n : NoNewLine; -f : ForegroundColor)
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">GIT</span><span style="color:#c0c5ce;">&#39; -n -f White
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;"> {</span><span style="color:#c0c5ce;">&#39; -n -f Yellow
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">(shorten-path (pwd).Path) -n -f White
+        
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;"> [</span><span style="color:#c0c5ce;">&#39; -n -f Yellow
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">branch </span><span style="color:#c0c5ce;">-n -f Cyan
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">branchData </span><span style="color:#c0c5ce;">-n -f Red
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">]</span><span style="color:#c0c5ce;">&#39; -n -f Yellow
+        
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">&gt;</span><span style="color:#c0c5ce;">&quot; -n -f Yellow
+    }
+    </span><span style="color:#b48ead;">else </span><span style="color:#c0c5ce;">{
+        </span><span style="color:#65737e;"># write status string
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">PS</span><span style="color:#c0c5ce;">&#39; -n -f White
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;"> {</span><span style="color:#c0c5ce;">&#39; -n -f Yellow
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">(shorten-path (pwd).Path) -n -f White
+        </span><span style="color:#96b5b4;">write-host </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">&gt;</span><span style="color:#c0c5ce;">&quot; -n -f Yellow
+    }
+
+    </span><span style="color:#b48ead;">return </span><span style="color:#c0c5ce;">&quot; &quot;
+}</span><span style="color:#96b5b4;">``</span><span style="color:#c0c5ce;">`
+
+
+</span><span style="color:#65737e;">##PowerShell Properties
+</span><span style="color:#b48ead;">If</span><span style="color:#c0c5ce;"> you right-click on the PowerShell menu bar, you will find a menu called `Properties`. </span><span style="color:#b48ead;">In</span><span style="color:#c0c5ce;"> there, you can change a few things that will make your work with the PowerShell a little easier.  
+Here are the properties I changed:
+
+	BufferSize: </span><span style="color:#d08770;">500
+</span><span style="color:#c0c5ce;">	QuickEditMode: true
+	Font: Lucidas Console
+	Font Size: </span><span style="color:#d08770;">14
+</span><span style="color:#c0c5ce;">	Screen Buffer Width: </span><span style="color:#d08770;">100
+</span><span style="color:#c0c5ce;">	Screen Buffer Height: </span><span style="color:#d08770;">1000
+</span><span style="color:#c0c5ce;">	Window Width: </span><span style="color:#d08770;">100
+</span><span style="color:#c0c5ce;">	Window Height: </span><span style="color:#d08770;">54
+</span></code></pre></div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

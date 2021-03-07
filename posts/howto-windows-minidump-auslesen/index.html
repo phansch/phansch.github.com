@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Howto: Windows Minidump auslesen</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Howto: Windows Minidump auslesen">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Howto: Windows Minidump auslesen</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;howto-windows-minidump-auslesen&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2010-12-21">21 Dec 2010</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  3  min read
+</em>
+      </p>
+      <div class="e-content"><p><em>Anmerkung: Screenshots wurden entfernt und der Artikel ist nicht mehr aktuell.</em></p>
+<p>Vor kurzem hat mich unter Windows 7 zum ersten mal ein BSOD erwischt. Das ist, zumindest bei mir, eine sehr seltene Angelegenheit. Leider war ich beim auftauchen des Bluescreens so perplex und habe die Fehlermeldung nicht wahrgenommen. Was also machen? 
+Es gibt verschiedene Möglichkeiten die Infos aus dem Bluescreen nachträglich einzusehen.</p>
+<ol>
+<li>Eventviewer</li>
+<li>WinDbg</li>
+</ol>
+<h2 id="eventlog">EventLog</h2>
+<p>Die erste Möglichkeit besteht darin, das EventLog von Windows zu durchsuchen.</p>
+<p>Das EventLog speichert verschiedene Arten von Ereignissen während des Windows Betriebes auf. Die Ereignisse sind in drei Kategorien aufgeteilt: <strong>Information</strong>, <strong>Warnung</strong>, <strong>Fehler</strong>. Diese Informationen werden ständig im Hintergrund gesammelt und im EventLog aufbereitet dargestellt. Aufgerufen wird das EventLog wie folgt:</p>
+<ol>
+<li>Start -&gt; Ausführen</li>
+<li>&quot;eventvwr&quot; eingeben</li>
+<li>Mit OK bestätigen</li>
+</ol>
+<p>Ein Bluescreen sollte unter die Kategorie &quot;Fehler&quot; bzw. &quot;Kritisch&quot; fallen. Mit einem Doppelklick auf das entsprechende Event und einem nachfolgendem Klick auf &quot;Details&quot; erhält man folgende Ansicht:</p>
+<!--[![Detailansicht im Eventfenster](http://wpimages.phansch.de/2010/11/Bluescreen_01-300x205.png)](http://wpimages.phansch.de/2010/11/Bluescreen_01.png)-->
+<p>Sowohl mit der Event-ID als auch dem BugCheckCode lassen sich über Google meistens weitere Informationen finden.</p>
+<h2 id="windbg">WinDbg</h2>
+<p>Wenn die gefundenen Informationen nicht reichen und der Bluescreen nicht beseitigt werden konnte, gibt es noch eine weitere Möglichkeit um der Ursache auf die Spur zu kommen.
+Mit WinDbg lassen sich sogenannte Minidumps analysieren. Minidumps werden im Falle eines Bluescreens unter C:\Windows\Minidump angelegt.
+Natürlich ist WinDbg sehr komplex. Für unser Problem reicht es jedoch, wenn wir die Schritte kennen um einen Bluescreen-Minidump zu analysieren.</p>
+<h3 id="windbg-installieren">WinDbg installieren</h3>
+<p>Für WinDbg werden die Windows Debugging Tools benötigt. Bei der Installation muss allerdings nur WinDbg installiert werden.</p>
+<p>Bei der Installation ist es wichtig, die Debugging Tools auszuwählen:</p>
+<!--[![Debugging Tools auswählen](http://wpimages.phansch.de/2010/12/windowsSDKinstall_11-300x288.png)](http://wpimages.phansch.de/2010/12/windowsSDKinstall_11.png)-->
+<p>WinDbg kann anschließend über das Programmmenü gestartet werden:</p>
+<!--[![WinDbg starten](http://wpimages.phansch.de/2010/12/startWinDbg.png)](http://wpimages.phansch.de/2010/12/startWinDbg.png)-->
+<h3 id="windbg-benutzen-um-minidump-auszulesen">WinDbg benutzen um Minidump auszulesen</h3>
+<p>Zunächst ist es nötig die Windows Symbols herunterzuladen welche das debuggen überhaupt erst ermöglichen.
+Dazu gehen wir in WinDbg auf &quot;File -&gt; Symbol File Path..&quot; und geben folgendes ein:</p>
+<p><code>SRV*c:\symbols*http://msdl.microsoft.com/download/symbols</code></p>
+<p>Nun sollten wir den Workspace speichern um den Symbolpfad beim erneuten Start des Programms nicht nochmal eingeben zu müssen.
+Um den Workspace zu speichern gehen wir auf &quot;File -&gt; Save Workspace&quot;.</p>
+<p>Als nächstes lokalisieren wir den zu analysierenden Minidump. Normalerweise wird dieser unter <code>%systemroot%\Minidump</code> gespeichert. Der Minidump ist nach dem Datum, einer zufälligen Nummer und einer fortlaufenden Nummer benannt.</p>
+<p>In meinem Beispiel heißt der Minidump &quot;111010-27456-01.dmp&quot;.</p>
+<p>Um den Minidump auszulesen öffnen wir ihn in WinDbg über &quot;File -&gt; Open Crash Dump&quot;. Bei der Frage, ob wir den Worksapce speichern möchten, wählen wir &quot;No&quot;.</p>
+<p>Nun befinden wir uns in der Debugging Ansicht. Es wird zunächst eine weile dauern bis die Symboldateien heruntergeladen wurden.
+Wenn der Download abgeschlossen ist, sieht das Debuggingfenster so aus:</p>
+<!--[![Download der Symbole komplett](http://wpimages.phansch.de/2010/12/winDbg_debug1-150x150.png)](http://wpimages.phansch.de/2010/12/winDbg_debug1.png)-->
+<p>Wir können bereits sehen wodurch der Fehler ausgelöst wurde: &quot;Probably caused by : ntkrnlmp.exe&quot;
+Um weitere Informationen zu bekommen, geben wir unten in der Kommandozeile den Befehl <code>!analyze -v</code> ein.</p>
+<p>Dies analysiert den Fehler bis ins Detail:</p>
+<pre style="background-color:#2b303b;">
+<code>    BAD_POOL_CALLER (c2)
+The current thread is making a bad pool request.  Typically this is at a bad IRQL level or double freeing the same allocation, etc.
+Arguments:
+Arg1: 000000000000000b, type of pool violation the caller is guilty of.
+Arg2: fffffa8005338728
+Arg3: 0000000005338720
+Arg4: fffffa8005338f38
+
+Debugging Details:
+
+FAULTING_IP: 
+nt!ExDeleteResourceLite+199
+fffff800`02c690f9 eba0            jmp     nt!ExDeleteResourceLite+0x13b (fffff800`02c6909b)  
+
+    BUGCHECK_STR:  0xc2_b
+
+CUSTOMER_CRASH_COUNT:  1  
+
+    DEFAULT_BUCKET_ID:  VISTA_DRIVER_FAULT
+
+PROCESS_NAME:  System
+
+CURRENT_IRQL:  0  
+
+LAST_CONTROL_TRANSFER:  from fffff80002daf6b8 to fffff80002c7c740
+
+STACK_TEXT:  
+[...]
+
+STACK_COMMAND:  kb
+
+FOLLOWUP_IP: 
+nt!ExDeleteResourceLite+199
+fffff800`02c690f9 eba0            jmp     nt!ExDeleteResourceLite+0x13b (fffff800`02c6909b)
+
+SYMBOL_STACK_INDEX:  2
+
+SYMBOL_NAME:  nt!ExDeleteResourceLite+199
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: nt
+
+    IMAGE_NAME:  ntkrnlmp.exe
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  4c1c44a9
+
+FAILURE_BUCKET_ID:  X64_0xc2_b_nt!ExDeleteResourceLite+199
+
+BUCKET_ID:  X64_0xc2_b_nt!ExDeleteResourceLite+199
+
+Followup: MachineOwner
+</code></pre>
+<p>Mithilfe der eingerückten Informationen können wir zum Beispiel über Google weitere Infos bekommen. In diesem Fall hat ein neuer Audiotreiber das Problem behoben.</p>
+<p>Ich hoffe dieser Post war einer Hilfe und konnte eventuelle Probleme beheben.
+*[BSOD]: Bluescreen of death</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

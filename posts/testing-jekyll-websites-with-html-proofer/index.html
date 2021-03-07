@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Testing your Jekyll Website with HTMLProofer</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Testing your Jekyll Website with HTMLProofer">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Testing your Jekyll Website with HTMLProofer</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;testing-jekyll-websites-with-html-proofer&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2017-09-10">10 Sep 2017</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>While I was adding [Capybara tests]({% post_url 2017-03-13-testing-jekyll-websites %}) for this Website, I also stumbled upon <a href="https://github.com/gjtorikian/html-proofer">HTMLProofer</a>.</p>
+<p>HTMLProofer allows to test your HTML output. It can check alt tags of images, if links are working and a few more things.</p>
+<p>I decided to give it a try on my website. Initially I was surprised at the amount of output and decided that it was too much to fix all at once. So first, I only had it check for broken links. It found about 30 of 200 outgoing links that were not working.</p>
+<p>Most of them were part of of my Hackership series where I sometimes linked to local startups that apparently didn't make it until today. Unfortunately <a href="https://en.wikipedia.org/wiki/Link_rot">Link Rot</a> is a thing.</p>
+<p>Before I dealt with all the broken links, I started to integrate HTMLProofer into the test suite by adding a custom Rake task:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#c0c5ce;">task </span><span style="color:#a3be8c;">:html_proofer </span><span style="color:#b48ead;">do
+</span><span style="color:#c0c5ce;">  build_dir = </span><span style="color:#ebcb8b;">File</span><span style="color:#c0c5ce;">.join(</span><span style="color:#ebcb8b;">File</span><span style="color:#c0c5ce;">.dirname(</span><span style="color:#bf616a;">__FILE__</span><span style="color:#c0c5ce;">), &#39;</span><span style="color:#a3be8c;">_site</span><span style="color:#c0c5ce;">&#39;)
+  </span><span style="color:#b48ead;">unless </span><span style="color:#ebcb8b;">File</span><span style="color:#c0c5ce;">.directory?(&#39;</span><span style="color:#a3be8c;">test/_site</span><span style="color:#c0c5ce;">&#39;)
+    `</span><span style="color:#a3be8c;">jekyll build -d </span><span style="color:#c0c5ce;">#{build_dir}</span><span style="color:#a3be8c;"> -V</span><span style="color:#c0c5ce;">`
+  </span><span style="color:#b48ead;">end
+</span><span style="color:#c0c5ce;">  opts = {
+    </span><span style="color:#a3be8c;">url_ignore: </span><span style="color:#c0c5ce;">[/</span><span style="color:#96b5b4;">localhost</span><span style="color:#c0c5ce;">/],
+    </span><span style="color:#a3be8c;">empty_alt_ignore: </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">,
+    </span><span style="color:#a3be8c;">file_ignore: </span><span style="color:#c0c5ce;">[/</span><span style="color:#96b5b4;">slides</span><span style="color:#c0c5ce;">/],
+    </span><span style="color:#a3be8c;">typhoeus: </span><span style="color:#c0c5ce;">{
+      </span><span style="color:#a3be8c;">ssl_verifyhost: </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">,
+      </span><span style="color:#a3be8c;">ssl_verifypeer: </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">,
+      </span><span style="color:#a3be8c;">timeout: </span><span style="color:#d08770;">30
+    </span><span style="color:#c0c5ce;">}
+  }
+  </span><span style="color:#ebcb8b;">HTMLProofer</span><span style="color:#c0c5ce;">.check_directory(build_dir, opts).run
+</span><span style="color:#b48ead;">end
+</span></code></pre>
+<p>Using <code>rake html_proofer</code> it builds the site and runs HTMLProofer with the given options on the Jekyll output.
+You can check the Travis CI integration in <a href="https://github.com/phansch/phansch.github.com/blob/master/script/ci.rb">script/ci.rb</a> and <a href="https://github.com/phansch/phansch.github.com/blob/master/.travis.yml">.travis.yml</a>.</p>
+<p>If you run into SSL issues with HTMLProofer, you may have to <a href="https://github.com/typhoeus/typhoeus/issues/568">install</a> <code>libcurl4-openssl-dev</code> on Travis.</p>
+<p>The last thing I did, was to fix the links, as it was the least compelling part of the task. There are many reasons why a link may be broken and almost each cause can be handled differently.</p>
+<ul>
+<li>
+<p>A missing article may be caused by a new URL structure and forgotten redirects, so I looked around on these sites and tried to find the correct link if possible.</p>
+</li>
+<li>
+<p>Broken domains are a lost cause most of the times, although some startups had renamed themselves or were bought up, so using the new domain makes sense there.</p>
+</li>
+<li>
+<p>Domains may be unreachable only temporarily, so I don't want to remove the link and instead whitelist it.</p>
+</li>
+</ul>
+<p>This all took some time, but it paid off and now I can be certain that there's no broken links in any of the HTML on this website.</p>
+<p>As mentioned in the beginning, HTMLProofer has a couple of more nice features, but I didn't get around to trying them, yet. In the next post I will probably have a look at the other features.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>A better Pry prompt for the Rails console</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="A better Pry prompt for the Rails console">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">A better Pry prompt for the Rails console</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;a-better-pry-prompt-for-rails-console&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2017-02-12">12 Feb 2017</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p><em>Update = This is now part of <a href="https://github.com/rweng/pry-rails#custom-rails-prompt">pry-rails</a>.</em></p>
+<p>On any given day I find myself with at least 2 rails consoles open at the same time. One for local development and one for the testing or production environment.
+All share the same prompt.</p>
+<p>In development:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">] pry(main)&gt; </span><span style="color:#ebcb8b;">User</span><span style="color:#c0c5ce;">.destroy_all
+</span></code></pre>
+<p>In production:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">2</span><span style="color:#c0c5ce;">] pry(main)&gt; </span><span style="color:#ebcb8b;">DataCollector</span><span style="color:#c0c5ce;">.collect
+</span></code></pre>
+<p>It would be really good to know <strong>what</strong> environment each rails console is operating on. While it is printed on the start of the rails console session, it usually quickly scrolls off the screen.</p>
+<p>What if we accidentally removed the users on the wrong system? Sure, everyone has working backups, database replication and is also testing them regularly, right?</p>
+<p>Even if we have working backups, we can still work on preventing accidents. Luckily we have complete control over the pry prompt through the <a href="https://github.com/pry/pry/wiki/Customization-and-configuration#Config_prompt"><code>.pryrc</code> configuration file</a>.</p>
+<h3 id="the-solution">The solution</h3>
+<p>A closer look at the <a href="https://www.rubydoc.info/github/pry/pry/Pry/Helpers/Text">documentation</a> shows that we can easily make text bold and colored in the prompt:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#ebcb8b;">Pry</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Helpers</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Text</span><span style="color:#c0c5ce;">.red(&#39;</span><span style="color:#a3be8c;">I am red.</span><span style="color:#c0c5ce;">&#39;)
+</span><span style="color:#ebcb8b;">Pry</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Helpers</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Text</span><span style="color:#c0c5ce;">.bold(&#39;</span><span style="color:#a3be8c;">I am bold.</span><span style="color:#c0c5ce;">&#39;)
+</span></code></pre>
+<p>We get the project name using:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#ebcb8b;">File</span><span style="color:#c0c5ce;">.basename(</span><span style="color:#ebcb8b;">Rails</span><span style="color:#c0c5ce;">.root)
+</span></code></pre>
+<p>The pry prompt can be overridden in the <code>.pryrc</code> with a custom proc:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#ebcb8b;">Pry</span><span style="color:#c0c5ce;">.config.prompt = </span><span style="color:#96b5b4;">proc </span><span style="color:#c0c5ce;">{ |</span><span style="color:#bf616a;">obj</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">nest_level</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">pry</span><span style="color:#c0c5ce;">| &#39;</span><span style="color:#a3be8c;">NicerPrompt</span><span style="color:#c0c5ce;">&#39;}
+</span></code></pre>
+<p>Using the above, this is what I am using for all my personal and work projects:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">formatted_env
+  </span><span style="color:#b48ead;">case </span><span style="color:#ebcb8b;">Rails</span><span style="color:#c0c5ce;">.env
+  </span><span style="color:#b48ead;">when </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">production</span><span style="color:#c0c5ce;">&#39;
+    bold_upcased_env = </span><span style="color:#ebcb8b;">Pry</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Helpers</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Text</span><span style="color:#c0c5ce;">.bold(</span><span style="color:#ebcb8b;">Rails</span><span style="color:#c0c5ce;">.env.upcase)
+    </span><span style="color:#ebcb8b;">Pry</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Helpers</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Text</span><span style="color:#c0c5ce;">.red(bold_upcased_env)
+  </span><span style="color:#b48ead;">when </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">staging</span><span style="color:#c0c5ce;">&#39;
+    </span><span style="color:#ebcb8b;">Pry</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Helpers</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Text</span><span style="color:#c0c5ce;">.yellow(</span><span style="color:#ebcb8b;">Rails</span><span style="color:#c0c5ce;">.env)
+  </span><span style="color:#b48ead;">when </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">development</span><span style="color:#c0c5ce;">&#39;
+    </span><span style="color:#ebcb8b;">Pry</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Helpers</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Text</span><span style="color:#c0c5ce;">.green(</span><span style="color:#ebcb8b;">Rails</span><span style="color:#c0c5ce;">.env)
+  </span><span style="color:#b48ead;">else
+    </span><span style="color:#ebcb8b;">Rails</span><span style="color:#c0c5ce;">.env
+  </span><span style="color:#b48ead;">end
+end
+
+def </span><span style="color:#8fa1b3;">app_name
+  </span><span style="color:#ebcb8b;">File</span><span style="color:#c0c5ce;">.basename(</span><span style="color:#ebcb8b;">Rails</span><span style="color:#c0c5ce;">.root)
+</span><span style="color:#b48ead;">end
+
+if defined?</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">Rails</span><span style="color:#c0c5ce;">)
+  </span><span style="color:#ebcb8b;">Pry</span><span style="color:#c0c5ce;">.config.prompt = </span><span style="color:#96b5b4;">proc </span><span style="color:#c0c5ce;">{ |</span><span style="color:#bf616a;">obj</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">nest_level</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">_</span><span style="color:#c0c5ce;">| &quot;</span><span style="color:#a3be8c;">[</span><span style="color:#c0c5ce;">#{app_name}</span><span style="color:#a3be8c;">][</span><span style="color:#c0c5ce;">#{formatted_env}</span><span style="color:#a3be8c;">] </span><span style="color:#c0c5ce;">#{obj}</span><span style="color:#a3be8c;">:</span><span style="color:#c0c5ce;">#{nest_level}</span><span style="color:#a3be8c;">&gt; </span><span style="color:#c0c5ce;">&quot; }
+</span><span style="color:#b48ead;">end
+</span></code></pre>
+<p>Here is what it looks like:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/2042399/22556063/31c05df0-e966-11e6-9a9a-fbfea33344c6.png" alt="selection_220" />
+<img src="https://cloud.githubusercontent.com/assets/2042399/22555944/c65dd894-e965-11e6-98e0-38368648c8bb.png" alt="selection_218" />
+<img src="https://cloud.githubusercontent.com/assets/2042399/22556006/0301be96-e966-11e6-84a7-a3fc54c93950.png" alt="selection_219" /></p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

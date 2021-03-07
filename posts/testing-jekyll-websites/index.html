@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Testing your Jekyll Website with Capybara</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Testing your Jekyll Website with Capybara">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Testing your Jekyll Website with Capybara</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;testing-jekyll-websites&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2017-03-13">13 Mar 2017</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>Even when it is just a static website like this one, it is always good to know that the most important things work.</p>
+<p>I recently had problems when I was migrating this blog from Jekyll 2.5 to Jekyll 3.3. The permalinks were broken after the upgrade and I only noticed this after the change went live. Some basic tests could have easily prevented this.</p>
+<p>After I fixed the broken permalinks I decided to add some basic Capybara tests, as I write them day-to-day for Ruby on Rails apps, too.</p>
+<h2 id="the-setup">The setup</h2>
+<p>The setup is pretty basic for now with <code>capybara</code>, <code>rack</code>, <code>rake</code> and most importantly <code>rack-jekyll</code>:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#65737e;"># Gemfile
+</span><span style="color:#c0c5ce;">source &#39;</span><span style="color:#a3be8c;">https://rubygems.org</span><span style="color:#c0c5ce;">&#39;
+
+</span><span style="color:#8fa1b3;">gem </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">jekyll</span><span style="color:#c0c5ce;">&#39;</span><span style="color:#8fa1b3;">, </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">3.3.1</span><span style="color:#c0c5ce;">&#39;
+
+group </span><span style="color:#a3be8c;">:test </span><span style="color:#b48ead;">do
+  </span><span style="color:#8fa1b3;">gem </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">capybara</span><span style="color:#c0c5ce;">&#39;
+  </span><span style="color:#8fa1b3;">gem </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">rack</span><span style="color:#c0c5ce;">&#39;
+  </span><span style="color:#8fa1b3;">gem </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">rack-jekyll</span><span style="color:#c0c5ce;">&#39;
+  </span><span style="color:#8fa1b3;">gem </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">rake</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#b48ead;">end
+</span></code></pre>
+<p>The <code>test_helper</code> tells <code>Capybara.app</code> to use <code>Rack::Jekyll</code> to serve a Rack version of our Jekyll site for our tests.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#65737e;"># test/test_helper.rb
+</span><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">minitest/autorun</span><span style="color:#c0c5ce;">&#39;
+
+</span><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">bundler/setup</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">capybara/dsl</span><span style="color:#c0c5ce;">&#39;
+</span><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">rack/jekyll</span><span style="color:#c0c5ce;">&#39;
+
+</span><span style="color:#ebcb8b;">Capybara</span><span style="color:#c0c5ce;">.app = </span><span style="color:#ebcb8b;">Rack</span><span style="color:#c0c5ce;">::</span><span style="color:#ebcb8b;">Jekyll</span><span style="color:#c0c5ce;">.</span><span style="color:#8fa1b3;">new</span><span style="color:#c0c5ce;">(</span><span style="color:#a3be8c;">force_build: </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">)
+
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CapybaraTestCase </span><span style="color:#eff1f5;">&lt; </span><span style="color:#a3be8c;">MiniTest::Test
+  </span><span style="color:#8fa1b3;">include </span><span style="color:#ebcb8b;">Capybara</span><span style="color:#c0c5ce;">::DSL
+
+  </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">teardown
+    </span><span style="color:#ebcb8b;">Capybara</span><span style="color:#c0c5ce;">.reset_sessions!
+    </span><span style="color:#ebcb8b;">Capybara</span><span style="color:#c0c5ce;">.use_default_driver
+  </span><span style="color:#b48ead;">end
+end
+</span></code></pre>
+<p>With the <code>test_helper</code> configured we can now start writing Capybara tests as usual:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-ruby" data-lang="ruby"><span style="color:#65737e;"># test/features/this_blog_post_test.rb
+</span><span style="color:#8fa1b3;">require </span><span style="color:#c0c5ce;">&#39;</span><span style="color:#a3be8c;">test_helper</span><span style="color:#c0c5ce;">&#39;
+
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">ThisBlogPostTest </span><span style="color:#eff1f5;">&lt; </span><span style="color:#a3be8c;">CapybaraTestCase
+  </span><span style="color:#b48ead;">def </span><span style="color:#8fa1b3;">test_describes_how_to_write_tests
+</span><span style="color:#c0c5ce;">    visit &#39;</span><span style="color:#a3be8c;">2017/03/02/testing-jekyll-websites/</span><span style="color:#c0c5ce;">&#39;
+    assert page.has_content?(&#39;</span><span style="color:#a3be8c;">configured we can now start </span><span style="color:#c0c5ce;">&#39;\
+      &#39;</span><span style="color:#a3be8c;">writing Capybara tests as usual:</span><span style="color:#c0c5ce;">&#39;)
+  </span><span style="color:#b48ead;">end
+end
+</span></code></pre><h2 id="what-to-test">What to test</h2>
+<p>This of course depends on your website. For me I identified a few things:</p>
+<ul>
+<li>The <a href="/">frontpage</a> (which is a bit outdated) should have the link to my <a href="https://gitlab.com/phansch/latex-resume/raw/master/resume-philipp-hansch.pdf">CV</a></li>
+<li>Clicking on the archive link should bring me to the archive</li>
+<li><a href="/archive">/archive</a> should contain the first and last post</li>
+<li>The dates on <a href="/archive">/archive</a> should be in the correct format</li>
+<li>The 'Read more' link on <a href="/writing">/writing</a> should bring me to the correct blog post</li>
+<li>A blog post should have the correct time to read</li>
+<li>A blog post should have its date in the correct format</li>
+<li>The main navigation items go to pages with the correct content</li>
+<li>The <a href="/atom.xml">atom feed</a> should be a valid atom feed</li>
+</ul>
+<p>Apart from the atom feed validation this is all straight Capybara using <code>has_content</code> and some basic Ruby for the time check. You can find all the tests <a href="https://github.com/phansch/phansch.github.com/tree/master/test/">here</a>.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

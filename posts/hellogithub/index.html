@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello GitHub!</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Hello GitHub!">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Hello GitHub!</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;hellogithub&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2012-07-26">26 Jul 2012</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>I came here after using Wordpress for over two years. 
+I always want to keep stuff as simple as possible: I don't need a dashboard, plugins, a media library or a link database. Neither do I need a theme database, a user database or a WYSIWYG editor to create a blog post. That stuff is over-kill. And that was going through my mind the whole time. 
+Today I pretty much dived head-on into github, jekyll and liquid to create this first post. And it was a blast. I learned so many useful things. But what I like most about this new setup is that, apart from the initial setup, there is almost no maintenance required. Whereas in popular blog software, you have to deal with frequent software updates, backups and broken plugins or broken themes.</p>
+<p>I will try to write about my experiences with jekyll and liquid as I move on. Here's a summary of day #1:</p>
+<h3 id="setting-up-github">Setting up github</h3>
+<p>This is not the first time I tried to get into using github. I admit that previously I had no idea what to use it for. But yesterday I stumbled upon <a href="http://pages.github.com">pages.github.com</a> and I was immediately intrigued. So today, I downloaded the github app for windows and created my first repository. This was pretty straightforward and right now I prefer the GUI over the command line.</p>
+<h3 id="getting-to-know-jekyll-and-liquid">Getting to know jekyll and liquid</h3>
+<p>The first documentation I found, was <a href="https://help.github.com/categories/20/articles">this one</a>. It wasn't very helpful as it didn't explain how to actually create a page or even a blog. Turns out, I was looking in the wrong place. jekyllbootstrap.com (not existing anymore) was the biggest help, especially the introduction article. 
+With the proper documentation at hand I quickly made progress and soon had my first template/page setup working. From there it was only a surprisingly small step to a blog.</p>
+<h3 id="how-this-blog-works">How this blog works</h3>
+<p><a href="https://github.com/phansch/phansch.github.com/blob/master/_posts/2012-07-26-HelloGitHub.md">This markdown file</a> contains all the text for the blog post. The YAML front matter at the top specifies the layout for the blog post, the category, tags and a title. <a href="https://github.com/phansch/phansch.github.com/blob/master/_layouts/post.html">The layout file</a> contains html and a content variable that is replaced with the blog post by jekyll. You might notice that the <em>post.html</em> layout file has a layout defined. The <a href="https://github.com/phansch/phansch.github.com/blob/master/_layouts/default.html">default layout</a> will replace the content variable with the post layout.</p>
+<h3 id="publishing">Publishing</h3>
+<p>I'm using Sublime Text 2 to create the blog posts in markdown. Once I'm done writing a blog post I commit the file to the <em>_posts</em> folder in my <a href="https://github.com/phansch/phansch.github.com">repository</a>. That's all there is to publishing. (It might take a few minutes until the changes show up.)</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

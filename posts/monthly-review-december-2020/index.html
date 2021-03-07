@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Monthly review: December</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Monthly review: December">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Monthly review: December</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;monthly-review-december-2020&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2020-12-26">26 Dec 2020</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><h2 id="sponsors">Sponsors</h2>
+<p>I'm really excited about December's new bronze sponsor:</p>
+<p><a href="https://github.com/EmbarkStudios">Embark Studios</a> 🎉</p>
+<p>They have been supporting all kinds of open source Rust contributors this past
+year and are a huge boon to the Rust community. I'm exited to work with them to
+bring more Clippy features on the way!</p>
+<p>I also want to thank the following people for continued sponsorship of my open
+source work this past month: <a href="https://github.com/repi">@repi</a>, <a href="https://github.com/oli-obk">@oli-obk</a> and <a href="https://github.com/yaahc">@yaahc</a>.</p>
+<p>If you like what I'm doing and want to support my work as well, please consider
+sponsoring me on <a href="https://www.patreon.com/philhansch">Patreon</a> or <a href="https://phansch.net/thanks">via other
+means</a> 🧡</p>
+<h2 id="what-i-ve-worked-on">What I've worked on</h2>
+<p>4 code contributions got merged this month:</p>
+<ul>
+<li><a href="https://github.com/rust-lang/rust-clippy/pull/6413">Rewrite update-all-references bash scripts in Rust</a></li>
+<li><a href="https://github.com/rust-lang/rust-clippy/pull/6473">Separate suspicious_else_formatting tests</a></li>
+<li><a href="https://github.com/rust-lang/rust-clippy/pull/6471">Fix blessing of new reference files</a></li>
+<li><a href="https://github.com/rust-lang/rust-clippy/pull/6485">Don't trigger large_enum_variant in external macros</a></li>
+</ul>
+<p>I've reviewed and approved <a href="https://github.com/rust-lang/rust-clippy/pulls?q=is%3Apr+sort%3Aupdated-desc+is%3Amerged+Approved+by%3A+phansch+merged%3A2020-12-01..2020-12-31+">2 pull requests</a>.</p>
+<p>Of those, the most rewarding work was rewriting Clippy's internal
+'update-reference' scripts. These scripts are used by contributors to update the
+reference files when test output has changed. Rewriting the scripts in Rust
+should make contributing from Windows much easier.</p>
+<h2 id="reflections">Reflections</h2>
+<p>Working from home during the lockdowns really messed with my daily routines and
+habits. Now that there is hope for an end to the pandemic I have been able to
+fix my lack of motivation that plagued me in the past months. I didn't get a lot
+done from July to November. Outside of work I didn't have the energy to touch
+any more code at all.</p>
+<div style="text-align: center">
+  <a href="/assets/images/posts/2020/github-timeline-2020.png">
+    <img src="/assets/images/posts/2020/github-timeline-2020.png" alt="screenshot" />
+  </a>
+</div>
+<p>In October I also <a href="https://github.com/rust-lang/highfive/pull/295">removed myself from the reviewer rotation</a> for Clippy
+and handed my pending reviews to the other members of the team. In retrospect, I
+should have done that much earlier. This break from open source was something I
+really needed and I won't hesitate to do this again in the future.</p>
+<h2 id="goals">Goals</h2>
+<p>My primary goal for January is to make Clippy's UI test blessing work from the
+<a href="https://github.com/rust-lang/rust/tree/master/src/tools/clippy">rustc subtree checkout</a>. I have a working prototype locally but as I have not much
+experience with the rustc tooling, I expect some edge cases will be uncovered
+once my code is being reviewed.</p>
+<p>This work will enable rustc contributors to update the Clippy UI test reference
+files without any issues and with their familiar tooling.</p>
+<p>Apart from that I'm going to re-add myself to the reviewer rotation for Clippy
+and start reviewing larger pull requests again.</p>
+<!-- begin links sponsor section-->
+<!-- end links sponsor section -->
+<!-- begin links post -->
+<!-- end links post -->
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

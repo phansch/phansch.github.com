@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Setup Part 1: Website</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="The Setup Part 1: Website">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">The Setup Part 1: Website</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;self-hosting-website&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2014-05-11">11 May 2014</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>This series will have a focus on DIY computer stuff, privacy issues, automation and security related topics.</p>
+<p>One thing I want to achieve this year, is independence from most customer cloud services. Customer cloud services meaning services that I use for personal stuff.
+That includes stuff like Google Mail, Google Calendar, GoogleDocs/Dropbox and many more.</p>
+<hr />
+<p>As a first step, one thing I recently did was moving my blog away from GitHub Pages. This blog is now hosted on my own server. This costs a little money, but I have full control over the environment. The setup is different for each provider, but essentially it's a git post-receive hook that triggers jekyll to build the page:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-bash" data-lang="bash"><span style="color:#65737e;"># $HOME/website.git/.git/hooks/post-receive
+</span><span style="color:#bf616a;">GIT_REPO</span><span style="color:#c0c5ce;">=$</span><span style="color:#bf616a;">HOME</span><span style="color:#a3be8c;">/website.git
+</span><span style="color:#bf616a;">TMP_GIT_CLONE</span><span style="color:#c0c5ce;">=$</span><span style="color:#bf616a;">HOME</span><span style="color:#a3be8c;">/tmp/website
+</span><span style="color:#bf616a;">PUBLIC_WWW</span><span style="color:#c0c5ce;">=$</span><span style="color:#bf616a;">HOME</span><span style="color:#a3be8c;">/html
+
+</span><span style="color:#96b5b4;">. </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">HOME</span><span style="color:#c0c5ce;">/.bash_profile
+</span><span style="color:#bf616a;">git</span><span style="color:#c0c5ce;"> clone $</span><span style="color:#bf616a;">GIT_REPO </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">TMP_GIT_CLONE
+</span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">(which jekyll)</span><span style="color:#c0c5ce;"> build</span><span style="color:#bf616a;"> -s </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">TMP_GIT_CLONE -d </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">PUBLIC_WWW
+rm -Rf </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">TMP_GIT_CLONE
+</span><span style="color:#96b5b4;">exit
+</span></code></pre>
+<p>More information about deploying with jekyll can be found <a href="http://jekyllrb.com/docs/deployment-methods/">here</a>.</p>
+<p>The biggest advantage I see is being able to customize the post-receive hook. There are so many possibilities, like automatically posting a tweet once a post is published.</p>
+<p>It's important to note that if you are planning to move away from GitHub Pages, you don't necessarily need a hoster that offers Ruby support. All you need is a webserver that can serve static files. You would first generate your blog with <code>jekyll</code> locally and then upload it it your server via FTP.</p>
+<p>After moving the website away from GitHub, I also moved most of my GitHub repositories to GitLab. As a result, most of the links to my GitHub repositories have to be changed at some point. A mirror of this websites repository is available on <a href="https://gitlab.com/phansch/phansch-net/tree/master">GitLab</a>.</p>
+<p>I haven't written any other posts for this series yet, but potential next topics include: Owncloud, Laptop Setup, Backups, Email, Password Management and Android liberation.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sideproject: Focusthingy</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Sideproject: Focusthingy">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Sideproject: Focusthingy</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;focusthingy&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2014-01-12">12 Jan 2014</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  1  min read
+</em>
+      </p>
+      <div class="e-content"><p>I wanted to build this for a while now and finally got around to do it.</p>
+<a href="http://focusthingy.herokuapp.com">
+  <img src="/assets/images/posts/2014-01-12-sideproject-focusapp/focusapp.png" class="img-thumbnail" alt="project screenshot" />
+</a>
+<p>Check it out on <a href="http://focusthingy.herokuapp.com/">focusthingy.herokuapp.com</a>.<br />
+The source is <a href="https://github.com/phansch/focus">available on GitHub</a>.</p>
+<hr />
+<p>As the footer says, it is inspired by a Chrome extension. But I can't remember the name of it. If you happen to know the extension, let me know.</p>
+<h2 id="using-indexeddb">Using IndexedDB</h2>
+<p>This project was my excuse to practice some Javascript as well as applying the principles of <a href="http://offlinefirst.org/">OfflineFirst</a>.
+I decided to use IndexedDB, because it seems to be the simplest solution for persistent offline storage. There is also <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Storage#localStorage">localStorage</a> which has limits on the maximum size of data. If you are looking to sync your data to a server, maybe give <a href="http://hood.ie">hood.ie</a> or <a href="http://pouchdb.com">PouchDB</a> a try.</p>
+<h3 id="an-indexeddb-primer">An IndexedDB primer</h3>
+<p>IndexedDB is an object storage for Javascript objects. Each IndexedDB database stores a collection of key-value pairs. Each value can be a Javascript object of any complexity. The key can be a property of such an object. You can also create indexes of any properties for quicker searching and sorting. Furthermore, instead of using SQL, in IndexedDB you use a cursor to iterate over a result set.</p>
+<p>If you want to learn more about IndexedDB, I recommend starting with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB">IndexedDB guide on the MDN</a>.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

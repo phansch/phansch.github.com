@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Setup done</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Setup done">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Setup done</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;setup-done&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2012-07-28">28 Jul 2012</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>It took me about two days to get everything set-up. The first day was spent with learning the basics of jekyll, liquid and markdown. </p>
+<p>The second day was littered with small challenges and quite a few problems. But problems are there to be solved. So here's my summary of day #2:</p>
+<h3 id="setup-a-local-test-environment">Setup a local test environment###</h3>
+<p>First thing I did, was figuring out how to setup a local testing environment. The previous day I did 80 commits for testing purposes. That was a little bit too much, in my eyes. Luckily there are quite a few tutorials on how to setup such a test environment. <a href="http://ntotten.com/2012/03/02/github-pages-with-jekyll-local-development-on-windows/">This</a> is the one I used (My desktop machine is running Windows 7). All you need is ruby, the ruby dev kit, jekyll, rdiscount and a clone of your repository.</p>
+<p><a href="/assets/images/posts/2012-07-28-Setup-done/commit-frequency.png"><img src="/assets/images/posts/2012-07-28-Setup-done/commit-frequency.png" width="610" alt="commit frequency" title="From 80 down to 18 commits." /></a></p>
+<p>So, from 80 commits without a testing environment I went down to 18 commits on day 2. </p>
+<h3 id="importing-blog-posts-from-wordpress">Importing blog posts from Wordpress</h3>
+<p>As I wanted to keep my old blog posts archived, I looked for ways to convert the Wordpress export xml file to markdown. I eventually found <a href="https://github.com/thomasf/exitwp/">thomasf/exitwp</a> which does exactly what I needed. All that was left to do was getting rid if <code>[caption]</code> tags, making the code look nicer and some general formatting. </p>
+<p>I also removed tags and categories from each post as I'm not making use of them. Sadly, embedded YouTube videos were removed by exitwp, so I had to put them in again. </p>
+<p>The last thing that was on my list was the code formatting. Apparently there is <a href="http://github.github.com/github-flavored-markdown/">GitHub flavoured markdown</a>. Except that it didn't seem to work on here. After I've spent some time messing around with that, I simply used the basic markdown syntax for code. No syntax highlighting, sadly.
+This is also where most of the commits came from. Obviously, GitHub flavored markdown is not available in a local testing environment, so I had to test it on GitHub.</p>
+<h3 id="my-own-theme">My own theme</h3>
+<p>This theme is a fork of Tom's jekyllbootstrap theme. A few changes to the font, a new archive page and a different footer - That's all I changed. But it's not finished yet. I'm planning to add a &quot;fork me&quot; badge and I might change the footer a little bit. But so far I'm pretty much done.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

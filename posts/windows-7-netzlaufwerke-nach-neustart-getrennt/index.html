@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Windows 7 - Netzlaufwerke nach Neustart getrennt</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Windows 7 - Netzlaufwerke nach Neustart getrennt">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Windows 7 - Netzlaufwerke nach Neustart getrennt</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;windows-7-netzlaufwerke-nach-neustart-getrennt&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2009-11-07">07 Nov 2009</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  1  min read
+</em>
+      </p>
+      <div class="e-content"><p>Dank MSDNAA bin ich nun im Besitz von Windows 7 Professional.</p>
+<p>Nun, vor kurzem habe ich mir ein NAS von Iomega zugelegt. Leider ist bisher noch kein offizieller Treiber für Windows 7 x64 erschienen.</p>
+<p>Also blieb mir nur die manuelle Methode:</p>
+<p><strong>Computer -&gt; Netzlaufwerk verbinden</strong></p>
+<!--[![Netzlaufwerk Verbinden](http://wpimages.phansch.de/2009/11/netzlaufwerk-verbinden-300x28.jpg)](http://wpimages.phansch.de/2009/11/netzlaufwerk-verbinden.jpg)-->
+<p>Nach einem Neustart kam jedoch folgende Nachricht:
+<em>&quot;Netzlaufwerk konnte nicht wiederhergestellt werden&quot;</em></p>
+<p>Das Problem ist warscheinlich, dass die Netzwerkdienste zu spät gestartet werden. Mit Windows XP hat Microsoft versucht, den Systemstart zu beschleunigen und dabei die Netzwerkdienste zu niedrig priorisiert.</p>
+<p>Es gibt aber zwei Lösungen die für mich funktioniert haben.</p>
+<h3 id="anmeldung-herauszogern">Anmeldung herauszögern</h3>
+<p>Der Gedanke hierbei ist, dass die Netzwerkdienste vor der Anmeldung starten können. Man wartet 15 bis 20 Sekunden bevor man das Nutzerpasswort eingibt und sich anmeldet.</p>
+<p>Wem das Warten nicht gefällt, den kann ich beruhigen.</p>
+<h3 id="batchdatei-zum-einbinden-der-netzlaufwerke-im-autostart">Batchdatei zum Einbinden der Netzlaufwerke im Autostart</h3>
+<p>Der Autostart ist so ziemlich der letzte Teil beim Start von Windows. Die Netzwerkdienste sind vor dem Autostart verfügbar.</p>
+<p>Mit einer kleinen Batchdatei lassen sich sich die Netzwerkordner einbinden.</p>
+<pre style="background-color:#2b303b;">
+<code>net use W: \\nas-server\public passwort /user:kontoname /Persistent:NO
+net use X: \\nas-server\backups /Persistent:NO
+net use Y: \\nas-server\itunes /Persistent:NO
+net use Z: \\nas-server\web /Persistent:NO
+</code></pre>
+<p>Bei der ersten Ressource werden die Logininformationen angegeben.
+Außerdem wird für jedes Netzlaufwerk Persistent auf &quot;NO&quot; gesetzt. Das heißt, das die Netzlaufwerke nur für eine Sitzung existieren. So sparen wir uns das manuelle Trennen der Netzlaufwerke.</p>
+<p>Nun muss die Batchdatei noch in den Autostart-Ordner gespeichert werden.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

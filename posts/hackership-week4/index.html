@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hackership Week 4</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Hackership Week 4">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Hackership Week 4</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;hackership-week4&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2013-12-06">06 Dec 2013</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>This week I worked on implementing the models for lessons and practices so that data is available for every single practice.
+I also tried to wrap my head around CoffeeScript but it seems that I should learn more about javascript first.</p>
+<p>We started the week with our usual Monday morning breakfast and decided on our goals for the week. After the breakfast I started working on creating the
+models and migrations for Lessons and Practices. I spent an hour planning the initial database structure and then went on to create the models, associations and migrations.</p>
+<p>The first thing I did on <strong>Tuesday</strong> was cleaning up the database model as there were a couple unused attributes. I then went on and re-organized my <code>routes.rb</code> as it was getting a little unwieldy with the new models. Me and a few other learners also got interviewed by <a href="https://twitter.com/visavis_kid">@e_w</a> about our Hackership experience. The interview videos will be part of a short video about the first Hackership batch. I also gave the <a href="https://github.com/thoughtbot/shoulda">shoulda</a> Gem a try. This is a gem that allows for easy testing of model associations.</p>
+<p>Once my tests were green, I started working on my Anki cards collection. When I started with Hackership, I wanted to see how spaced repetition could improve my learning. I started taking notes of things that I looked up again and again. One example would be unpacking bzip and gzip files on Linux: <code>tar xvjf files.tar.bz2</code> - I had a really hard time remembering the arguments until I put it into my Anki collection.</p>
+<p>On <strong>Wednesday</strong> I had to make up for not writing enough tests in the previous two days. I started learning more about FactoryGirl and also installed the <a href="https://github.com/bmabey/database_cleaner">database_cleaner</a> Gem. Then I wrote some tests for a couple helper methods I've written before. We also had a 2 hour long Rails Q&amp;A session where we talked about <a href="http://37signals.com/svn/posts/3372-put-chubby-models-on-a-diet-with-concerns">concerns</a> and the <a href="https://github.com/plataformatec/devise">devise</a> Gem.</p>
+<p>It was CoffeeScript time on <strong>Thursday</strong>. I tried. I tried really hard to understand CoffeeScript scoping. But it seems that without proper Javascript knowledge this is very hard. That makes refactoring very difficult and my current code is not very maintainable. I don't think that I have enough time to improve on it before Hackership ends. Another thing that happened, was an introduction to GitHub by <a href="https://twitter.com/lstoll">@lstoll</a>, <a href="https://twitter.com/muanchiou">@muanchiou</a>, <a href="https://twitter.com/vmg">@vmg</a> and <a href="https://twitter.com/jdennes">@jdennes</a>. They explained pull requests and a couple more features of GitHub, like commenting on specific lines on a commit.</p>
+<hr />
+<p>I did get everything done that I had planned for this week. I also went to the <a href="http://berlin.onruby.de/events/december-meetup-2013">Ruby Meetup</a> on Thursday and met a lot of new people. Next week I'm going to work on displaying errors the user makes and jumping to specific lessons.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Open Markdown files from vim</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Open Markdown files from vim">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Open Markdown files from vim</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;open-markdown-files-from-vim&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2014-05-30">30 May 2014</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>Here's my most recent addition to my vimrc. I was looking for a way to open Markdown or HTML files in the browser, with a single keystroke from vim.</p>
+<p>In vim you can execute shell commands with <code>:!command</code>. This will put vim in the background and execute the given command. You have to hit enter in order to go back to vim.</p>
+<p>So, to open the current file in Firefox you can use <code>:!firefox %</code>. Where <code>%</code> is expanded to the current active file in vim.</p>
+<p>To make this a bit more flexible, on Debian based systems you can use <code>:!sensible-browser %</code> to open the file in your default browser. On a Mac it should be <code>:!open %</code>, although you will have to try that one for yourself.</p>
+<p>Now, there's one thing that is getting in the way: You still have to press enter to get back to vim. So, the next step is to prepend a <code>:silent execute</code> to our command:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-vim" data-lang="vim"><span style="color:#c0c5ce;">  :silent </span><span style="color:#96b5b4;">execute </span><span style="color:#a3be8c;">&quot;!sensible-browser %&quot;
+</span></code></pre>
+<p>This should work on most systems. However if your vim turns blank when executing your command, you will have to force a redraw afterwards with <code>:redraw!</code>. You could also hit CTRL+L to achieve the same thing, however we can use <code>:redraw!</code> in combination with the other command:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-vim" data-lang="vim"><span style="color:#b48ead;">function</span><span style="color:#c0c5ce;">! </span><span style="color:#8fa1b3;">OpenCurrentFileInBrowser</span><span style="color:#c0c5ce;">()
+</span><span style="color:#65737e;">  &quot; Open current file in browser
+</span><span style="color:#c0c5ce;">  :silent </span><span style="color:#96b5b4;">execute </span><span style="color:#a3be8c;">&quot;!sensible-browser %&quot;
+
+</span><span style="color:#65737e;">  &quot; Fix empty vim window by forcing a redraw
+</span><span style="color:#c0c5ce;">  :redraw!
+</span><span style="color:#b48ead;">endfu
+</span></code></pre>
+<p>Now we can conveniently bind it to a shortcut:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-vim" data-lang="vim"><span style="color:#b48ead;">augroup</span><span style="color:#c0c5ce;"> filetype_markdown
+  </span><span style="color:#96b5b4;">au</span><span style="color:#c0c5ce;">!
+  </span><span style="color:#96b5b4;">au </span><span style="color:#c0c5ce;">BufNewFile,BufRead </span><span style="color:#b48ead;">*.</span><span style="color:#c0c5ce;">md </span><span style="color:#96b5b4;">set filetype</span><span style="color:#c0c5ce;">=markdown
+
+  </span><span style="color:#96b5b4;">au </span><span style="color:#c0c5ce;">FileType markdown </span><span style="color:#96b5b4;">nnoremap </span><span style="color:#c0c5ce;">&lt;leader&gt;f :call </span><span style="color:#8fa1b3;">OpenCurrentFileInBrowser</span><span style="color:#c0c5ce;">()&lt;cr&gt;
+</span><span style="color:#b48ead;">augroup</span><span style="color:#c0c5ce;"> END
+</span></code></pre>
+<hr />
+<h5 id="actually-opening-markdown-files-in-your-browser">Actually opening Markdown files in your browser</h5>
+<p>By now, the browser should open a download dialogue when executing our command. To fix this, we have to install an addon that provides a markdown parser.</p>
+<p>For Google Chrome, install <a href="https://chrome.google.com/webstore/detail/markdown-reader/gpoigdifkoadgajcincpilkjmejcaanc?hl=en">Markdown Reader</a>, <a href="https://chrome.google.com/webstore/detail/markview/iaddkimmopgchbbnmfmdcophmlnghkim?hl=en">MarkView</a> or <a href="https://chrome.google.com/webstore/detail/markdown-viewer/ehnambpmkdhopilaccgfmojilolcglhn?hl=en">Markdown Viewer</a>. Be sure to give the plugin access to file URLs after installing it.</p>
+<p>For Firefox there's pretty much only <a href="https://addons.mozilla.org/en-US/firefox/addon/markdown-viewer-webext/">Markdown Viewer</a> available. And chances are it doesn't work out of the box on Linux. If it doesn't, you are probably missing an entry in <code>~/.mozilla/firefox/*default/mimeTypes.rdf</code>.</p>
+<p>Add the following to <code>mimeTypes.rdf</code> to make it recognize .md files as text/plain:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-xml" data-lang="xml"><span style="color:#c0c5ce;">&lt;</span><span style="color:#bf616a;">RDF:Description </span><span style="color:#d08770;">RDF:about</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">urn:mimetype:text/plain</span><span style="color:#c0c5ce;">&quot;
+        </span><span style="color:#d08770;">NC:value</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">text/plain</span><span style="color:#c0c5ce;">&quot;
+        </span><span style="color:#d08770;">NC:fileExtensions</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">md</span><span style="color:#c0c5ce;">&quot;
+        </span><span style="color:#d08770;">NC:description</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">Text Document</span><span style="color:#c0c5ce;">&quot;&gt;
+    &lt;</span><span style="color:#bf616a;">NC:handlerProp </span><span style="color:#d08770;">RDF:resource</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">urn:mimetype:handler:text/plain</span><span style="color:#c0c5ce;">&quot;/&gt;
+&lt;/</span><span style="color:#bf616a;">RDF:Description</span><span style="color:#c0c5ce;">&gt;
+</span></code></pre>
+<p><small><a href="https://www.ryanchapin.com/getting-markdown-viewer-to-display-html-formatted-markdown-content-in-firefox-under-linux/">Source: Getting Markdown Viewer To Display HTML Formatted Markdown Content in Firefox Under Linux</a></small></p>
+<p>Now restart your browser and give it a try.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

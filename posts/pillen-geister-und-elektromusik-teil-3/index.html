@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pillen, Geister und Elektromusik - Teil 3</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Pillen, Geister und Elektromusik - Teil 3">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Pillen, Geister und Elektromusik - Teil 3</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;pillen-geister-und-elektromusik-teil-3&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2011-09-17">17 Sep 2011</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  4  min read
+</em>
+      </p>
+      <div class="e-content"><p>In den letzten zwei Wochen habe ich wieder Zeit für das <a href="http://phansch.net/2010/12/31/pillen-geister-und-elektromusik-teil-2">Pacman Spiel</a> gefunden.
+Es hat sich einiges getan. Unter anderen verfügen die Geister nun über eine automatische Wegfindung. Außerdem können sie von Pacman durch das Sammeln von großen Pillen für 5 Sekunden verlangsamt werden. Was es sonst noch neues gibt, erfahrt ihr hier</p>
+<h3 id="geister-ai">Geister &quot;AI&quot;</h3>
+<p>Die Geister Wegfindung ist sehr einfach gehalten.
+Befindet sich ein Geist auf einer Kreuzung, wird eine zufällige Richtung ausgewählt. Ausgenommen ist dabei die Richtung aus der der Geist gekommen ist.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">public void </span><span style="color:#8fa1b3;">GetPossibleDirections</span><span style="color:#c0c5ce;">(Map </span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">)
+{
+    </span><span style="color:#bf616a;">_possibleDirections</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Clear</span><span style="color:#c0c5ce;">();
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(Direction </span><span style="color:#bf616a;">dir </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">Enum</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GetValues</span><span style="color:#c0c5ce;">(typeof(Direction)))
+    {
+        </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">CanMove</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">dir</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">map</span><span style="color:#c0c5ce;">))
+        {
+            </span><span style="color:#bf616a;">_possibleDirections</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Add</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">dir</span><span style="color:#c0c5ce;">);
+        }
+    }
+
+    </span><span style="color:#65737e;">//Remove the opposite direction
+    </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">CurrentDirection </span><span style="color:#c0c5ce;">== </span><span style="color:#bf616a;">Direction</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Right</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">_possibleDirections</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Remove</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">Direction</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Left</span><span style="color:#c0c5ce;">);
+    }
+    </span><span style="color:#b48ead;">else if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">CurrentDirection </span><span style="color:#c0c5ce;">== </span><span style="color:#bf616a;">Direction</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Left</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">_possibleDirections</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Remove</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">Direction</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Right</span><span style="color:#c0c5ce;">);
+    }
+    </span><span style="color:#b48ead;">else if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">CurrentDirection </span><span style="color:#c0c5ce;">== </span><span style="color:#bf616a;">Direction</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Up</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">_possibleDirections</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Remove</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">Direction</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Down</span><span style="color:#c0c5ce;">);
+    }
+    </span><span style="color:#b48ead;">else if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">CurrentDirection </span><span style="color:#c0c5ce;">== </span><span style="color:#bf616a;">Direction</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Down</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">_possibleDirections</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Remove</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">Direction</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Up</span><span style="color:#c0c5ce;">);
+    }
+}
+</span></code></pre>
+<p>Natürlich ist das noch keine große Herausforderung für den Spieler. Im Original hat jeder Geist seine eigene Persönlichkeit, so dass er zum Beispiel auf die Nähe Pacmans reagiert. 
+Dazu gibt es einige wunderbare Artikel im Netz:</p>
+<ul>
+<li><a href="http://www.gamasutra.com/view/feature/3938/the_pacman_dossier.php?print=1">Gamasutra</a></li>
+<li><a href="http://gameinternals.com/post/2072558330/understanding-pac-man-ghost-behavior">http://gameinternals.com/post/2072558330/understanding-pac-man-ghost-behavior</a></li>
+</ul>
+<p>Ich werde wenigstens eine Alternative Wegfindung für die Gegner implementieren. </p>
+<h3 id="collision-detection">Collision Detection</h3>
+<!--![](http://wpimages.phansch.de/2011/09/collisionDetection_1.jpg)-->
+<p>Die erstbeste Methode zur Kollisionserkennung auf die man stößt wenn man nach &quot;XNA collision detection&quot; recherchiert, ist <code>Rectangle.Intersects(Rectangle r)</code>. Wenn sich Rechteck A mit Rechteck B treffen hat man eine Kollision. Hier stoßen wir beim Spielen aber früher oder später auf Schwierigkeiten.</p>
+<!--![](http://wpimages.phansch.de/2011/09/collisionDetection_2.jpg) -->
+<p>Anhand des Bildes kann man das leicht erklären. Der Gegner (rot) befindet sich auf dem Weg nach oben und ist Pacman schon fast ein ganzes Feld voraus. Da sich jedoch die Rechtecke beider Objekte berühren, kommt es zur Kollision.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">public bool </span><span style="color:#8fa1b3;">GetsEaten_Hardcore</span><span style="color:#c0c5ce;">(List&lt;ghost&gt;)
+{
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(Ghost </span><span style="color:#bf616a;">g </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">ghosts</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">RectBoundary</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Intersects</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">g</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">RectBoundary</span><span style="color:#c0c5ce;">))
+        {
+            </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+        }
+    }
+    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>Eine andere Möglichkeit: Während des Spiels wird von der Spielfigur und den Gegnern jeweils das aktuelle Feld erfasst. Befindet sich ein Geist mit Pacman auf demselben Feld, kommt es zu einer Kollision.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">public bool </span><span style="color:#8fa1b3;">GetsEaten_Liberal</span><span style="color:#c0c5ce;">(List&lt;ghost&gt;)
+{
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(Ghost </span><span style="color:#bf616a;">g </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">ghosts</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">CurrentField </span><span style="color:#c0c5ce;">== </span><span style="color:#bf616a;">g</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">CurrentField</span><span style="color:#c0c5ce;">)
+        {
+            </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+        }
+    }
+    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre><!--![](http://wpimages.phansch.de/2011/09/collisionDetection_3.jpg)-->
+<p>Nun, damit entsteht ein Problem: Was passiert wenn sich Pacman und Gegner (rot) auf demselben Feld sind, sich aber nicht berühren? Genau: Die Methode gibt <em>true</em> zurück und der Spieler hat ein Leben weniger.
+Einen optimalen Lösungsweg habe ich hiermit noch nicht gefunden. Ich werde mich nochmals mit der letzteren Methode beschäftigen, da die erste Methode zu frustrierend für den Spieler wäre. Immerhin kann der Spieler die Bounding Rectangles nicht sehen.</p>
+<h3 id="verlangsamung-der-gegner">Verlangsamung der Gegner</h3>
+<p>In der jetzigen Version kann Pacman die Gegner für eine bestimmte Zeit verlangsamen indem er eine große Pille sammelt. Ist die festgelegte Zeit abgelaufen, haben die Gegner wieder ihre ursprüngliche Geschwindigkeit.</p>
+<p>Alles fängt damit an, dass Pacman eine große Pille sammelt:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">((</span><span style="color:#bf616a;">pointsGained </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">_pacman</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">EatBigPill</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">_map</span><span style="color:#c0c5ce;">) == </span><span style="color:#d08770;">30</span><span style="color:#c0c5ce;">)
+{
+    </span><span style="color:#bf616a;">GameData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">AteBigPill </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>Die Methode <code>Update_Ghosts()</code> überprüft ob <code>GameData.AteBigPill == true</code> ist und ändert entsprechend die Geschwindigkeit der Gegner.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">//Slow each ghost for GHOST_SLOWTIME in seconds if pacman ate a big pill
+</span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">GameData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">AteBigPill </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">)
+{
+    </span><span style="color:#65737e;">//Start counter
+    </span><span style="color:#bf616a;">GameData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GhostSlowTimer </span><span style="color:#c0c5ce;">-= </span><span style="color:#bf616a;">gameTime</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ElapsedGameTime</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">TotalSeconds</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(Ghost </span><span style="color:#bf616a;">g </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">_ghostList</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">g</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Speed </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">MovingCreature</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">MovementSpeed</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Slow</span><span style="color:#c0c5ce;">; </span><span style="color:#65737e;">//Force effect on each ghost
+    </span><span style="color:#c0c5ce;">}
+
+    </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">GameData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GhostSlowTimer </span><span style="color:#c0c5ce;">&lt; = </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">) </span><span style="color:#65737e;">//if time is over
+    </span><span style="color:#c0c5ce;">{
+        </span><span style="color:#bf616a;">GameData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GhostSlowTimer </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">GameData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GHOST_SLOWTIME</span><span style="color:#c0c5ce;">; </span><span style="color:#65737e;">//reset timer
+        </span><span style="color:#bf616a;">GameData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">AteBigPill </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">; </span><span style="color:#65737e;">//reset flag
+    </span><span style="color:#c0c5ce;">}
+}
+</span><span style="color:#b48ead;">else if</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">GameData</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">AteBigPill </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">)
+{
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(Ghost </span><span style="color:#bf616a;">g </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">_ghostList</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">g</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Speed </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">MovingCreature</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">MovementSpeed</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Fast</span><span style="color:#c0c5ce;">; </span><span style="color:#65737e;">//Remove effect
+    </span><span style="color:#c0c5ce;">}
+}
+</span></code></pre></div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

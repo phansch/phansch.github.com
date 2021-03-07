@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>From Ruby to Rust</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="From Ruby to Rust">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">From Ruby to Rust</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;from-ruby-to-learning-rust&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2018-04-08">08 Apr 2018</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  3  min read
+</em>
+      </p>
+      <div class="e-content"><p>It's been a few months since I've written here and it's time for an update.</p>
+<p>The idea to learn another programming language than Ruby was on my mind the majority of 2017.
+I know Ruby pretty well and have been doing it for over 4 years now, and I feel like my learning has slowed down a lot in the past year.</p>
+<p>Last November, after playing around with Elixir, I decided that it would be better to learn Rust if I want to learn things more deeply.</p>
+<p>I really think Elixir and Erlang have their place and I enjoyed doing Elixir. However, the reach of Elixir and Erlang doesn't seem to go far beyond web development and communication technology. Furthermore, I felt like being on the same abstraction level as Ruby where I didn't learn as deeply as I could.</p>
+<p>That's why I decided to focus on <a href="https://rust-lang.org"><strong>Rust</strong></a> this year.</p>
+<p>Rust gives me much more freedom but it still allows me to build sensible abstractions that keep me productive.
+The language itself covers many new concepts that I didn't have to deal with in Ruby. Especially the type system and borrow checker.</p>
+<h4 id="how-am-i-learning-rust">How am I learning Rust</h4>
+<p>At the beginning of December I started with <a href="https://github.com/phansch/aoc">Advent of Code</a>. It was fun, but AoC was a bit tough with time constraints and the fact that I never really did Rust before, contributed to me giving up. After partly finishing the first week I decided not to continue.</p>
+<p>Instead, I started with the <a href="http://exercism.io/languages/rust/exercises">Exercism exercises</a> for Rust. Currently I'm about halfway done with all the exercises.
+Almost all of them have a focus on mathematical problems and algorithms, which makes them perfect for learning about iterators and collections.</p>
+<p>While doing these practice exercises can be fun, I was also looking to contribute something useful to the community and getting my hands on some real-world Rust code.</p>
+<h4 id="clippy">Clippy</h4>
+<p>I don't remember exactly how I found it, but I have now been contributing for about 2 months: <a href="https://github.com/rust-lang-nursery/rust-clippy">Clippy</a>.</p>
+<p>Clippy is a bunch of lints that catch common mistakes and improve your Rust code.</p>
+<p>Contributing to Clippy is awesome in many ways. It's an opportunity to teach users how to improve their Rust code while also preventing common mistakes at the same time.
+For me as a contributor, Clippy allows me to learn Rust while also learning about Rust internals.</p>
+<p>My first lint was <a href="https://github.com/rust-lang-nursery/rust-clippy/pull/2340">this one</a>. It turned out much more tricky in the end because attributes in Rust are not at all what they look like on the surface. There were a hand full of bug reports after it got merged.</p>
+<p>Not being a Rust expert certainly made it more difficult, but it's totally possible to do a deep dive into a very specific area of Rust internals and coming out alive.</p>
+<p>I am also regularly going to the Berlin Rust Hackers/Learners Meetup and the last time it happened during the <a href="https://blog.rust-lang.org/2018/04/06/all-hands.html">Rust All Hands 2018</a>. The atmosphere that day was exciting to say the least. I got to meet some of the people working on Clippy and everyone was super welcoming.</p>
+<p>The end result of that day was that I'm now part of the clippy team! While I wasn't super productive that day, I left with many ideas and lots of enthusiasm.</p>
+<h4 id="what-s-next">What's next</h4>
+<p>For Clippy I want to personally focus on fixing existing bugs and lowering the open PR count. I also want to improve the contribution instructions to make it easier for new people to contribute.</p>
+<p>In order to do that I need to learn more Rust. I haven't finished my copy of 'Programming Rust' by Jim Blandy and Jason Orendorff, yet. Once finished, I want to get some practical experience writing my own thing from scratch.</p>
+<p>I started a <a href="https://www.gnu.org/software/gtypist/index.html">GNU Typist</a> rewrite last year but didn't continue because I didn't know enough Rust at the time: <a href="https://github.com/phansch/rtypist">rtypist</a>. I hope to pick it up again this month and use it to get some practical experience with traits, lifetimes and writing my own macros.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

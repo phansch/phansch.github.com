@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hackership Graduation</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Hackership Graduation">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Hackership Graduation</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;hackership-graduation&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2013-12-22">22 Dec 2013</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  4  min read
+</em>
+      </p>
+      <div class="e-content"><p>I can't believe how fast the time flew by during Hackership. It is almost holiday time. And by the time this post is published I will be visiting my family already. This week at Hackership, I moved my authentication system to <a href="https://github.com/plataformatec/devise">devise</a> and made everything <a href="https://twitter.com/phansch/status/413368624905064448">look nice</a>.</p>
+<p>On <strong>Monday</strong> I began to setup devise. I wanted to move to devise at some point because it also comes with its own mailing system. This way I don't have to figure out too many things at once. Setting up devise went more smoothly than I anticipated. However there were a lot of failing test - leftovers from the railstutorial. Some of them were still useful. But most of the test cases are now covered by devise.</p>
+<p>Sadly I had to stay home on <strong>Tuesday</strong> because I didn't feel very good. I spent a lot of time on Typeracer to further improve my typing speed. I also changed a few vim shortcuts to make things easier. (Feel free to check out my <a href="https://gitlab.com/phansch/dotfiles/blob/master/vimrc">.vimrc</a>!). I also managed to get devise working properly but still had a few failing tests.</p>
+<p>Luckily I didn't catch the flu, so I was back on <strong>Wednesday</strong>. I got a lot of stuff done on Wednesday. The first half of the day I worked on fixing the rest of the failing tests for devise. When I was done with that, it was time for our last Rails Q&amp;A. This time we talked about how to connect your Rails application to an external web service. We actually set up a basic proxy API with the <a href="http://developer.wordnik.com/">Wordnik service</a>.</p>
+<p>Once we got that working, it was time to part again and continue working on our own projects. Since my work on the tests was done, I began working on the design of my application. As I already did that before, I had a basic design going after another two hours. Here is a screenshot:</p>
+<a href="/assets/images/posts/2013-12-22-hackership-graduation/theme.png" class="thumbnail">
+  <img src="/assets/images/posts/2013-12-22-hackership-graduation/theme.png" alt="screenshot" />
+</a>
+<p>On <strong>Thursday</strong> I spent a little more time on the look. I made sure all the forms for user authentication are looking nice. The default devise views don't come with the Bootstrap look by default.</p>
+<p>At about 3 pm we went to the big presentation room of betahaus. Since we were going to use it for the graduation ceremony later on, it was nice to get accustomed to it. I wasn't a big fan of public speaking when I started Hackership. Maybe this has changed a little bit by now. Since we were doing daily stand ups and weekly demo sessions, I had a lot of practice.</p>
+<p>Anyway, this last time our internal demo session was held on a proper stage. I don't think anyone had a finished project to show. We have learned a lot, but 6 weeks aren't enough to learn a new language/framework <em>and</em> have a ready product to present.</p>
+<p>After our demo session, it was time to walk through the plans for the graduation ceremony. We basically staged everything beforehand so that there would be no surprises during the actual ceremony. And then it was time for the actual graduation ceremony. It took a little while until everyone arrived, but eventually every seat was taken.</p>
+<p>Ben started by giving a short introduction to Hackership and the philosophy behind it. Then it was panel time. I also signed up for the panel and so I found myself sitting in front of 70 people together with 6 other graduates. We shared some of our experiences and answered questions from the audience. People seemed to be genuinely interested. After the panel, we were given our certificates. Below is mine. It also includes code from everyones Hackership project, but it's not included in the picture.</p>
+<a href="/assets/images/posts/2013-12-22-hackership-graduation/cert.png" class="thumbnail">
+  <img src="/assets/images/posts/2013-12-22-hackership-graduation/cert.png" alt="screenshot" />
+</a>
+<p>With the certificates given out, our organizers announced the <a href="http://www.indiegogo.com/projects/an-apprenticeship-for-hackers-a-hackership">crowdfunding campaign</a> for the next Hackership Batch. <strong>Hackership is on Indiegogo. Feel free to check it out and maybe help with the funding if you happen to like it.</strong> I already did. After the announcement of the crowdfunding campaign, the ceremony was over pretty much. It was time to meet the audience and talk about what we learned during Hackership.</p>
+<p>It was nice talking about my project. I got some very valuable feedback for my touch typing teacher and will start measuring user performance on different typing lessons to figure out what lessons help the users the most. The more data the better. So it seems I still have a lot of things to learn. However, I'm not sure if that will help me with actually learning Ruby on Rails. Instead I might start to contribute to open source Rails projects, like Discourse or Open Streetmap.</p>
+<p>So this is it. Hackership is officially over. A couple of us will continue to work together in the new year and help each other with their projects. <strong>Thanks to the organizers and Hackers in Residence and other people who helped to make this happen.</strong> Hackership introduced me to all kinds of awesome people and they helped me overcome my depression and social anxiety. But that's for another post. So this won't be the last post this year. If you have read this far, thank you for actually taking the time to read this!</p>
+<p>Have a great holiday!</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

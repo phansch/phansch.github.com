@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Philipp Hansch</title>
+ <link href="https://phansch.net/atom.xml" rel="self" type="application/atom+xml"/>
+ <link href="https://phansch.net//"/>
+ <generator uri="https://www.getzola.org/">Zola</generator>
+ <updated>2021-02-01T00:00:00+00:00</updated>
+ <id>https://phansch.net/atom.xml</id>
+ <author>
+   <name>Philipp Hansch</name>
+   <email>hi@phansch.net</email>
+ </author>
+ <entry>
+   <title>Monthly review: January</title>
+   <link href="https://phansch.net/posts/monthly-review-january-2021/"/>
+   <published>2021-02-01T00:00:00+00:00</published>
+   <updated>2021-02-01T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-january-2021/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-january-2021/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: December</title>
+   <link href="https://phansch.net/posts/monthly-review-december-2020/"/>
+   <published>2020-12-26T00:00:00+00:00</published>
+   <updated>2020-12-26T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-december-2020/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-december-2020/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: June</title>
+   <link href="https://phansch.net/posts/monthly-review-june/"/>
+   <published>2020-07-06T00:00:00+00:00</published>
+   <updated>2020-07-06T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-june/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-june/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: May</title>
+   <link href="https://phansch.net/posts/monthly-review-may/"/>
+   <published>2020-06-01T00:00:00+00:00</published>
+   <updated>2020-06-01T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-may/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-may/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: March and April</title>
+   <link href="https://phansch.net/posts/monthly-review-march-april/"/>
+   <published>2020-05-04T00:00:00+00:00</published>
+   <updated>2020-05-04T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-march-april/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-march-april/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Fighting my procrastination: Part 1</title>
+   <link href="https://phansch.net/posts/fighting-procrastination-part-1/"/>
+   <published>2020-03-03T00:00:00+00:00</published>
+   <updated>2020-03-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/fighting-procrastination-part-1/</id>
+   <content type="html"><a href="https://phansch.net/posts/fighting-procrastination-part-1/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: February</title>
+   <link href="https://phansch.net/posts/monthly-review-february/"/>
+   <published>2020-03-03T00:00:00+00:00</published>
+   <updated>2020-03-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-february/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-february/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: January</title>
+   <link href="https://phansch.net/posts/monthly-review-january/"/>
+   <published>2020-02-03T00:00:00+00:00</published>
+   <updated>2020-02-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-january/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-january/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Exploring Embedded Rust - Part 1</title>
+   <link href="https://phansch.net/posts/exploring-embedded-rust-part-1/"/>
+   <published>2020-01-14T00:00:00+00:00</published>
+   <updated>2020-01-14T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/exploring-embedded-rust-part-1/</id>
+   <content type="html"><a href="https://phansch.net/posts/exploring-embedded-rust-part-1/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: December</title>
+   <link href="https://phansch.net/posts/monthly-review-december/"/>
+   <published>2020-01-06T00:00:00+00:00</published>
+   <updated>2020-01-06T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-december/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-december/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: November</title>
+   <link href="https://phansch.net/posts/monthly-review-november/"/>
+   <published>2019-12-02T00:00:00+00:00</published>
+   <updated>2019-12-02T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-november/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-november/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Monthly review: October</title>
+   <link href="https://phansch.net/posts/monthly-review-october/"/>
+   <published>2019-11-03T00:00:00+00:00</published>
+   <updated>2019-11-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/monthly-review-october/</id>
+   <content type="html"><a href="https://phansch.net/posts/monthly-review-october/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Accepting sponsorship</title>
+   <link href="https://phansch.net/posts/sponsoring/"/>
+   <published>2019-10-21T00:00:00+00:00</published>
+   <updated>2019-10-21T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/sponsoring/</id>
+   <content type="html"><a href="https://phansch.net/posts/sponsoring/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>One Hundred Rust PRs later</title>
+   <link href="https://phansch.net/posts/onehundred-rust-prs/"/>
+   <published>2019-02-18T00:00:00+00:00</published>
+   <updated>2019-02-18T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/onehundred-rust-prs/</id>
+   <content type="html"><a href="https://phansch.net/posts/onehundred-rust-prs/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Cargo lint configuration proposal</title>
+   <link href="https://phansch.net/posts/cargo-lint-configuration-proposal/"/>
+   <published>2019-01-03T00:00:00+00:00</published>
+   <updated>2019-01-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/cargo-lint-configuration-proposal/</id>
+   <content type="html"><a href="https://phansch.net/posts/cargo-lint-configuration-proposal/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Fixing a Clippy crash</title>
+   <link href="https://phansch.net/posts/fixing-a-clippy-crash/"/>
+   <published>2018-10-10T00:00:00+00:00</published>
+   <updated>2018-10-10T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/fixing-a-clippy-crash/</id>
+   <content type="html"><a href="https://phansch.net/posts/fixing-a-clippy-crash/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>From Ruby to Rust</title>
+   <link href="https://phansch.net/posts/from-ruby-to-learning-rust/"/>
+   <published>2018-04-08T00:00:00+00:00</published>
+   <updated>2018-04-08T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/from-ruby-to-learning-rust/</id>
+   <content type="html"><a href="https://phansch.net/posts/from-ruby-to-learning-rust/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>No more Disqus comments</title>
+   <link href="https://phansch.net/posts/no-more-disqus/"/>
+   <published>2017-12-13T00:00:00+00:00</published>
+   <updated>2017-12-13T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/no-more-disqus/</id>
+   <content type="html"><a href="https://phansch.net/posts/no-more-disqus/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Setting up SSL Certificates for HAProxy with certbot</title>
+   <link href="https://phansch.net/posts/haproxy-letsencrypt-certbot/"/>
+   <published>2017-10-18T00:00:00+00:00</published>
+   <updated>2017-10-18T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/haproxy-letsencrypt-certbot/</id>
+   <content type="html"><a href="https://phansch.net/posts/haproxy-letsencrypt-certbot/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Testing your Jekyll Website with HTMLProofer</title>
+   <link href="https://phansch.net/posts/testing-jekyll-websites-with-html-proofer/"/>
+   <published>2017-09-10T00:00:00+00:00</published>
+   <updated>2017-09-10T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/testing-jekyll-websites-with-html-proofer/</id>
+   <content type="html"><a href="https://phansch.net/posts/testing-jekyll-websites-with-html-proofer/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Testing your Jekyll Website with Capybara</title>
+   <link href="https://phansch.net/posts/testing-jekyll-websites/"/>
+   <published>2017-03-13T00:00:00+00:00</published>
+   <updated>2017-03-13T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/testing-jekyll-websites/</id>
+   <content type="html"><a href="https://phansch.net/posts/testing-jekyll-websites/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>A better Pry prompt for the Rails console</title>
+   <link href="https://phansch.net/posts/a-better-pry-prompt-for-rails-console/"/>
+   <published>2017-02-12T00:00:00+00:00</published>
+   <updated>2017-02-12T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/a-better-pry-prompt-for-rails-console/</id>
+   <content type="html"><a href="https://phansch.net/posts/a-better-pry-prompt-for-rails-console/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Open Markdown files from vim</title>
+   <link href="https://phansch.net/posts/open-markdown-files-from-vim/"/>
+   <published>2014-05-30T00:00:00+00:00</published>
+   <updated>2014-05-30T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/open-markdown-files-from-vim/</id>
+   <content type="html"><a href="https://phansch.net/posts/open-markdown-files-from-vim/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>The Setup Part 1: Website</title>
+   <link href="https://phansch.net/posts/self-hosting-website/"/>
+   <published>2014-05-11T00:00:00+00:00</published>
+   <updated>2014-05-11T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/self-hosting-website/</id>
+   <content type="html"><a href="https://phansch.net/posts/self-hosting-website/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Sideproject: Screenshot Streamer</title>
+   <link href="https://phansch.net/posts/sideproject-screenshot-streamer/"/>
+   <published>2014-04-13T00:00:00+00:00</published>
+   <updated>2014-04-13T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/sideproject-screenshot-streamer/</id>
+   <content type="html"><a href="https://phansch.net/posts/sideproject-screenshot-streamer/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Seeing the natural night sky</title>
+   <link href="https://phansch.net/posts/astronomy-meetup/"/>
+   <published>2014-03-30T00:00:00+00:00</published>
+   <updated>2014-03-30T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/astronomy-meetup/</id>
+   <content type="html"><a href="https://phansch.net/posts/astronomy-meetup/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Using tmux and tmuxinator</title>
+   <link href="https://phansch.net/posts/using-tmux-and-tmuxinator/"/>
+   <published>2014-03-10T00:00:00+00:00</published>
+   <updated>2014-03-10T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/using-tmux-and-tmuxinator/</id>
+   <content type="html"><a href="https://phansch.net/posts/using-tmux-and-tmuxinator/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Why blog?</title>
+   <link href="https://phansch.net/posts/why-blog/"/>
+   <published>2014-03-02T00:00:00+00:00</published>
+   <updated>2014-03-02T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/why-blog/</id>
+   <content type="html"><a href="https://phansch.net/posts/why-blog/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Automating your deployments from Travis to Heroku</title>
+   <link href="https://phansch.net/posts/travis-heroku-rails/"/>
+   <published>2014-02-17T00:00:00+00:00</published>
+   <updated>2014-02-17T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/travis-heroku-rails/</id>
+   <content type="html"><a href="https://phansch.net/posts/travis-heroku-rails/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>What I don&#x27;t know</title>
+   <link href="https://phansch.net/posts/what-i-dont-know/"/>
+   <published>2014-02-03T00:00:00+00:00</published>
+   <updated>2014-02-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/what-i-dont-know/</id>
+   <content type="html"><a href="https://phansch.net/posts/what-i-dont-know/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Getting started with open source</title>
+   <link href="https://phansch.net/posts/getting-started-with-open-source/"/>
+   <published>2014-01-22T00:00:00+00:00</published>
+   <updated>2014-01-22T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/getting-started-with-open-source/</id>
+   <content type="html"><a href="https://phansch.net/posts/getting-started-with-open-source/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Sideproject: Focusthingy</title>
+   <link href="https://phansch.net/posts/focusthingy/"/>
+   <published>2014-01-12T00:00:00+00:00</published>
+   <updated>2014-01-12T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/focusthingy/</id>
+   <content type="html"><a href="https://phansch.net/posts/focusthingy/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>This one is for everyone</title>
+   <link href="https://phansch.net/posts/for-everyone/"/>
+   <published>2013-12-29T00:00:00+00:00</published>
+   <updated>2013-12-29T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/for-everyone/</id>
+   <content type="html"><a href="https://phansch.net/posts/for-everyone/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Hackership Graduation</title>
+   <link href="https://phansch.net/posts/hackership-graduation/"/>
+   <published>2013-12-22T00:00:00+00:00</published>
+   <updated>2013-12-22T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/hackership-graduation/</id>
+   <content type="html"><a href="https://phansch.net/posts/hackership-graduation/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Hackership Week 5</title>
+   <link href="https://phansch.net/posts/hackership-week5/"/>
+   <published>2013-12-14T00:00:00+00:00</published>
+   <updated>2013-12-14T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/hackership-week5/</id>
+   <content type="html"><a href="https://phansch.net/posts/hackership-week5/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Hackership Week 4</title>
+   <link href="https://phansch.net/posts/hackership-week4/"/>
+   <published>2013-12-06T00:00:00+00:00</published>
+   <updated>2013-12-06T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/hackership-week4/</id>
+   <content type="html"><a href="https://phansch.net/posts/hackership-week4/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Hackership Week 3</title>
+   <link href="https://phansch.net/posts/hackership-week3/"/>
+   <published>2013-12-02T00:00:00+00:00</published>
+   <updated>2013-12-02T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/hackership-week3/</id>
+   <content type="html"><a href="https://phansch.net/posts/hackership-week3/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Hackership Week 2</title>
+   <link href="https://phansch.net/posts/hackership-week2/"/>
+   <published>2013-11-24T00:00:00+00:00</published>
+   <updated>2013-11-24T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/hackership-week2/</id>
+   <content type="html"><a href="https://phansch.net/posts/hackership-week2/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Hackership Week 1</title>
+   <link href="https://phansch.net/posts/hackership-week1/"/>
+   <published>2013-11-17T00:00:00+00:00</published>
+   <updated>2013-11-17T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/hackership-week1/</id>
+   <content type="html"><a href="https://phansch.net/posts/hackership-week1/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Hackership Batch 0</title>
+   <link href="https://phansch.net/posts/hackership-week0/"/>
+   <published>2013-11-10T00:00:00+00:00</published>
+   <updated>2013-11-10T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/hackership-week0/</id>
+   <content type="html"><a href="https://phansch.net/posts/hackership-week0/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Worthwhile bugfixing</title>
+   <link href="https://phansch.net/posts/bugfixing/"/>
+   <published>2013-11-03T00:00:00+00:00</published>
+   <updated>2013-11-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/bugfixing/</id>
+   <content type="html"><a href="https://phansch.net/posts/bugfixing/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Productivity sideprojects</title>
+   <link href="https://phansch.net/posts/productivity-sideprojects/"/>
+   <published>2013-10-19T00:00:00+00:00</published>
+   <updated>2013-10-19T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/productivity-sideprojects/</id>
+   <content type="html"><a href="https://phansch.net/posts/productivity-sideprojects/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Fall update</title>
+   <link href="https://phansch.net/posts/fall-update/"/>
+   <published>2013-10-15T00:00:00+00:00</published>
+   <updated>2013-10-15T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/fall-update/</id>
+   <content type="html"><a href="https://phansch.net/posts/fall-update/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Google Drive as a CDN</title>
+   <link href="https://phansch.net/posts/google-drive-as-cdn/"/>
+   <published>2013-03-01T00:00:00+00:00</published>
+   <updated>2013-03-01T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/google-drive-as-cdn/</id>
+   <content type="html"><a href="https://phansch.net/posts/google-drive-as-cdn/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>February</title>
+   <link href="https://phansch.net/posts/february/"/>
+   <published>2013-02-28T00:00:00+00:00</published>
+   <updated>2013-02-28T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/february/</id>
+   <content type="html"><a href="https://phansch.net/posts/february/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Done with PiDefender</title>
+   <link href="https://phansch.net/posts/done-with-pidefender/"/>
+   <published>2013-01-25T00:00:00+00:00</published>
+   <updated>2013-01-25T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/done-with-pidefender/</id>
+   <content type="html"><a href="https://phansch.net/posts/done-with-pidefender/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>PiDefender Progress</title>
+   <link href="https://phansch.net/posts/pidefender-progress/"/>
+   <published>2013-01-20T00:00:00+00:00</published>
+   <updated>2013-01-20T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/pidefender-progress/</id>
+   <content type="html"><a href="https://phansch.net/posts/pidefender-progress/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>PiDefender Week 2</title>
+   <link href="https://phansch.net/posts/pidefender-week2/"/>
+   <published>2013-01-13T00:00:00+00:00</published>
+   <updated>2013-01-13T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/pidefender-week2/</id>
+   <content type="html"><a href="https://phansch.net/posts/pidefender-week2/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>PiDefender Week 1</title>
+   <link href="https://phansch.net/posts/pidefender-week1/"/>
+   <published>2013-01-06T00:00:00+00:00</published>
+   <updated>2013-01-06T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/pidefender-week1/</id>
+   <content type="html"><a href="https://phansch.net/posts/pidefender-week1/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>One Game A Month 2013</title>
+   <link href="https://phansch.net/posts/one-game-a-month-2013/"/>
+   <published>2013-01-01T00:00:00+00:00</published>
+   <updated>2013-01-01T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/one-game-a-month-2013/</id>
+   <content type="html"><a href="https://phansch.net/posts/one-game-a-month-2013/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Stuff of 2012</title>
+   <link href="https://phansch.net/posts/stuff-of-2012/"/>
+   <published>2012-12-30T00:00:00+00:00</published>
+   <updated>2012-12-30T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/stuff-of-2012/</id>
+   <content type="html"><a href="https://phansch.net/posts/stuff-of-2012/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>RE: My netbook experience</title>
+   <link href="https://phansch.net/posts/re-my-netbook-experience/"/>
+   <published>2012-12-28T00:00:00+00:00</published>
+   <updated>2012-12-28T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/re-my-netbook-experience/</id>
+   <content type="html"><a href="https://phansch.net/posts/re-my-netbook-experience/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Ludum Dare 25 Post Mortem</title>
+   <link href="https://phansch.net/posts/ludum-dare-25-post-mortem/"/>
+   <published>2012-12-26T00:00:00+00:00</published>
+   <updated>2012-12-26T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/ludum-dare-25-post-mortem/</id>
+   <content type="html"><a href="https://phansch.net/posts/ludum-dare-25-post-mortem/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Running Love2D from Sublime Text 2 on Windows</title>
+   <link href="https://phansch.net/posts/running-love2d-from-sublimetext2-on-windows/"/>
+   <published>2012-12-12T00:00:00+00:00</published>
+   <updated>2012-12-12T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/running-love2d-from-sublimetext2-on-windows/</id>
+   <content type="html"><a href="https://phansch.net/posts/running-love2d-from-sublimetext2-on-windows/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>New domain phansch.net</title>
+   <link href="https://phansch.net/posts/new-domain-phansch-net/"/>
+   <published>2012-12-10T00:00:00+00:00</published>
+   <updated>2012-12-10T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/new-domain-phansch-net/</id>
+   <content type="html"><a href="https://phansch.net/posts/new-domain-phansch-net/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Updates to plyturon.net, phansch.de and this blog</title>
+   <link href="https://phansch.net/posts/updates-to-plyturon-net-phansch-de-and-this-blog/"/>
+   <published>2012-12-08T00:00:00+00:00</published>
+   <updated>2012-12-08T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/updates-to-plyturon-net-phansch-de-and-this-blog/</id>
+   <content type="html"><a href="https://phansch.net/posts/updates-to-plyturon-net-phansch-de-and-this-blog/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>I need to write</title>
+   <link href="https://phansch.net/posts/i-need-to-write/"/>
+   <published>2012-12-07T00:00:00+00:00</published>
+   <updated>2012-12-07T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/i-need-to-write/</id>
+   <content type="html"><a href="https://phansch.net/posts/i-need-to-write/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>My PowerShell prompt</title>
+   <link href="https://phansch.net/posts/my-powershell-prompt/"/>
+   <published>2012-10-01T00:00:00+00:00</published>
+   <updated>2012-10-01T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/my-powershell-prompt/</id>
+   <content type="html"><a href="https://phansch.net/posts/my-powershell-prompt/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Fall Update</title>
+   <link href="https://phansch.net/posts/fall-reading/"/>
+   <published>2012-09-24T00:00:00+00:00</published>
+   <updated>2012-09-24T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/fall-reading/</id>
+   <content type="html"><a href="https://phansch.net/posts/fall-reading/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Setup done</title>
+   <link href="https://phansch.net/posts/setup-done/"/>
+   <published>2012-07-28T00:00:00+00:00</published>
+   <updated>2012-07-28T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/setup-done/</id>
+   <content type="html"><a href="https://phansch.net/posts/setup-done/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Hello GitHub!</title>
+   <link href="https://phansch.net/posts/hellogithub/"/>
+   <published>2012-07-26T00:00:00+00:00</published>
+   <updated>2012-07-26T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/hellogithub/</id>
+   <content type="html"><a href="https://phansch.net/posts/hellogithub/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>New Krytan Translator</title>
+   <link href="https://phansch.net/posts/new-krytan-translator/"/>
+   <published>2012-07-14T00:00:00+00:00</published>
+   <updated>2012-07-14T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/new-krytan-translator/</id>
+   <content type="html"><a href="https://phansch.net/posts/new-krytan-translator/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>[Guild Wars 2] See what&#x27;&#x27;s in store for BWE #2</title>
+   <link href="https://phansch.net/posts/guild-wars-2-see-whats-in-store-for-bwe-2/"/>
+   <published>2012-06-05T00:00:00+00:00</published>
+   <updated>2012-06-05T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/guild-wars-2-see-whats-in-store-for-bwe-2/</id>
+   <content type="html"><a href="https://phansch.net/posts/guild-wars-2-see-whats-in-store-for-bwe-2/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Year 2032: The dark age of gaming is history</title>
+   <link href="https://phansch.net/posts/year-2032-the-dark-age-of-gaming-is-history/"/>
+   <published>2012-06-05T00:00:00+00:00</published>
+   <updated>2012-06-05T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/year-2032-the-dark-age-of-gaming-is-history/</id>
+   <content type="html"><a href="https://phansch.net/posts/year-2032-the-dark-age-of-gaming-is-history/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Self Improvement Week 3</title>
+   <link href="https://phansch.net/posts/self-improvement-week-3/"/>
+   <published>2012-06-03T00:00:00+00:00</published>
+   <updated>2012-06-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/self-improvement-week-3/</id>
+   <content type="html"><a href="https://phansch.net/posts/self-improvement-week-3/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Are you the princess or the knight?</title>
+   <link href="https://phansch.net/posts/are-you-the-princess-or-the-knight/"/>
+   <published>2012-05-23T00:00:00+00:00</published>
+   <updated>2012-05-23T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/are-you-the-princess-or-the-knight/</id>
+   <content type="html"><a href="https://phansch.net/posts/are-you-the-princess-or-the-knight/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Blog moving!</title>
+   <link href="https://phansch.net/posts/blog-moving/"/>
+   <published>2012-05-18T00:00:00+00:00</published>
+   <updated>2012-05-18T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/blog-moving/</id>
+   <content type="html"><a href="https://phansch.net/posts/blog-moving/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>I&#x27;m running now!</title>
+   <link href="https://phansch.net/posts/im-running-now/"/>
+   <published>2012-05-15T00:00:00+00:00</published>
+   <updated>2012-05-15T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/im-running-now/</id>
+   <content type="html"><a href="https://phansch.net/posts/im-running-now/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>The shape of things to come.</title>
+   <link href="https://phansch.net/posts/the-shape-of-things-to-come/"/>
+   <published>2012-05-15T00:00:00+00:00</published>
+   <updated>2012-05-15T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/the-shape-of-things-to-come/</id>
+   <content type="html"><a href="https://phansch.net/posts/the-shape-of-things-to-come/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Character diversity in Guild Wars 2</title>
+   <link href="https://phansch.net/posts/character-diversity-in-guild-wars-2/"/>
+   <published>2012-03-16T00:00:00+00:00</published>
+   <updated>2012-03-16T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/character-diversity-in-guild-wars-2/</id>
+   <content type="html"><a href="https://phansch.net/posts/character-diversity-in-guild-wars-2/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Livestream interview with Jon Peters this Thursday [MMORPG.com]</title>
+   <link href="https://phansch.net/posts/livestream-interview-with-jon-peters-this-thursday-mmorpg-com/"/>
+   <published>2012-03-14T00:00:00+00:00</published>
+   <updated>2012-03-14T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/livestream-interview-with-jon-peters-this-thursday-mmorpg-com/</id>
+   <content type="html"><a href="https://phansch.net/posts/livestream-interview-with-jon-peters-this-thursday-mmorpg-com/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>This week in Guild Wars 2 - W11</title>
+   <link href="https://phansch.net/posts/this-week-in-guild-wars-2-w11/"/>
+   <published>2012-03-14T00:00:00+00:00</published>
+   <updated>2012-03-14T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/this-week-in-guild-wars-2-w11/</id>
+   <content type="html"><a href="https://phansch.net/posts/this-week-in-guild-wars-2-w11/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>RE: What will Guild Wars 2 do to me?</title>
+   <link href="https://phansch.net/posts/re-what-will-guild-wars-2-do-to-me/"/>
+   <published>2012-03-07T00:00:00+00:00</published>
+   <updated>2012-03-07T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/re-what-will-guild-wars-2-do-to-me/</id>
+   <content type="html"><a href="https://phansch.net/posts/re-what-will-guild-wars-2-do-to-me/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>This Week In Guild Wars 2 - W10</title>
+   <link href="https://phansch.net/posts/this-week-in-guild-wars-2-w10/"/>
+   <published>2012-03-07T00:00:00+00:00</published>
+   <updated>2012-03-07T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/this-week-in-guild-wars-2-w10/</id>
+   <content type="html"><a href="https://phansch.net/posts/this-week-in-guild-wars-2-w10/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Elementalist Introduction</title>
+   <link href="https://phansch.net/posts/elementalist-introduction/"/>
+   <published>2012-03-06T00:00:00+00:00</published>
+   <updated>2012-03-06T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/elementalist-introduction/</id>
+   <content type="html"><a href="https://phansch.net/posts/elementalist-introduction/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>PC Gamer shows off graphics settings for Guild Wars 2 Beta</title>
+   <link href="https://phansch.net/posts/pc-gamer-shows-off-graphics-settings-for-guild-wars-2-beta/"/>
+   <published>2012-03-05T00:00:00+00:00</published>
+   <updated>2012-03-05T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/pc-gamer-shows-off-graphics-settings-for-guild-wars-2-beta/</id>
+   <content type="html"><a href="https://phansch.net/posts/pc-gamer-shows-off-graphics-settings-for-guild-wars-2-beta/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Fear and Horror in MMOs</title>
+   <link href="https://phansch.net/posts/sketchbook-fear-and-horror-in-mmos/"/>
+   <published>2012-03-05T00:00:00+00:00</published>
+   <updated>2012-03-05T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/sketchbook-fear-and-horror-in-mmos/</id>
+   <content type="html"><a href="https://phansch.net/posts/sketchbook-fear-and-horror-in-mmos/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>This Week In Guild Wars 2 - W9</title>
+   <link href="https://phansch.net/posts/this-week-in-guildwars2-w9/"/>
+   <published>2012-03-05T00:00:00+00:00</published>
+   <updated>2012-03-05T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/this-week-in-guildwars2-w9/</id>
+   <content type="html"><a href="https://phansch.net/posts/this-week-in-guildwars2-w9/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Exploration and jumping puzzles in Guild Wars 2</title>
+   <link href="https://phansch.net/posts/exploration-and-jumping-puzzles-in-guild-wars-2/"/>
+   <published>2012-02-22T00:00:00+00:00</published>
+   <updated>2012-02-22T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/exploration-and-jumping-puzzles-in-guild-wars-2/</id>
+   <content type="html"><a href="https://phansch.net/posts/exploration-and-jumping-puzzles-in-guild-wars-2/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Welcome to plyturon.net</title>
+   <link href="https://phansch.net/posts/welcome-to-plyturon-net/"/>
+   <published>2012-02-21T00:00:00+00:00</published>
+   <updated>2012-02-21T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/welcome-to-plyturon-net/</id>
+   <content type="html"><a href="https://phansch.net/posts/welcome-to-plyturon-net/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Updated Rift macro translator for Rift 1.7</title>
+   <link href="https://phansch.net/posts/updated-rift-macro-translator-for-rift-1-7/"/>
+   <published>2012-02-04T00:00:00+00:00</published>
+   <updated>2012-02-04T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/updated-rift-macro-translator-for-rift-1-7/</id>
+   <content type="html"><a href="https://phansch.net/posts/updated-rift-macro-translator-for-rift-1-7/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>The Rift macro system</title>
+   <link href="https://phansch.net/posts/the-rift-macro-system/"/>
+   <published>2012-02-03T00:00:00+00:00</published>
+   <updated>2012-02-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/the-rift-macro-system/</id>
+   <content type="html"><a href="https://phansch.net/posts/the-rift-macro-system/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Trying something new for 30 days</title>
+   <link href="https://phansch.net/posts/trying-something-new-for-30-days/"/>
+   <published>2012-01-23T00:00:00+00:00</published>
+   <updated>2012-01-23T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/trying-something-new-for-30-days/</id>
+   <content type="html"><a href="https://phansch.net/posts/trying-something-new-for-30-days/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>How gaming could make a better world</title>
+   <link href="https://phansch.net/posts/how-gaming-could-make-a-better-world/"/>
+   <published>2012-01-18T00:00:00+00:00</published>
+   <updated>2012-01-18T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/how-gaming-could-make-a-better-world/</id>
+   <content type="html"><a href="https://phansch.net/posts/how-gaming-could-make-a-better-world/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Plans and goals for 2012</title>
+   <link href="https://phansch.net/posts/plans-and-goals-for-2012/"/>
+   <published>2012-01-03T00:00:00+00:00</published>
+   <updated>2012-01-03T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/plans-and-goals-for-2012/</id>
+   <content type="html"><a href="https://phansch.net/posts/plans-and-goals-for-2012/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>My netbook experience</title>
+   <link href="https://phansch.net/posts/my-netbook-experience/"/>
+   <published>2012-01-01T00:00:00+00:00</published>
+   <updated>2012-01-01T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/my-netbook-experience/</id>
+   <content type="html"><a href="https://phansch.net/posts/my-netbook-experience/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Happy new year!</title>
+   <link href="https://phansch.net/posts/happy-new-year/"/>
+   <published>2011-12-31T00:00:00+00:00</published>
+   <updated>2011-12-31T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/happy-new-year/</id>
+   <content type="html"><a href="https://phansch.net/posts/happy-new-year/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>An Update</title>
+   <link href="https://phansch.net/posts/an-update/"/>
+   <published>2011-12-12T00:00:00+00:00</published>
+   <updated>2011-12-12T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/an-update/</id>
+   <content type="html"><a href="https://phansch.net/posts/an-update/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Good news: I am moving to Berlin! And getting into the games industry!?</title>
+   <link href="https://phansch.net/posts/good-news-i-am-moving-to-berlin-and-getting-into-the-games-industry/"/>
+   <published>2011-09-29T00:00:00+00:00</published>
+   <updated>2011-09-29T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/good-news-i-am-moving-to-berlin-and-getting-into-the-games-industry/</id>
+   <content type="html"><a href="https://phansch.net/posts/good-news-i-am-moving-to-berlin-and-getting-into-the-games-industry/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Including the DirectX SDK libraries into your Visual C++ game project</title>
+   <link href="https://phansch.net/posts/including-the-directx-sdk-libraries-into-your-visual-cpp-game-project/"/>
+   <published>2011-09-29T00:00:00+00:00</published>
+   <updated>2011-09-29T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/including-the-directx-sdk-libraries-into-your-visual-cpp-game-project/</id>
+   <content type="html"><a href="https://phansch.net/posts/including-the-directx-sdk-libraries-into-your-visual-cpp-game-project/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Google+ invites</title>
+   <link href="https://phansch.net/posts/google-plus-invites/"/>
+   <published>2011-09-21T00:00:00+00:00</published>
+   <updated>2011-09-21T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/google-plus-invites/</id>
+   <content type="html"><a href="https://phansch.net/posts/google-plus-invites/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Pillen, Geister und Elektromusik - Teil 3</title>
+   <link href="https://phansch.net/posts/pillen-geister-und-elektromusik-teil-3/"/>
+   <published>2011-09-17T00:00:00+00:00</published>
+   <updated>2011-09-17T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/pillen-geister-und-elektromusik-teil-3/</id>
+   <content type="html"><a href="https://phansch.net/posts/pillen-geister-und-elektromusik-teil-3/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Showcase: WIP 2D Tile MapEditor</title>
+   <link href="https://phansch.net/posts/showcase-wip-2d-tile-mapeditor/"/>
+   <published>2011-09-09T00:00:00+00:00</published>
+   <updated>2011-09-09T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/showcase-wip-2d-tile-mapeditor/</id>
+   <content type="html"><a href="https://phansch.net/posts/showcase-wip-2d-tile-mapeditor/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Blog Hiatus</title>
+   <link href="https://phansch.net/posts/blog-hiatus/"/>
+   <published>2011-06-29T00:00:00+00:00</published>
+   <updated>2011-06-29T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/blog-hiatus/</id>
+   <content type="html"><a href="https://phansch.net/posts/blog-hiatus/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Pillen, Geister und Elektromusik - Teil 2</title>
+   <link href="https://phansch.net/posts/pillen-geister-und-elektromusik-teil-2/"/>
+   <published>2010-12-31T00:00:00+00:00</published>
+   <updated>2010-12-31T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/pillen-geister-und-elektromusik-teil-2/</id>
+   <content type="html"><a href="https://phansch.net/posts/pillen-geister-und-elektromusik-teil-2/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Howto: Windows Minidump auslesen</title>
+   <link href="https://phansch.net/posts/howto-windows-minidump-auslesen/"/>
+   <published>2010-12-21T00:00:00+00:00</published>
+   <updated>2010-12-21T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/howto-windows-minidump-auslesen/</id>
+   <content type="html"><a href="https://phansch.net/posts/howto-windows-minidump-auslesen/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Getting started with C++</title>
+   <link href="https://phansch.net/posts/getting-started-with-cplusplus/"/>
+   <published>2010-12-11T00:00:00+00:00</published>
+   <updated>2010-12-11T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/getting-started-with-cplusplus/</id>
+   <content type="html"><a href="https://phansch.net/posts/getting-started-with-cplusplus/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Is Germany paving the way to a surveillance country?</title>
+   <link href="https://phansch.net/posts/is-germany-paving-the-way-to-a-surveillance-country/"/>
+   <published>2010-11-10T00:00:00+00:00</published>
+   <updated>2010-11-10T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/is-germany-paving-the-way-to-a-surveillance-country/</id>
+   <content type="html"><a href="https://phansch.net/posts/is-germany-paving-the-way-to-a-surveillance-country/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Pillen, Geister und Elektromusik - Teil 1</title>
+   <link href="https://phansch.net/posts/pillen-geister-und-elektromusik/"/>
+   <published>2010-11-04T00:00:00+00:00</published>
+   <updated>2010-11-04T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/pillen-geister-und-elektromusik/</id>
+   <content type="html"><a href="https://phansch.net/posts/pillen-geister-und-elektromusik/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>C# Quiz - Ergebnisse darstellen (Teil 5)</title>
+   <link href="https://phansch.net/posts/c-sharp-quiz-ergebnisse-darstellen-teil-5/"/>
+   <published>2010-09-22T00:00:00+00:00</published>
+   <updated>2010-09-22T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/c-sharp-quiz-ergebnisse-darstellen-teil-5/</id>
+   <content type="html"><a href="https://phansch.net/posts/c-sharp-quiz-ergebnisse-darstellen-teil-5/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>C# - Diagramme und Graphen mit ZedGraph</title>
+   <link href="https://phansch.net/posts/c-sharp-diagramme-und-graphen-mit-zedgraph/"/>
+   <published>2010-09-19T00:00:00+00:00</published>
+   <updated>2010-09-19T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/c-sharp-diagramme-und-graphen-mit-zedgraph/</id>
+   <content type="html"><a href="https://phansch.net/posts/c-sharp-diagramme-und-graphen-mit-zedgraph/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>C# Quiz - Antworten darstellen (Teil 4)</title>
+   <link href="https://phansch.net/posts/c-sharp-quiz-antworten-darstellen-teil-4/"/>
+   <published>2010-09-18T00:00:00+00:00</published>
+   <updated>2010-09-18T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/c-sharp-quiz-antworten-darstellen-teil-4/</id>
+   <content type="html"><a href="https://phansch.net/posts/c-sharp-quiz-antworten-darstellen-teil-4/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Mein Einstieg in C++</title>
+   <link href="https://phansch.net/posts/mein-einstieg-in-cplusplus/"/>
+   <published>2010-09-04T00:00:00+00:00</published>
+   <updated>2010-09-04T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/mein-einstieg-in-cplusplus/</id>
+   <content type="html"><a href="https://phansch.net/posts/mein-einstieg-in-cplusplus/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>C# Quiz - Fragen auslesen (Teil 3)</title>
+   <link href="https://phansch.net/posts/c-sharp-quiz-fragen-auslesen-teil-3/"/>
+   <published>2010-07-22T00:00:00+00:00</published>
+   <updated>2010-07-22T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/c-sharp-quiz-fragen-auslesen-teil-3/</id>
+   <content type="html"><a href="https://phansch.net/posts/c-sharp-quiz-fragen-auslesen-teil-3/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>C# Quiz - Planung (Teil 1)</title>
+   <link href="https://phansch.net/posts/c-sharp-quiz-planung-teil-1/"/>
+   <published>2010-07-22T00:00:00+00:00</published>
+   <updated>2010-07-22T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/c-sharp-quiz-planung-teil-1/</id>
+   <content type="html"><a href="https://phansch.net/posts/c-sharp-quiz-planung-teil-1/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>C# Quiz - Vorbereitung (Teil 2)</title>
+   <link href="https://phansch.net/posts/c-sharp-quiz-vorbereitung-teil-2/"/>
+   <published>2010-07-22T00:00:00+00:00</published>
+   <updated>2010-07-22T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/c-sharp-quiz-vorbereitung-teil-2/</id>
+   <content type="html"><a href="https://phansch.net/posts/c-sharp-quiz-vorbereitung-teil-2/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Steam auf Ubuntu Linux</title>
+   <link href="https://phansch.net/posts/steam-auf-ubuntu-linux/"/>
+   <published>2010-07-06T00:00:00+00:00</published>
+   <updated>2010-07-06T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/steam-auf-ubuntu-linux/</id>
+   <content type="html"><a href="https://phansch.net/posts/steam-auf-ubuntu-linux/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Linux Webserver mit VirtualBox</title>
+   <link href="https://phansch.net/posts/linux-webserver-mit-virtualbox/"/>
+   <published>2010-03-20T00:00:00+00:00</published>
+   <updated>2010-03-20T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/linux-webserver-mit-virtualbox/</id>
+   <content type="html"><a href="https://phansch.net/posts/linux-webserver-mit-virtualbox/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>C# Schiffe Versenken - Ueberlegungen (Teil 1)</title>
+   <link href="https://phansch.net/posts/c-schiffe-versenken-uberlegungen/"/>
+   <published>2010-03-12T00:00:00+00:00</published>
+   <updated>2010-03-12T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/c-schiffe-versenken-uberlegungen/</id>
+   <content type="html"><a href="https://phansch.net/posts/c-schiffe-versenken-uberlegungen/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Windows 7 - Netzlaufwerke nach Neustart getrennt</title>
+   <link href="https://phansch.net/posts/windows-7-netzlaufwerke-nach-neustart-getrennt/"/>
+   <published>2009-11-07T00:00:00+00:00</published>
+   <updated>2009-11-07T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/windows-7-netzlaufwerke-nach-neustart-getrennt/</id>
+   <content type="html"><a href="https://phansch.net/posts/windows-7-netzlaufwerke-nach-neustart-getrennt/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Berufskolleg - C# Aufgabe</title>
+   <link href="https://phansch.net/posts/berufskolleg-c-aufgabe/"/>
+   <published>2009-08-31T00:00:00+00:00</published>
+   <updated>2009-08-31T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/berufskolleg-c-aufgabe/</id>
+   <content type="html"><a href="https://phansch.net/posts/berufskolleg-c-aufgabe/">View post on phansch.net</a></content>
+ </entry>
+ <entry>
+   <title>Aller Anfang ist schwer</title>
+   <link href="https://phansch.net/posts/aller-anfang-ist-schwer/"/>
+   <published>2009-06-25T00:00:00+00:00</published>
+   <updated>2009-06-25T00:00:00+00:00</updated>
+   <id>https://phansch.net/posts/aller-anfang-ist-schwer/</id>
+   <content type="html"><a href="https://phansch.net/posts/aller-anfang-ist-schwer/">View post on phansch.net</a></content>
+ </entry>
+</feed>
+

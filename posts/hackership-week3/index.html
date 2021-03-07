@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Hackership Week 3</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Hackership Week 3">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Hackership Week 3</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;hackership-week3&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2013-12-02">02 Dec 2013</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>This week was a little bit less about rails and more about front-end stuff. I needed to get some Ajax to work. And that proved to be very difficult. Especially considering that I didn't know in what form rails is expecting PATCH data.</p>
+<p>On <strong>Monday</strong> I continued working on the sign-in and sign-out system for the touch-typing website. Once I was done with that, I had to update the user model to include a new column which stores the WPM of users. The <a href="http://guides.rubyonrails.org/migrations.html">Rails guide for migrations</a> was pretty useful to get that done. In the evening it was time to get to know our Hackers in residence.</p>
+<p><strong>Tuesday</strong> started off with a very insightful blogging workshop from <a href="https://twitter.com/laurawadden">@laurawadden</a> and <a href="https://twitter.com/sheley">@sheley</a>.
+After the blogging workshop, it was time for the Rails Q&amp;A led by <a href="https://twitter.com/freenerd">@freenerd</a>. We talked about <a href="http://edgeguides.rubyonrails.org/active_record_validations.html">validations</a> and <a href="http://guides.rubyonrails.org/association_basics.html">associations</a>. After Hackership it was time for <a href="http://www.meetup.com/Berlin-Hack-and-Tell/events/151270052/">Berlin Hack and Tell</a>.</p>
+<p>On <strong>Wednesday</strong> one thing I was trying to figure out was: <q>What exactly Rails is expecting from an Ajax request?</q> I spent a lot of time in the development.log and tried to solve various errors. Eventually I got it working with the help of Ben. Once I got it working I was able to make a lot of progress. The WPM of a user is now automatically submitted once the lesson is finished.</p>
+<p><strong>Thursday</strong> started in the evening for me. I mainly did some CoffeeScript refactoring. Here are some interesting resources I found helpful:</p>
+<h4 id="js2-coffee"><a href="http://js2.coffee/">js2.coffee</a></h4>
+<p>This is a CoffeeScript to JavaScript converter. I used it to covert my original JavaScript to CoffeeScript.</p>
+<h4 id="smooth-coffeescript-interactive-edition"><a href="http://autotelicum.github.io/Smooth-CoffeeScript/interactive/interactive-coffeescript.html">Smooth CoffeeScript - Interactive Edition</a></h4>
+<p>Smooth CoffeeScript is an interactive book on CoffeeScript. I found the <a href="http://autotelicum.github.io/Smooth-CoffeeScript/interactive/interactive-coffeescript.html#functional-programming">chapter on Functional Programming</a> really interesting.</p>
+<h4 id="the-little-book-on-coffeescript"><a href="http://arcturo.github.io/library/coffeescript/">The Little Book on CoffeeScript</a></h4>
+<p>This book contains a very helpful section on the syntax of CoffeeScript and also a short introduction to Classes.</p>
+<p><strong>Friday</strong> is not an official Hackership day, but there was a lot of interest in an Arduino Workshop. So, we started at 12. Since there was an Arduino Workshop the previous Friday which I didn't attend, I had to setup my environment first which went surprisingly smooth. Making the LED's blink was just a matter of about half an hour. I didn't stop at making one LED blink. There was a very difficult practice which required a lot of conncetors and resistors. Making sure that everything is connected correctly was not an easy task. The task was to create an LED array to display a certain image. The image was set in a 2D array in the source file. This was a really fun exercise and eventually I got it to work, yay!</p>
+<hr />
+<p>That's it for the third week of Hackership. Next week I'm going to work on the database model and some CoffeeScript refactoring.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

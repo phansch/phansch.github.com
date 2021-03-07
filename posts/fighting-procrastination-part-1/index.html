@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Fighting my procrastination: Part 1</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Fighting my procrastination: Part 1">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Fighting my procrastination: Part 1</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;fighting-procrastination-part-1&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2020-03-03">03 Mar 2020</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>Hi, this post is going to be part of a series about productivity,
+procrastination and how to form better habits around open-source work.</p>
+<p>I can be a terrible procrastinator. Sometimes it's productive procrastination,
+other times it's just browsing Reddit or watching YouTube videos. With these
+posts I want to share some of my approaches to keep my procrastination at a
+non-destructive level.</p>
+<p>In retrospect, one key part of this battle has been to move my procrastination
+away from the computer and internet and to only use my computer for
+non-procrastination things. This post describes the key parts that are working
+for me right now.</p>
+<h2 id="firefox-extensions">Firefox Extensions</h2>
+<p>I'm using two Firefox extensions to limit some of my procrastination:</p>
+<ul>
+<li>
+<p><strong><a href="https://addons.mozilla.org/en-US/firefox/addon/youtube-unhooked/">Youtube Unhooked</a></strong> is a small extension that will block the more useless parts
+of youtube, such as recommendations, related videos and of course, the
+comments. I found this useful mostly for hiding the related videos section.</p>
+</li>
+<li>
+<p><strong><a href="https://addons.mozilla.org/en-US/firefox/addon/news-feed-eradicator/">Facebook News Feed Eradicator</a></strong> is another very focused extension that will
+hide the Facebook news feed. This is useful because I pretty much only use
+Facebook for the events part.</p>
+</li>
+</ul>
+<p>You have probably already heard of <strong><a href="https://addons.mozilla.org/en-US/firefox/addon/leechblock-ng/">LeechBlock</a></strong>. It worked for me for a
+few weeks but I got into the habit of just going to <code>about::addons</code> and
+disabling it... Which brings me to my current solution for blocking websites.</p>
+<h2 id="etc-hosts-blocklist-with-cronjob"><code>/etc/hosts</code> blocklist with cronjob</h2>
+<p>As a replacement for LeechBlock, I've been utilizing my <code>/etc/hosts</code> file for
+some time now. Editing it requires me to enter my sudo password which makes it a
+bit more difficult to unblock blocked sites. However, it was not difficult
+enough. I ended up removing sites from the file and never got around to
+add them again.</p>
+<p>To solve that problem, I now have an <a href="https://github.com/phansch/dotfiles/blob/35486702f404d6ba4ed514e612a4d20a93e6a41a/ansible/playbooks/procrastination.yml#L11">Ansible playbook</a> that
+creates a cronjob which runs every 2 minutes. The cronjob resets the <code>/etc/hosts</code>
+file to the contents of a <code>/etc/hosts_base</code> file where all of my go-to
+procrastination sites are blocked.</p>
+<p>I have found this to work <em>surprisingly</em> well.</p>
+<p>Of course, this has potential to fall apart if I start editing <code>/etc/hosts_base</code> but
+so far that hasn't been the case.</p>
+<h2 id="an-ongoing-fight">An ongoing fight</h2>
+<p>I don't claim to have found a perfect solution here. It's more the case that I
+think that fighting procrastination is a never ending battle. I will always find
+some way to procrastinate. However, by at least limiting some of the bad habits
+on my computer, I think that I'm more likely to produce something of value when
+I'm using it without distractions.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

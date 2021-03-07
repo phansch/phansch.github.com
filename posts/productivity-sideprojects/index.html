@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Productivity sideprojects</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Productivity sideprojects">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Productivity sideprojects</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;productivity-sideprojects&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2013-10-19">19 Oct 2013</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  1  min read
+</em>
+      </p>
+      <div class="e-content"><p>So I have been keeping track of the stuff I do for a while now. 
+I'm using a simple markdown formatted file to write things down. It's part of my GTD process and feels nice to look over when feeling less productive.
+My editor of choice is Sublime Text 3.</p>
+<p>After using this setup for a few months, I felt it wasn't efficient enough.
+Opening the journal file in markdown required tedious navigation through many directories.</p>
+<p>So I started writing a simple ruby script.</p>
+<h2 id="introducing-jou">Introducing <em>jou</em></h2>
+<p>Jou is a simple command line utility that helps with maintaining a journal file in markdown syntax.</p>
+<ul>
+<li>Install it with <code>gem install jou</code></li>
+<li>Set a path to your journal file: <code>jou --set-journal &quot;/home/user/Documents/Journal.md&quot;</code></li>
+<li>Add entries by using <code>jou -a &quot;Gave jou a try&quot;</code></li>
+</ul>
+<p>The source is available on <a href="https://github.com/phansch/jou">GitHub</a>.</p>
+<p>(This may or may not work on a Mac.)</p>
+<h2 id="introducing-routines">Introducing <em>routines</em></h2>
+<p>Routines is my way of building and keeping habits. It's the morning part of my GTD process.
+The script is launched when I power on my PC. It then continues by reminding me of my morning routine.
+It launches my calendar, email, my tasklist and anki. Here's a screenshot:</p>
+<a href="https://github.com/phansch/dotfiles/raw/main/screenshots/routines.png" class="thumbnail">
+  <img src="https://github.com/phansch/dotfiles/raw/main/screenshots/routines.png" alt="screenshot" />
+</a>
+<p>The script is part of my <a href="https://github.com/phansch/dotfiles/tree/main">dotfiles</a> repository and can be found <a href="https://github.com/phansch/dotfiles/blob/522c6e73566178c8dd73d343f9cda7157665c778/bin/routines">here</a>.</p>
+<p>Have a beautiful day!</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

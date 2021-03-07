@@ -1,0 +1,2266 @@
+[
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Upgrade compiletest-rs to 0.6 and tester to 0.9",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6743",
+    "date": "2021-02-15"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Add basic `bless` support",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/231",
+    "date": "2021-02-10"
+  },
+  {
+    "type": "code",
+    "project": "rustc-test",
+    "explanation": "Allow multiple test filters",
+    "language": "Rust",
+    "url": "https://github.com/messense/rustc-test/pull/8",
+    "date": "2021-02-10"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Move to GitHub Actions",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/232",
+    "date": "2021-02-09"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "clippy_dev: Pass stderr to CommandFailed",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6656",
+    "date": "2021-01-31"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "compiletest: Add two more unit tests",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/81428",
+    "date": "2021-01-28"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix derive and macro related false positives in `field_reassign_with_default`",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6553",
+    "date": "2021-01-06"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Tiny Symbol cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6551",
+    "date": "2021-01-05"
+  },
+  {
+    "type": "code",
+    "project": "highfive",
+    "explanation": "Add myself to Clippy reviewers again",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/highfive/pull/303",
+    "date": "2021-01-04"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix blessing of test output in subdirectories",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6525",
+    "date": "2021-01-04"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Run `cargo test` on CI",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/229",
+    "date": "2021-01-03"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Update CHANGELOG for Rust 1.50",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6520",
+    "date": "2021-01-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Don't trigger large_enum_variant in external macros",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6485",
+    "date": "2020-12-22"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "UI Tests: Separate suspicious_else_formatting tests",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6473",
+    "date": "2020-12-19"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix blessing of new reference files",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6471",
+    "date": "2020-12-19"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Rewrite update-all-references bash scripts in Rust",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6413",
+    "date": "2020-12-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Remove lazy_static completely and use once_cell feature instead",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6163",
+    "date": "2020-10-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Replace some lazy_static usage with once_cell feature",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/6120",
+    "date": "2020-10-07"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Remove old Symbol reexport",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5856",
+    "date": "2020-08-04"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Deprecate regex_macro lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5760",
+    "date": "2020-07-01"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Cleanup: Use rustc's `same_type` for our `same_tys`",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5528",
+    "date": "2020-06-06"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add regression test for `string_lit_as_bytes` issue",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5672",
+    "date": "2020-06-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add regression test for endless loop / update `pulldown_cmark`",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5673",
+    "date": "2020-06-01"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Make empty_line_after_outer_attr an early lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5609",
+    "date": "2020-05-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Remove util/dev script",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5534",
+    "date": "2020-04-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Use more diagnostic items",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5509",
+    "date": "2020-04-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "rustup to https://github.com/rust-lang/rust/pull/70043",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5533",
+    "date": "2020-04-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add lifetime test case for `new_ret_no_self`",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5523",
+    "date": "2020-04-25"
+  },
+  {
+    "type": "code",
+    "project": "http-types",
+    "explanation": "Add conversions to and from bytes",
+    "language": "Rust",
+    "url": "https://github.com/http-rs/http-types/pull/100",
+    "date": "2020-04-24"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Update CHANGELOG.md for Rust 1.43 and 1.44",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5498",
+    "date": "2020-04-23"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "More diagnostic items for Clippy usage",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/71414",
+    "date": "2020-04-22"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "util/fetch_prs_between.sh: Add Markdown formatted link",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5496",
+    "date": "2020-04-20"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Update the changelog update documentation",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5495",
+    "date": "2020-04-20"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Cleanup: `node_id` -> `hir_id`",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5489",
+    "date": "2020-04-19"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Cleanup: future_not_send: use `utils::return_ty` function",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5488",
+    "date": "2020-04-19"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Cleanup: Rename 'db' variables to 'diag'",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5482",
+    "date": "2020-04-17"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Re-enable rustfmt integration test",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5474",
+    "date": "2020-04-16"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "large_enum_variant: Report sizes of variants",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5466",
+    "date": "2020-04-15"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Refactor: Use rustc's `match_def_path`",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5452",
+    "date": "2020-04-15"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Make use of more diagnostic items",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5449",
+    "date": "2020-04-14"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "result_map_unit_fn: Fix incorrect UI tests",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5460",
+    "date": "2020-04-14"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Cleanup: Use our `sym!` macro more",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5457",
+    "date": "2020-04-14"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Cleanup: Use rustc's is_proc_macro_attr",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5458",
+    "date": "2020-04-14"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Temporarily disable rustfmt integration test",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5461",
+    "date": "2020-04-13"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Add some basic docs to `sym` and `kw` modules",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/71053",
+    "date": "2020-04-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Rustup to https://github.com/rust-lang/rust/pull/70913",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5447",
+    "date": "2020-04-10"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Rustup to https://github.com/rust-lang/rust/pull/70449",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5390",
+    "date": "2020-03-30"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Remove dependency on `matches` crate",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5370",
+    "date": "2020-03-25"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Make use of `or_patterns` feature",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5322",
+    "date": "2020-03-16"
+  },
+  {
+    "type": "code",
+    "project": "rustc-dev-guide",
+    "explanation": "Add introductory section for name resolution chapter",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rustc-dev-guide/pull/590",
+    "date": "2020-02-26"
+  },
+  {
+    "type": "code",
+    "project": "reference",
+    "explanation": "Small improvements to types/pointer.md",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/reference/pull/726",
+    "date": "2020-01-18"
+  },
+  {
+    "type": "docs",
+    "project": "book",
+    "explanation": "Replace nursery links with rust-lang links",
+    "language": "Rust",
+    "url": "https://github.com/rust-embedded/book/pull/222",
+    "date": "2020-01-27"
+  },
+  {
+    "type": "docs",
+    "project": "book",
+    "explanation": "Mention discovery book more prominently",
+    "language": "Rust",
+    "url": "https://github.com/rust-embedded/book/pull/219",
+    "date": "2020-01-27"
+  },
+  {
+    "type": "docs",
+    "project": "book",
+    "explanation": "Add a Glossary appendix page",
+    "language": "Rust",
+    "url": "https://github.com/rust-embedded/book/pull/223",
+    "date": "2020-01-27"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Deprecate util/dev in favor of cargo alias",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5109",
+    "date": "2020-01-31"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Resolve FIXME: String::new is now a const fn",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/5097",
+    "date": "2020-01-26"
+  },
+  {
+    "type": "docs",
+    "project": "reference",
+    "explanation": "Small improvements to types/pointer.md",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/reference/pull/726",
+    "date": "2020-01-18"
+  },
+  {
+    "type": "docs",
+    "project": "discovery",
+    "explanation": "Requirements: USB cables need data transfer",
+    "language": "Rust",
+    "url": "https://github.com/rust-embedded/discovery/pull/201",
+    "date": "2020-01-13"
+  },
+  {
+    "type": "code",
+    "project": "ansible-role-chruby",
+    "explanation": "Fix warning and invalid apt state",
+    "language": "Ansible",
+    "url": "https://github.com/ferrarimarco/ansible-role-chruby/pull/7",
+    "date": "2020-01-04"
+  },
+  {
+    "type": "docs",
+    "project": "rust-ecosystem",
+    "explanation": "Fix outdated link in README",
+    "language": "Rust",
+    "url": "https://github.com/EmbarkStudios/rust-ecosystem/pull/44",
+    "date": "2020-01-04"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4992",
+    "date": "2020-01-04"
+  },
+  {
+    "type": "docs",
+    "project": "jsonapi-rust",
+    "explanation": "Fix cargo/crates.io Travis CI badge",
+    "language": "Rust",
+    "url": "https://github.com/michiel/jsonapi-rust/pull/59",
+    "date": "2019-01-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Update changelog for Rust 1.39 and 1.40",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4911",
+    "date": "2019-12-23"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4873",
+    "date": "2019-12-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix false positive in derive_hash_xor_eq",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4766",
+    "date": "2019-11-23"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "(Partly) Fix Clippy website deployment",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4865",
+    "date": "2019-11-30"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add custom ICE message that points to Clippy repo",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4588",
+    "date": "2019-11-29"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Move use_self lint to nursery",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4863",
+    "date": "2019-11-29"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "UI test cleanup: Extract derive_hash_xor_eq tests",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4744",
+    "date": "2019-10-28"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix: Don't emit try_err lint in external macros",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4721",
+    "date": "2019-10-24"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Refactor: Rename `db` locals to `diag`",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/65428",
+    "date": "2019-10-15"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Update compiletest to work with latest rustc nightly",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/189",
+    "date": "2019-10-13"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add run-rustfix for toplevel_ref_arg lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4567",
+    "date": "2019-09-23"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Update the changelog for Rust 1.38",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4566",
+    "date": "2019-09-23"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add run-rustfix for wildcard_enum_match_arm lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4562",
+    "date": "2019-09-21"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Use resume_unwind instead of panic!() for nicer errors",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/176",
+    "date": "2019-09-12"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Add support for upstream's 'edition' flag",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/180",
+    "date": "2019-09-11"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Add a proc-macro UI test example to the test project",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/171",
+    "date": "2019-09-10"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "annotate-snippet emitter: Update an issue number",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/64206",
+    "date": "2019-09-06"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "annotate-snippet emitter: Deal with multispans from macros, too",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/64189",
+    "date": "2019-09-06"
+  },
+  {
+    "type": "code",
+    "project": "annotate-snippets-rs",
+    "explanation": "Small update to `Slice` docs",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/annotate-snippets-rs/pull/10",
+    "date": "2019-09-06"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "librustc_errors: Extract sugg/subst handling into method",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/64058",
+    "date": "2019-09-03"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix cast_lossless false positive in impl const fn",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4473",
+    "date": "2019-08-30"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix missing_const_for_fn false positive",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4450",
+    "date": "2019-08-29"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added more rustfix tests",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4408",
+    "date": "2019-08-29"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Split up cmp_owned tests, add run-rustfix",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4444",
+    "date": "2019-08-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix unused_unit false positive",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4445",
+    "date": "2019-08-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add 3 more run-rustfix headers",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4431",
+    "date": "2019-08-26"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Update Clippy submodule from 2bcb615 to 05f603e",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/63878",
+    "date": "2019-08-25"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4447",
+    "date": "2019-08-25"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Document how to update the changelog",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4372",
+    "date": "2019-08-21"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix some suggestions for redundant_pattern_matching",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4352",
+    "date": "2019-08-21"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Disable RLS integration test",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4420",
+    "date": "2019-08-20"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Remove unused dev scripts/files",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4392",
+    "date": "2019-08-16"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Deprecate unused_collect lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4348",
+    "date": "2019-08-15"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Update changelog for Rust 1.37",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4383",
+    "date": "2019-08-14"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Update lint deprecation mechanism for tool lints",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4363",
+    "date": "2019-08-14"
+  },
+  {
+    "type": "code",
+    "project": "rustfix",
+    "explanation": "Fix a string indexing bug in rustfix",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang-nursery/rustfix/pull/167",
+    "date": "2019-08-07"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add run-rustfix for needless_bool lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4339",
+    "date": "2019-08-07"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix enum_variant_names false positives",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4345",
+    "date": "2019-08-07"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix needless_bool suggestion with if--else-if--else",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4335",
+    "date": "2019-08-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Doctests: Enable running doc tests for nursery lints",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4330",
+    "date": "2019-08-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4332",
+    "date": "2019-08-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Doctests: Enable running doc tests for restriction lints",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4331",
+    "date": "2019-08-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Doctests: Enable running doc tests for pedantic lints",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4329",
+    "date": "2019-08-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add run-rustfix for decimal_literal_representation lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4333",
+    "date": "2019-08-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4336",
+    "date": "2019-08-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Doctests: Enable running doc tests for perf lints",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4327",
+    "date": "2019-08-03"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Doctests: Enable running doc tests for complexity lints",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4325",
+    "date": "2019-08-03"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4328",
+    "date": "2019-08-03"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Mark `fn_to_numeric_cast` lints as MaybeIncorrect",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4315",
+    "date": "2019-08-01"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4316",
+    "date": "2019-08-01"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "librustc_errors: Support ui-testing flag in annotate-snippet emitter",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/62985",
+    "date": "2019-07-26"
+  },
+  {
+    "type": "docs",
+    "project": "tide",
+    "explanation": "Add doc example showing query parameter extraction",
+    "language": "Rust",
+    "url": "https://github.com/rustasync/tide/pull/291",
+    "date": "2019-06-12"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Add support for rustfix coverage tracking",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/167",
+    "date": "2019-07-16"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4278",
+    "date": "2019-07-17"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4276",
+    "date": "2019-07-16"
+  },
+  {
+    "type": "code",
+    "project": "annotate-snippets-rs",
+    "explanation": "Fix too many anonymized line numbers",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/annotate-snippets-rs/pull/5",
+    "date": "2019-07-15"
+  },
+  {
+    "type": "code",
+    "project": "annotate-snippets-rs",
+    "explanation": "Add option to anonymize line numbers",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/annotate-snippets-rs/pull/3",
+    "date": "2019-06-13"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Refactor: Replace NodeSet with HirIdSet",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4216",
+    "date": "2019-06-18"
+  },
+  {
+    "type": "docs",
+    "project": "rust",
+    "explanation": "librustc_errors: Add some more documentation",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/61686",
+    "date": "2019-06-12"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Add new diagnostic writer using annotate-snippet library",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/61407",
+    "date": "2019-06-04"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Update pulldown_cmark to 0.5.2",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4157",
+    "date": "2019-05-30"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4155",
+    "date": "2019-05-30"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "librustc_errors: Move annotation collection to own impl",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/61191",
+    "date": "2019-05-29"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4141",
+    "date": "2019-05-25"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4134",
+    "date": "2019-05-24"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "librustc_errors: Remove unused annotation style `OldSchoolNoteText`",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/61073",
+    "date": "2019-05-23"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4126",
+    "date": "2019-05-23"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4120",
+    "date": "2019-05-22"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add a stderr file length check to clippy_dev",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4100",
+    "date": "2019-05-19"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4087",
+    "date": "2019-05-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add tests for empty_loop lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4085",
+    "date": "2019-05-12"
+  },
+  {
+    "type": "code",
+    "project": "mdBook",
+    "explanation": "Don't let robots index the print.html",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang-nursery/mdBook/pull/844",
+    "date": "2019-05-07"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add two more tests for redundant_closure",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4032",
+    "date": "2019-04-29"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Update pulldown_cmark to 0.5",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4029",
+    "date": "2019-04-25"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4022",
+    "date": "2019-04-24"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Deny rust_2018_idioms globally",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/60133",
+    "date": "2019-04-22"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix allowing of toplevel_ref_arg lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4007",
+    "date": "2019-04-20"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for match_as_ref lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4005",
+    "date": "2019-04-20"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix false positive in module_name_repetitions lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/4006",
+    "date": "2019-04-20"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for len_zero lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3978",
+    "date": "2019-04-18"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for option_map_or_none lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3987",
+    "date": "2019-04-18"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Change naive_bytecount applicability to MaybeIncorrect",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3984",
+    "date": "2019-04-18"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Change while_let_loop applicability to HasPlaceholders",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3976",
+    "date": "2019-04-17"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for deref_addrof lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3976",
+    "date": "2019-04-17"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for bool_comparison lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3977",
+    "date": "2019-04-17"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Update changelog for Rust 1.34",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3950",
+    "date": "2019-04-13"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3938",
+    "date": "2019-04-11"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash in decimal_literal_representation lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3931",
+    "date": "2019-04-10"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for redundant_closure lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3933",
+    "date": "2019-04-10"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Don't emit useless_attribute lint in external macros",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3932",
+    "date": "2019-04-10"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash in suspicious_else_formatting lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3925",
+    "date": "2019-04-09"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add missing `// run-pass` annotations to ICE tests",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3922",
+    "date": "2019-04-06"
+  },
+  {
+    "type": "code",
+    "project": "rustfix",
+    "explanation": "Migrate to Rust 2018",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang-nursery/rustfix/pull/168",
+    "date": "2019-04-05"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "rustfix coverage: Skip UI tests with non-json error-format",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/59677",
+    "date": "2019-04-04"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Add a way to track Rust,fix UI test coverage",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/59398",
+    "date": "2019-03-29"
+  },
+  {
+    "type": "docs",
+    "project": "rust",
+    "explanation": "Improved some compiletest documentation",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/59432",
+    "date": "2019-03-27"
+  },
+  {
+    "type": "code",
+    "project": "rustfix",
+    "explanation": "Fix out of bounds access in parse_snippet",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang-nursery/rustfix/pull/165",
+    "date": "2019-03-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for mistyped_literal_suffix lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3888",
+    "date": "2019-03-19"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for useless_asref lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3886",
+    "date": "2019-03-15"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3887",
+    "date": "2019-03-15"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added rustfix tests for string_lit_as_bytes lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3879",
+    "date": "2019-03-14"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3880",
+    "date": "2019-03-14"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Some more HirId-ification",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3873",
+    "date": "2019-03-13"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Remove some unused features and `error-pattern`s",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3872",
+    "date": "2019-03-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Run more doc tests",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3865",
+    "date": "2019-03-12"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Add lint writing documentation",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3824",
+    "date": "2019-03-09"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Refactor: Remove utils::opt_def_id",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3860",
+    "date": "2019-03-09"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Refactor: Cleanup one part of assign_ops lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3852",
+    "date": "2019-03-09"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Refactor: Extract `trait_ref_of_method` function",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3851",
+    "date": "2019-03-09"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Document match_path, improve match_qpath docs",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3857",
+    "date": "2019-03-09"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed two missing_const_for_fn false positives",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3844",
+    "date": "2019-03-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3827",
+    "date": "2019-02-27"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Update changelog for Rust 1.33",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3818",
+    "date": "2019-02-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Extract diagnostics module and document some functions",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3810",
+    "date": "2019-02-24"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Document some `span_lint_*` util functions",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3809",
+    "date": "2019-02-24"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Document `declare_clippy_lint` macro",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3758",
+    "date": "2019-02-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3754",
+    "date": "2019-02-10"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3755",
+    "date": "2019-02-10"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash in needless_pass_by_value lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3744",
+    "date": "2019-02-10"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Simplify UI test invocation",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3748",
+    "date": "2019-02-09"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Transition compiletest tool to Rust 2018",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/58091",
+    "date": "2019-02-09"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash in vec_box lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3732",
+    "date": "2019-02-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3727",
+    "date": "2019-01-31"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Improved another bug! message",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/57984",
+    "date": "2019-01-31"
+  },
+  {
+    "type": "docs",
+    "project": "book",
+    "explanation": "Update the Rust book Clippy section",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/book/pull/1792",
+    "date": "2019-01-30"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add initial version of const_fn lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3648",
+    "date": "2019-01-29"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Prevent incorrect cast_lossless suggestion in const_fn",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3700",
+    "date": "2019-01-28"
+  },
+  {
+    "type": "code",
+    "project": "vim-snippets",
+    "explanation": "Add dbg! macro snippet",
+    "language": "vim-snippets",
+    "url": "https://github.com/honza/vim-snippets/pull/1109",
+    "date": "2019-01-27"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Update changelog with all changes since 0.0.212",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3691",
+    "date": "2019-01-25"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3693",
+    "date": "2019-01-24"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Removed a bug emission from qualify_min_const_fn module",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/57736",
+    "date": "2019-01-19"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Removed license headers from all files",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3645",
+    "date": "2019-01-08"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Made a module public",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/57342",
+    "date": "2019-01-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3623",
+    "date": "2019-01-03"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Integrate rustfix into Clippy test suite",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3519",
+    "date": "2019-01-03"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Integrate rustfix into compiletest-rs",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/151",
+    "date": "2019-01-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3612",
+    "date": "2019-01-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3611",
+    "date": "2019-01-02"
+  },
+  {
+    "type": "code",
+    "project": "compiletest-rs",
+    "explanation": "Fixed deprecation warnings",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/153",
+    "date": "2019-01-02"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Improved util documentation",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3608",
+    "date": "2018-12-31"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3605",
+    "date": "2018-12-30"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Actually run compiletest suite on CI. It didn't before.",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/57010",
+    "date": "2018-12-23"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Changed CONTRIBUTING.md hierarchy",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3569",
+    "date": "2018-12-22"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Improved integration test error detection",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3552",
+    "date": "2018-12-19"
+  },
+  {
+    "type": "code",
+    "project": "rustfmt",
+    "explanation": "Fixed some deprecation warnings (trim_left/trim_right)",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rustfmt/pull/3252",
+    "date": "2018-12-18"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Added more unit tests to compiletest",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/56841",
+    "date": "2018-12-15"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Added a missing testsuite for a rustc testing tool",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/56792",
+    "date": "2018-12-13"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a false positive with the doc_markdown lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3510",
+    "date": "2018-12-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Added a suggestion to the explicit_write lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3450",
+    "date": "2018-12-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed an off-by-one issue with the doc_markdown lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3509",
+    "date": "2018-12-12"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Cleaned up README in regards to now stable tool_lints feature",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3527",
+    "date": "2018-12-10"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3490",
+    "date": "2018-12-04"
+  },
+  {
+    "type": "docs",
+    "project": "www.rust-lang.org",
+    "explanation": "Fixed some typos before the release of the new website",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/www.rust-lang.org/pull/545",
+    "date": "2018-12-04"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Enforce LF lineendings when cloning Clippy",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3484",
+    "date": "2018-12-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continue fixing Clippy Windows CI build",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3486",
+    "date": "2018-12-02"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Introduce a issue/PR triage procedure for Clippy",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3483",
+    "date": "2018-12-02"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Fix some outdated links",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3485",
+    "date": "2018-12-02"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Fix const_fn ICE with non-const function pointer",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/56337",
+    "date": "2018-11-30"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Update CONTRIBUTING.md in regards to merged Clippy RFC",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3466",
+    "date": "2018-11-28"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Small variable renaming",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3447",
+    "date": "2018-11-22"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Finished rewrite of internal python script in Rust",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3408",
+    "date": "2018-11-05"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Rewrote another part of internal python script in Rust",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3399",
+    "date": "2018-11-03"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3398",
+    "date": "2018-11-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3397",
+    "date": "2018-11-02"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Rewrote another part of internal python script in Rust",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3388",
+    "date": "2018-11-01"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Add missing code of conduct file",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3395",
+    "date": "2018-11-01"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3394",
+    "date": "2018-11-01"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3392",
+    "date": "2018-10-31"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3373",
+    "date": "2018-10-28"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Continuation of UI test output cleanup",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3372",
+    "date": "2018-10-28"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fix multiple incorrect suggestions related to macros",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3366",
+    "date": "2018-10-27"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Rewrote another part of internal python script in Rust",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3325",
+    "date": "2018-10-16"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Started setting up Travis for Windows",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3300",
+    "date": "2018-10-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a false positive after the previous lint rewrite",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3279",
+    "date": "2018-10-07"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Rewrote two lints for relicensing purposes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3251",
+    "date": "2018-10-05"
+  },
+  {
+    "type": "docs",
+    "project": "rust",
+    "explanation": "Improved documentation for two rustc internal types",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/54781",
+    "date": "2018-10-05"
+  },
+  {
+    "type": "docs",
+    "project": "compiletest-rs",
+    "explanation": "Improved a link between pages",
+    "language": "Rust",
+    "url": "https://github.com/laumann/compiletest-rs/pull/128",
+    "date": "2018-10-04"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3248",
+    "date": "2018-10-01"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Improved error handling in one edge case",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/54679",
+    "date": "2018-09-30"
+  },
+  {
+    "type": "docs",
+    "project": "reference",
+    "explanation": "Improved a link between pages",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang-nursery/reference/pull/436",
+    "date": "2018-09-28"
+  },
+  {
+    "type": "reading",
+    "title": "Programming with Higher-Order Logic",
+    "action": "Started reading",
+    "author": "Dale Miller and Gopalan Nadathur",
+    "date": "2018-09-27",
+    "pages": "306"
+  },
+  {
+    "type": "reading",
+    "title": "Programming Rust",
+    "action": "Finished reading",
+    "author": "Jim Blandy and Jason Orendorff",
+    "date": "2018-09-25",
+    "pages": "598"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Improved CONTRIBUTING.md",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3201",
+    "date": "2018-09-20"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Added automatic resolution suggestions to a lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/54173",
+    "date": "2018-09-14"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Cleaned up the README for the latest Rust release",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3165",
+    "date": "2018-09-14"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "Added unit tests for a Levensthein function",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/54119",
+    "date": "2018-09-13"
+  },
+  {
+    "type": "docs",
+    "project": "rustc-dev-guide",
+    "explanation": "Added a section about using incremental compilation",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang-nursery/rustc-dev-guide/pull/199",
+    "date": "2018-09-11"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Rewrote first part of internal python script in Rust",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2985",
+    "date": "2018-09-06"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed some warnings on CI",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/3116",
+    "date": "2018-09-03"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Cleaned up a dev script",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2962",
+    "date": "2018-08-30"
+  },
+  {
+    "type": "docs",
+    "project": "maud-book",
+    "explanation": "Added a page explaining how to compose templates",
+    "language": "Rust",
+    "url": "https://github.com/lfairy/maud-book/pull/6",
+    "date": "2018-08-21"
+  },
+  {
+    "type": "code",
+    "project": "maud",
+    "explanation": "Updated a dependency on actix-web",
+    "language": "Rust",
+    "url": "https://github.com/lfairy/maud/pull/146",
+    "date": "2018-08-14"
+  },
+  {
+    "type": "code",
+    "project": "unidiff-rs",
+    "explanation": "Simplified the test fixture loading a bit",
+    "language": "Rust",
+    "url": "https://github.com/messense/unidiff-rs/pull/1",
+    "date": "2018-08-05"
+  },
+  {
+    "type": "code",
+    "project": "hubcaps",
+    "explanation": "Added support for creating Review Comments through this GitHub API Client library",
+    "language": "Rust",
+    "url": "https://github.com/softprops/hubcaps/pull/142",
+    "date": "2018-08-02"
+  },
+  {
+    "type": "code",
+    "project": "libsyntax2",
+    "explanation": "Added Clippy to CI build",
+    "language": "Rust",
+    "url": "https://github.com/matklad/libsyntax2/pull/55",
+    "date": "2018-07-29"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2968",
+    "date": "2018-07-28"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2833",
+    "date": "2018-06-07"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2786",
+    "date": "2018-05-21"
+  },
+  {
+    "type": "docs",
+    "project": "rustc-dev-guide",
+    "explanation": "Added an example of how type inference works",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang-nursery/rustc-dev-guide/pull/136",
+    "date": "2018-05-21"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Add integration tests to Clippy to notice regressions in popular crates",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2764",
+    "date": "2018-05-16"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed 5 different crashes at once",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2763",
+    "date": "2018-05-15"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed crash in new build script",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2753",
+    "date": "2018-05-13"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2754",
+    "date": "2018-05-13"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Document how to debug Clippy build failures after nightly changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2748",
+    "date": "2018-05-12"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2743",
+    "date": "2018-05-11"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Made sure Clippy compilation aborts early on outdated/unsupported 'Rust', versions",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2733",
+    "date": "2018-05-07"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a crash",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2711",
+    "date": "2018-05-01"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed Clippy after nightly breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2703",
+    "date": "2018-04-28"
+  },
+  {
+    "type": "code",
+    "project": "rust",
+    "explanation": "My first actual 'Rust', contribution",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust/pull/50300",
+    "date": "2018-04-28"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed clippy after nightly introduced breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2703",
+    "date": "2018-04-28"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Explained how Clippy works",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2687",
+    "date": "2018-04-24"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed clippy after nightly introduced breaking changes",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2681",
+    "date": "2018-04-18"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Took over a pull request, adding a new lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/1467",
+    "date": "2018-04-15"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed a false positive in nonminimal_bool lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2644",
+    "date": "2018-04-07"
+  },
+  {
+    "type": "docs",
+    "project": "rust-clippy",
+    "explanation": "Improved the contribution documentation",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2606",
+    "date": "2018-04-01"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed an incorrect lint suggestion",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2577",
+    "date": "2018-03-26"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed another incorrect lint suggestion",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2473",
+    "date": "2018-02-21"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Improved documentation around executing tests",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2459",
+    "date": "2018-02-20"
+  },
+  {
+    "type": "code",
+    "project": "rust-clippy",
+    "explanation": "Fixed an incorrect suggestion from a lint",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2444",
+    "date": "2018-02-07"
+  },
+  {
+    "type": "reading",
+    "title": "Programming Rust",
+    "action": "Started reading",
+    "author": "Jim Blandy and Jason Orendorff",
+    "date": "2018-02-01",
+    "pages": "598"
+  },
+  {
+    "type": "code",
+    "explanation": "Added a new lint that detects empty lines after attributes",
+    "project": "rust-clippy",
+    "language": "Rust",
+    "url": "https://github.com/rust-lang/rust-clippy/pull/2340",
+    "date": "2018-01-30"
+  }
+]

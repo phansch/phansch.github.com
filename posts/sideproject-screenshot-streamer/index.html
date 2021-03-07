@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sideproject: Screenshot Streamer</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Sideproject: Screenshot Streamer">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Sideproject: Screenshot Streamer</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;sideproject-screenshot-streamer&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2014-04-13">13 Apr 2014</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>Time for another side project! This is a project for the upcoming <a href="https://ldjam.com/events/ludum-dare/rules">Ludum Dare game making competition</a>.</p>
+<h2 id="what-this-is-about">What this is about</h2>
+<p>I want to participate in the next game making competition for Ludum Dare. The <a href="http://phansch.net/2012/12/26/ludum-dare-25-post-mortem/">last time I participated</a>, I created a <a href="https://www.youtube.com/watch?v=eX7fsD3Hbmc">screenlapse</a> of my work over the weekend.
+This time I want to do that again, but with a twist. I'm planning to live stream my work over the weekend.</p>
+<p>However, this is not your usual video livestream. It will be images from the screenlapse recording output. A new image every 30 seconds. Since my laptop is not powerful enough to do actual video livestreaming, I hope this will be an interesting alternative.</p>
+<p>Here's a preview of how it might end up looking like:</p>
+<a href="/assets/images/posts/2014-04-13-sideproject-screenshot-streamer/frontend.png">
+  <img src="/assets/images/posts/2014-04-13-sideproject-screenshot-streamer/frontend.png" class="img-thumbnail" alt="project screenshot" />
+</a>
+Additionally, older screenshots will be displayed as thumbnails at the bottom.
+<h2 id="new-things-learned">New things learned!</h2>
+<p>The image livestreaming server is pretty much done and there's just a few finishing touches left. It is not available online yet, but the source code is available <a href="https://gitlab.com/phansch/screenshot-streamer/tree/master">here on GitLab</a>. The server itself can be found in the <a href="https://gitlab.com/phansch/screenshot-streamer/blob/master/app.rb">app.rb</a>. It is built with Sinatra and provides a <code>text/event-stream</code> route for a client that uses the <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">EventSource API</a>. The other important route is <code>post '/screenshot/:filename'</code>, which provides an interface for someone to push new images to the server. This route is also <a href="https://gitlab.com/phansch/screenshot-streamer/blob/master/helpers/auth.rb">protected with HTTP Basic Auth</a>, so that only authorized people (i.e me) can post screenshots.</p>
+<p>The client code can be found in <a href="https://gitlab.com/phansch/screenshot-streamer/blob/master/views/index.erb">views/index.erb</a>. The frontend part is also quite interesting: Once a new image gets posted to the server, it will show up in all connected clients without reloading. The old image will be moved to the list of thumbnails while the top image gets replaced with the new image. I extracted the code responsible for moving the images into a small Jquery plugin, which can be found <a href="https://gitlab.com/phansch/screenshot-streamer/blob/master/public/js/MoveImages.js">here</a>. I also wrote tests in Jasmine, because it got very tedious to test the frontend code. The tests can be found <a href="https://gitlab.com/phansch/screenshot-streamer/blob/master/spec/javascripts/MoveImage.spec.js">here</a>.</p>
+<p>I am really happy about this little project coming together because I learned so many new things. I never used Sinatra before. I had JavaScript testing on my list of things to do anyway and coincidentally, Jquery plugins make testing a lot easier.</p>
+<h2 id="what-s-left-to-do">What's left to do</h2>
+<p>The most important part that is missing, is a tool that automatically posts images to the server. Additionally I'd like to automatically remove images from the server once they aren't needed anymore. And tests for the Sinatra app. Other than that, I'm really looking forward to the next <a href="http://www.ludumdare.com/">Ludum Dare</a>.</p>
+<p>Have a great time!</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

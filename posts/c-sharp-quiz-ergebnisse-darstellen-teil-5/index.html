@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>C# Quiz - Ergebnisse darstellen (Teil 5)</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="C# Quiz - Ergebnisse darstellen (Teil 5)">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">C# Quiz - Ergebnisse darstellen (Teil 5)</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;c-sharp-quiz-ergebnisse-darstellen-teil-5&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2010-09-22">22 Sep 2010</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  4  min read
+</em>
+      </p>
+      <div class="e-content"><p>Im <a href="http://phansch.net/2010/09/18/c-sharp-quiz-antworten-darstellen-teil-4/">vorherigen Tutorialteil</a> haben wir die Grundlagen für das Auswerten der Fragen programmiert.</p>
+<p>Ein kurzer Blick auf unsere <a href="http://phansch.net/2010/07/22/c-sharp-quiz-planung-teil-1">ToDo Liste</a> sagt uns, dass wir nur noch eine <strong>grafische Liveauswertung der Ergebnisse</strong> implementieren müssen.</p>
+<p>Meine Wahl für ein passende Auswertung habe ich mit <a href="http://phansch.net/2010/09/19/c-sharp-diagramme-und-graphen-mit-zedgraph">ZedGraph</a> bereits getroffen. ZedGraph ist einfach zu benutzen und sehr flexibel was die Darstellungsformen angeht.</p>
+<p>Wir stehen jetzt vor <strong>2 Teilproblemen</strong>:</p>
+<ol>
+<li>Sammeln der Ergebnisse</li>
+<li>Erstellung des Diagramms</li>
+</ol>
+<h2 id="sammeln-der-ergebnisse">Sammeln der Ergebnisse</h2>
+<p>Das sammeln der Ergebnisse ist überraschend einfach.</p>
+<p>Wir legen eine neue Membervariable an:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private double</span><span style="color:#c0c5ce;">[] </span><span style="color:#bf616a;">answerCount</span><span style="color:#c0c5ce;">; </span><span style="color:#65737e;">//Contains the choices
+</span></code></pre>
+<p>Diese wird dann in der Methode Form1_Load initialisiert:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">//Initialize the array (size = total possible answers)
+</span><span style="color:#bf616a;">answerCount </span><span style="color:#c0c5ce;">= new </span><span style="color:#b48ead;">double</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Count</span><span style="color:#c0c5ce;">];
+</span></code></pre>
+<p>Der Gedanke ist recht simpel:
+Das Array hat eine Größe die der Anzahl der Antworten entspricht. In unserem Fall wäre das 4.
+Wenn nun eine Antwort bestätigt wird (<em>button_next_Click</em>) können wir den Wert des entsprechenden Arrayfeldes erhöhen.</p>
+<p>Wir erweitern nun die IF Abfrage in der Methode button_next_Click():</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Checked </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">)
+{
+    </span><span style="color:#65737e;">//Save the answer
+    </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">answerID</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">answerID </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">Convert</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ToInt32</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Name</span><span style="color:#c0c5ce;">);
+    </span><span style="color:#bf616a;">answerCount</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">answerID</span><span style="color:#c0c5ce;">] += </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#65737e;">//Set the answer to unchecked and break
+    </span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Checked </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>So können wir für jede Antwortmöglichkeit bequem die Anzahl der Antworten feststellen.</p>
+<h2 id="erstellung-des-diagramms">Erstellung des Diagramms</h2>
+<p>Für den letzten Schritt müssen wir ein paar Vorbereitungen treffen.
+Um ZedGraph benutzen zu können, brauchen wir einen Verweis auf die ZedGraph.dll und das entsprechende Steuerelement in der Toolbox.
+Wie das geht kann in <a href="http://phansch.net/2010/09/19/c-sharp-diagramme-und-graphen-mit-zedgraph">diesem Blogeintrag</a> nachgelesen werden.</p>
+<p>Als nächstes verbreitern wir unsere Form und fügen das ZedGraphControl hinzu.
+In etwa so:</p>
+<!--[![QuizForm mit ZedGraphControl](http://wpimages.phansch.de/2010/06/quiz_teil5_1-300x126.png)](http://wpimages.phansch.de/2010/06/quiz_teil5_1.png)-->
+<h3 id="initialisierung-des-diagramms">Initialisierung des Diagramms</h3>
+<p>Soweit zur Vorbereitung des Diagramms. Nun fehlen uns noch 2 Methoden und entsprechend die Aufrufe.
+Der erste Schritt ist die Initialisierung des Diagramms. Hier werden sämtliche Startattribute festgelegt.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">InitChart</span><span style="color:#c0c5ce;">(ZedGraphControl </span><span style="color:#bf616a;">zgc</span><span style="color:#c0c5ce;">)
+{
+    GraphPane </span><span style="color:#bf616a;">myPane </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">zgc</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GraphPane</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#65737e;">//Set a title
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Title</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Text </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Auswertung</span><span style="color:#c0c5ce;">&quot;;
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Title</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">FontSpec</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Size </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">30</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#65737e;">//titles and axislabels
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">XAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Title</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Text </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Antwortmöglichkeiten</span><span style="color:#c0c5ce;">&quot;;
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">XAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Title</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">FontSpec</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Size </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">25</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">YAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Title</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Text </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Anzahl</span><span style="color:#c0c5ce;">&quot;;
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">YAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Title</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">FontSpec</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Size </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">25</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#65737e;">//Set labels for the x-axis
+    </span><span style="color:#b48ead;">string</span><span style="color:#c0c5ce;">[] </span><span style="color:#bf616a;">XLabels </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">XAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Type </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">AxisType</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Text</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">XAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Scale</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">TextLabels </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">XLabels</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">XAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Scale</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">FontSpec</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Size </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">15</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#65737e;">//Set labels for the y-axis
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">YAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Scale</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">FontSpec</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Size </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">20</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">YAxis</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Scale</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">FontSpec</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">IsBold </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#65737e;">//Refresh the graph
+    </span><span style="color:#bf616a;">zgc</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">AxisChange</span><span style="color:#c0c5ce;">();
+}
+</span></code></pre>
+<p>Diese Methode wird nur einmal aufgerufen:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">Form1_Load</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">object </span><span style="color:#bf616a;">sender</span><span style="color:#c0c5ce;">, EventArgs </span><span style="color:#bf616a;">e</span><span style="color:#c0c5ce;">)
+{
+    ..
+    ..
+    ..
+    </span><span style="color:#65737e;">//Initialize the chart
+    </span><span style="color:#bf616a;">InitChart</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">zedGraphControl1</span><span style="color:#c0c5ce;">);
+}
+</span></code></pre>
+<p>Wenn wir das Programm so ausführen erhalten wir folgendes Bild:</p>
+<!--[![Initialisiertes Diagramm ohne Balken](http://wpimages.phansch.de/2010/06/quiz_teil5_2-300x124.png)](http://wpimages.phansch.de/2010/06/quiz_teil5_2.png)-->
+<h3 id="update-des-diagramms">Update des Diagramms</h3>
+<p>Nun fehlen nur noch die Balken, welche die Anzahl der Antworten repräsentieren.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">UpdateChart</span><span style="color:#c0c5ce;">(ZedGraphControl </span><span style="color:#bf616a;">zgc</span><span style="color:#c0c5ce;">)
+{
+    GraphPane </span><span style="color:#bf616a;">myPane </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">zgc</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">GraphPane</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#65737e;">//Needed for redrawing the chart, to remove old curves
+    </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">CurveList</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Clear</span><span style="color:#c0c5ce;">();
+
+    </span><span style="color:#65737e;">//Add the actual bars
+    </span><span style="color:#c0c5ce;">BarItem </span><span style="color:#bf616a;">myBar </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">myPane</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">AddBar</span><span style="color:#c0c5ce;">(&quot;</span><span style="color:#a3be8c;">Antworten</span><span style="color:#c0c5ce;">&quot;, </span><span style="color:#d08770;">null</span><span style="color:#c0c5ce;">, </span><span style="color:#bf616a;">answerCount</span><span style="color:#c0c5ce;">,
+                                    </span><span style="color:#bf616a;">Color</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Red</span><span style="color:#c0c5ce;">);
+
+    </span><span style="color:#65737e;">//Refresh the graph in order to show the new data
+    </span><span style="color:#bf616a;">zgc</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">AxisChange</span><span style="color:#c0c5ce;">();
+    </span><span style="color:#bf616a;">zgc</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Refresh</span><span style="color:#c0c5ce;">();
+}
+</span></code></pre>
+<p>Aufgerufen wir UpdateChart() im button_next_Click-Eventhandler:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">button_next_Click</span><span style="color:#c0c5ce;">(</span><span style="color:#b48ead;">object </span><span style="color:#bf616a;">sender</span><span style="color:#c0c5ce;">, EventArgs </span><span style="color:#bf616a;">e</span><span style="color:#c0c5ce;">)
+{
+    ..
+    ..
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(RadioButton </span><span style="color:#bf616a;">rdb </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">a</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ArrAnswers</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Checked </span><span style="color:#c0c5ce;">== </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">)
+        {
+            ..
+            ..
+            </span><span style="color:#bf616a;">UpdateChart</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">zedGraphControl1</span><span style="color:#c0c5ce;">);
+            </span><span style="color:#65737e;">//Set the answer to unchecked and break
+            </span><span style="color:#bf616a;">rdb</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Checked </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+            </span><span style="color:#b48ead;">break</span><span style="color:#c0c5ce;">;
+        }
+    }
+    ..
+    ..
+    }
+</span></code></pre>
+<p>Das war es auch schon. Leider ist die fertige Lösung nicht mehr als Download verfügbar.</p>
+<p>Ich hoffe, dass meine erste Blogreihe eine gute Hilfestellung, auch für C# Anfänger, bietet.
+Anregungen und Wünsche können gerne in den Kommentaren geäußert werden. :)</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

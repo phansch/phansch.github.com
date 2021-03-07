@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Fixing a Clippy crash</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Fixing a Clippy crash">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Fixing a Clippy crash</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;fixing-a-clippy-crash&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2018-10-10">10 Oct 2018</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  12  min read
+</em>
+      </p>
+      <div class="e-content"><p>3 weeks ago I set out to fix a crash in Clippy, this is what I learned along the
+way. I hope this blog post will be useful for other people diving
+into Clippy and maybe serve as motivation if things get difficult.</p>
+<p>
+<div class="toc">
+<h3>Table of contents</h3>
+<ol class="h1">
+    <li>
+        <a href="https://phansch.net/posts/fixing-a-clippy-crash/#meet-the-crash">Meet the crash</a>
+        
+<ol class="h2">
+    <li>
+        <a href="https://phansch.net/posts/fixing-a-clippy-crash/#traits-generics-lifetimes-oh-no">Traits.. generics.. lifetimes!? Oh no</a>
+        
+    </li>
+    <li>
+        <a href="https://phansch.net/posts/fixing-a-clippy-crash/#the-backtrace">The backtrace</a>
+        
+    </li>
+    <li>
+        <a href="https://phansch.net/posts/fixing-a-clippy-crash/#first-steps-to-fixing-a-clippy-bug">First steps to fixing a Clippy bug</a>
+        
+    </li>
+    <li>
+        <a href="https://phansch.net/posts/fixing-a-clippy-crash/#debugging-with-println">Debugging with println!</a>
+        
+    </li>
+</ol>
+    </li>
+    <li>
+        <a href="https://phansch.net/posts/fixing-a-clippy-crash/#understanding-the-context">Understanding the context</a>
+        
+    </li>
+    <li>
+        <a href="https://phansch.net/posts/fixing-a-clippy-crash/#fixing-the-bug">Fixing the bug</a>
+        
+    </li>
+</ol>
+</div></p>
+<h1 id="meet-the-crash">Meet the crash</h1>
+<p>The crash has been reported in <a href="https://github.com/rust-lang/rust-clippy/issues/2831">this Clippy issue</a>.
+It is demonstrated with the following valid Rust program:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Foo&lt;&#39;a, A&gt; {}
+
+</span><span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, T&gt; Foo&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, T&gt; </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">T {}
+
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">func</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, S: Foo&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, ()&gt;&gt;(</span><span style="color:#bf616a;">_item</span><span style="color:#c0c5ce;">: S) {}
+
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {}
+</span></code></pre>
+<p>When executed with rustc, it compiles, but it produces the following ICE when it
+is executed with Clippy:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#c0c5ce;">error: internal compiler error: librustc/ty/relate.rs:</span><span style="color:#d08770;">700</span><span style="color:#c0c5ce;">: impossible case reached
+thread &#39;main&#39; panicked at </span><span style="color:#b48ead;">&#39;Box</span><span style="color:#c0c5ce;">&lt;Any&gt;&#39;, librustc_errors/lib.rs:</span><span style="color:#d08770;">554</span><span style="color:#c0c5ce;">:</span><span style="color:#d08770;">9
+</span><span style="color:#c0c5ce;">stack backtrace:
+&lt;snip&gt;
+</span></code></pre><h2 id="traits-generics-lifetimes-oh-no">Traits.. generics.. lifetimes!? Oh no</h2>
+<p>The crashing snippet from above shows why I have been.. not so quick with fixing
+this. I have been avoiding dealing with explicit lifetime annotations since I
+started with Rust almost a year ago. Further, I have never been in a position
+where it made sense to implement my own traits, especially not generic traits,
+so it was pretty easy to avoid.</p>
+<p>It's safe to say that, at this point, I don't really understand what this
+program means. Let's figure it out step by step.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Foo&lt;&#39;a, A&gt; {}
+</span></code></pre>
+<p>This is a trait called <code>Foo</code> with no associated items. <code>Foo</code> is also generic
+over any type <code>A</code> and it declares a lifetime parameter <code>'a</code>. By itself, this
+does not mean anything, but it allows for potential implementors of this trait
+to use the lifetime <code>'a</code> and the generic type <code>A</code>.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, T&gt; Foo&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, T&gt; </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">T {}
+</span></code></pre>
+<p>Here we define an implementation of our trait <code>Foo</code> for any type <code>T</code>. Again, we
+declare a lifetime <code>'b</code> and a generic type <code>T</code> so that we can use them to implement
+<code>Foo</code>. This <code>impl</code> also declares no associated items.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#65737e;">// func takes item of type S which has to implement `Foo`
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">func</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">&gt;(</span><span style="color:#bf616a;">_item</span><span style="color:#c0c5ce;">: impl Foo&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, ()&gt;) {}
+</span></code></pre>
+<p>The last line contains the cause of the Clippy crash. Again we declare that the
+function is going to use a lifetime <code>'b</code>. We then define a parameter that can
+be any type that implements <code>Foo</code> with the lifetime of <code>'b</code> and a type of <code>()</code>.</p>
+<h2 id="the-backtrace">The backtrace</h2>
+<p>The backtrace contains some first pointers where we can have a further look.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#c0c5ce;">error: internal compiler error: librustc/ty/relate.rs:</span><span style="color:#d08770;">705</span><span style="color:#c0c5ce;">: impossible case reached
+
+thread &#39;main&#39; panicked at </span><span style="color:#b48ead;">&#39;Box</span><span style="color:#c0c5ce;">&lt;Any&gt;&#39;, librustc_errors/lib.rs:</span><span style="color:#d08770;">599</span><span style="color:#c0c5ce;">:</span><span style="color:#d08770;">9
+</span><span style="color:#c0c5ce;">stack backtrace:
+  </span><span style="color:#65737e;">// snip
+  </span><span style="color:#d08770;">13</span><span style="color:#c0c5ce;">: rustc::util::bug::bug_fmt
+  </span><span style="color:#d08770;">14</span><span style="color:#c0c5ce;">: &lt;rustc::ty::subst::Kind&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt; as rustc::ty::relate::Relate&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;::relate
+  </span><span style="color:#d08770;">15</span><span style="color:#c0c5ce;">: &lt;&amp;</span><span style="color:#b48ead;">&#39;a mut</span><span style="color:#c0c5ce;"> I as core::iter::iterator::Iterator&gt;::next
+  </span><span style="color:#d08770;">16</span><span style="color:#c0c5ce;">: &lt;smallvec::SmallVec&lt;A&gt; as core::iter::traits::FromIterator&lt;&lt;A as smallvec::Array&gt;::Item&gt;&gt;
+    ::from_iter
+  </span><span style="color:#d08770;">17</span><span style="color:#c0c5ce;">: &lt;core::result::Result&lt;T, E&gt; as rustc::ty::context::InternIteratorElement&lt;T, R&gt;&gt;::intern_with
+  </span><span style="color:#d08770;">18</span><span style="color:#c0c5ce;">: &lt;rustc::ty::sty::TraitRef&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt; as rustc::ty::relate::Relate&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;::relate
+  </span><span style="color:#d08770;">19</span><span style="color:#c0c5ce;">: rustc::infer::InferCtxt::commit_if_ok
+  </span><span style="color:#d08770;">20</span><span style="color:#c0c5ce;">: rustc::traits::select::SelectionContext::match_impl
+  </span><span style="color:#d08770;">21</span><span style="color:#c0c5ce;">: rustc::infer::InferCtxt::probe
+  </span><span style="color:#d08770;">22</span><span style="color:#c0c5ce;">: rustc::ty::trait_def::&lt;impl rustc::ty::context::TyCtxt&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;gcx</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;::for_each_relevant_impl
+  </span><span style="color:#65737e;">// snip
+  </span><span style="color:#d08770;">34</span><span style="color:#c0c5ce;">: rustc::ty::query::__query_compute::evaluate_obligation
+  </span><span style="color:#d08770;">35</span><span style="color:#c0c5ce;">: rustc::ty::query::&lt;impl rustc::ty::query::config::QueryAccessors&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt; for
+    rustc::ty::query::queries::evaluate_obligation&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;::compute
+  </span><span style="color:#d08770;">36</span><span style="color:#c0c5ce;">: rustc::dep_graph::graph::DepGraph::with_task_impl
+  </span><span style="color:#d08770;">37</span><span style="color:#c0c5ce;">: rustc::ty::context::tls::with_related_context
+  </span><span style="color:#d08770;">38</span><span style="color:#c0c5ce;">: rustc::ty::query::plumbing::&lt;impl rustc::ty::context::TyCtxt&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;gcx</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;
+    ::force_query_with_job
+  </span><span style="color:#d08770;">39</span><span style="color:#c0c5ce;">: rustc::ty::query::plumbing::&lt;impl rustc::ty::context::TyCtxt&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;gcx</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;::get_query
+  </span><span style="color:#d08770;">40</span><span style="color:#c0c5ce;">: rustc::traits::query::evaluate_obligation::&lt;impl rustc::infer::InferCtxt&lt;</span><span style="color:#b48ead;">&#39;cx</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;gcx</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;
+    ::evaluate_obligation
+  </span><span style="color:#d08770;">41</span><span style="color:#c0c5ce;">: rustc::traits::query::evaluate_obligation::&lt;impl rustc::infer::InferCtxt&lt;</span><span style="color:#b48ead;">&#39;cx</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;gcx</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;
+    ::predicate_must_hold
+  </span><span style="color:#d08770;">42</span><span style="color:#c0c5ce;">: clippy_lints::utils::implements_trait::{{closure}}
+             at clippy_lints/src/utils/</span><span style="color:#b48ead;">mod</span><span style="color:#c0c5ce;">.rs:</span><span style="color:#d08770;">258
+  43</span><span style="color:#c0c5ce;">: rustc::infer::InferCtxtBuilder::enter::{{closure}}
+             at librustc/infer/</span><span style="color:#b48ead;">mod</span><span style="color:#c0c5ce;">.rs:</span><span style="color:#d08770;">472
+  </span><span style="color:#65737e;">// snip
+  </span><span style="color:#d08770;">56</span><span style="color:#c0c5ce;">: clippy_lints::utils::implements_trait
+             at clippy_lints/src/utils/</span><span style="color:#b48ead;">mod</span><span style="color:#c0c5ce;">.rs:</span><span style="color:#d08770;">258
+  57</span><span style="color:#c0c5ce;">: &lt;clippy_lints::needless_pass_by_value::NeedlessPassByValue as rustc::lint::LateLintPass&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;
+    ::check_fn::{{closure}}
+             at clippy_lints/src/needless_pass_by_value.rs:</span><span style="color:#d08770;">178
+  58</span><span style="color:#c0c5ce;">: core::iter::iterator::Iterator::all::{{closure}}
+             at libcore/iter/iterator.rs:</span><span style="color:#d08770;">1680
+  59</span><span style="color:#c0c5ce;">: core::iter::iterator::Iterator::try_for_each::{{closure}}
+             at libcore/iter/iterator.rs:</span><span style="color:#d08770;">1559
+  60</span><span style="color:#c0c5ce;">: &lt;core::slice::Iter&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, T&gt; as core::iter::iterator::Iterator&gt;::try_fold
+             at libcore/slice/</span><span style="color:#b48ead;">mod</span><span style="color:#c0c5ce;">.rs:</span><span style="color:#d08770;">2490
+  61</span><span style="color:#c0c5ce;">: core::iter::iterator::Iterator::try_for_each
+             at libcore/iter/iterator.rs:</span><span style="color:#d08770;">1559
+  62</span><span style="color:#c0c5ce;">: core::iter::iterator::Iterator::all
+             at libcore/iter/iterator.rs:</span><span style="color:#d08770;">1679
+  63</span><span style="color:#c0c5ce;">: &lt;clippy_lints::needless_pass_by_value::NeedlessPassByValue as rustc::lint::LateLintPass&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;
+    ::check_fn
+             at clippy_lints/src/needless_pass_by_value.rs:</span><span style="color:#d08770;">175
+</span></code></pre>
+<p>Let's go through the backtrace from top to bottom.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#c0c5ce;">error: internal compiler error: librustc/ty/relate.rs:</span><span style="color:#d08770;">705</span><span style="color:#c0c5ce;">: impossible case reached
+</span></code></pre>
+<p>This tells us where the crash was reported from inside rustc. I'm noting this
+down to have a look at the code later.</p>
+<p>Next follow 30 to 40 lines of plumbing, like:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#c0c5ce;">  </span><span style="color:#d08770;">39</span><span style="color:#c0c5ce;">: rustc::ty::query::plumbing::&lt;impl rustc::ty::context::TyCtxt&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;gcx</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;::get_query
+</span></code></pre>
+<p>For now, I think all these lines are irrelevant to the crash in Clippy.</p>
+<p>Further down we find more useful information:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#c0c5ce;">  </span><span style="color:#d08770;">56</span><span style="color:#c0c5ce;">: clippy_lints::utils::implements_trait
+             at clippy_lints/src/utils/</span><span style="color:#b48ead;">mod</span><span style="color:#c0c5ce;">.rs:</span><span style="color:#d08770;">258
+  57</span><span style="color:#c0c5ce;">: &lt;clippy_lints::needless_pass_by_value::NeedlessPassByValue as rustc::lint::LateLintPass&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt;
+    ::check_fn::{{closure}}
+             at clippy_lints/src/needless_pass_by_value.rs:</span><span style="color:#d08770;">178
+</span></code></pre>
+<p>This tells us from where Clippy invoked the chain of methods that caused the
+Crash. In other words, one of these places is probably using rustc internals
+incorrectly.</p>
+<p>It also shows which lint caused the crash to happen.</p>
+<p><code>needless_pass_by_value</code> checks for functions that take arguments by value and
+don't consume those arguments. Clippy should suggest to pass these arguments by
+reference instead:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">v</span><span style="color:#c0c5ce;">: Vec&lt;</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">&gt;) {
+    assert_eq!(v.</span><span style="color:#96b5b4;">len</span><span style="color:#c0c5ce;">(), </span><span style="color:#d08770;">42</span><span style="color:#c0c5ce;">);
+}
+
+</span><span style="color:#65737e;">// should be:
+
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">foo</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">v</span><span style="color:#c0c5ce;">: &amp;[</span><span style="color:#b48ead;">i32</span><span style="color:#c0c5ce;">]) {
+    assert_eq!(v.</span><span style="color:#96b5b4;">len</span><span style="color:#c0c5ce;">(), </span><span style="color:#d08770;">42</span><span style="color:#c0c5ce;">);
+}
+</span></code></pre>
+<p>And indeed, in our crashing example, we pass the argument by value:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">func</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, S: Bar&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, ()&gt;&gt;(</span><span style="color:#bf616a;">_item</span><span style="color:#c0c5ce;">: S) {}
+</span></code></pre>
+<p>We are now sure that this code should trigger the <code>needless_pass_by_value</code> lint
+but it crashes instead. Next, we are going to try and find out more about what's
+going on internally.</p>
+<h2 id="first-steps-to-fixing-a-clippy-bug">First steps to fixing a Clippy bug</h2>
+<p>The first thing we are going to do is making the crash easily reproducible by
+creating a test case. Luckily someone <a href="https://github.com/rust-lang/rust-clippy/issues/2831#issuecomment-409411096">already provided</a> a minimal crashing
+example in the issue. A minimized example is always <em>super</em> helpful.</p>
+<p>We are going to add the code to the <code>run-pass</code> test suite of Clippy. The
+<code>run-pass</code> suite will fail if any of the code inside fails to compile.</p>
+<p>Here's our failing code:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#65737e;">// tests/run-pass/ice-2831.rs
+</span><span style="color:#c0c5ce;">#![</span><span style="color:#bf616a;">allow</span><span style="color:#c0c5ce;">(dead_code)]
+
+</span><span style="color:#b48ead;">trait </span><span style="color:#c0c5ce;">Bar&lt;&#39;a, A&gt; {}
+</span><span style="color:#b48ead;">impl</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, T&gt; Bar&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, T&gt; </span><span style="color:#b48ead;">for </span><span style="color:#c0c5ce;">T {}
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">funk</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, S: Bar&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, ()&gt;&gt;(</span><span style="color:#bf616a;">_item</span><span style="color:#c0c5ce;">: S) {}
+
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">main</span><span style="color:#c0c5ce;">() {}
+</span></code></pre>
+<p>We can now run the test easily using:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-shell" data-lang="shell"><span style="color:#c0c5ce;">RUST_BACKTRACE=1 TESTNAME=run-pass/ice-2831 cargo test --test compile-test
+</span></code></pre>
+<p>As expected, this fails to compile and crashes with the backtrace from above.
+Good!</p>
+<h2 id="debugging-with-println">Debugging with println!</h2>
+<p>Now that we are able to quickly run the test, we can start to debug the
+crash. I usually use plain <code>println!</code> calls to get all the possibly relevant
+values printed to stdout.</p>
+<p>In this case we want to know what we pass through to rustc before
+<code>predicate_must_hold</code> is called:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#65737e;">/// Check whether a type implements a trait.
+/// See also `get_trait_def_id`.
+</span><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">implements_trait</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;(
+    </span><span style="color:#bf616a;">cx</span><span style="color:#c0c5ce;">: &amp;LateContext&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">, </span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;,
+    </span><span style="color:#bf616a;">ty</span><span style="color:#c0c5ce;">: Ty&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;,
+    </span><span style="color:#bf616a;">trait_id</span><span style="color:#c0c5ce;">: DefId,
+    </span><span style="color:#bf616a;">ty_params</span><span style="color:#c0c5ce;">: &amp;[Kind&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;],
+) -&gt; </span><span style="color:#b48ead;">bool </span><span style="color:#c0c5ce;">{
+    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> ty = cx.tcx.</span><span style="color:#96b5b4;">erase_regions</span><span style="color:#c0c5ce;">(&amp;ty);
+    </span><span style="color:#b48ead;">let</span><span style="color:#c0c5ce;"> obligation = cx.tcx.</span><span style="color:#96b5b4;">predicate_for_trait_def</span><span style="color:#c0c5ce;">(
+        cx.param_env, traits::ObligationCause::dummy(), trait_id, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">, ty, ty_params
+    );
+    println!(&quot;</span><span style="color:#a3be8c;">cx.param_env: </span><span style="color:#d08770;">{:?}</span><span style="color:#c0c5ce;">&quot;, cx.param_env);
+    println!(&quot;</span><span style="color:#a3be8c;">ty: </span><span style="color:#d08770;">{:?}</span><span style="color:#c0c5ce;">&quot;, ty);
+    println!(&quot;</span><span style="color:#a3be8c;">obligation: </span><span style="color:#d08770;">{:?}</span><span style="color:#c0c5ce;">&quot;, obligation);
+    println!(&quot;</span><span style="color:#a3be8c;">ty_params: </span><span style="color:#d08770;">{:?}</span><span style="color:#c0c5ce;">&quot;, ty_params);
+    </span><span style="color:#65737e;">// NOTE: Crash happens after `predicate_must_hold` is called
+</span><span style="color:#c0c5ce;">    cx.tcx.</span><span style="color:#96b5b4;">infer_ctxt</span><span style="color:#c0c5ce;">().</span><span style="color:#96b5b4;">enter</span><span style="color:#c0c5ce;">(|</span><span style="color:#bf616a;">infcx</span><span style="color:#c0c5ce;">| infcx.</span><span style="color:#96b5b4;">predicate_must_hold</span><span style="color:#c0c5ce;">(&amp;obligation))
+}
+</span></code></pre>
+<p>Using the command from above, this will recompile the changed code and execute
+our test. Here is the result:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#c0c5ce;">cx.param_env: ParamEnv { caller_bounds: [
+    Binder(TraitPredicate(&lt;S as Bar&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, ()&gt;&gt;)), Binder(TraitPredicate(&lt;S as std::marker::Sized&gt;))
+  ], reveal: UserFacing }
+ty: &amp;S
+obligation: Obligation(predicate=Binder(TraitPredicate(&lt;&amp;S as Bar&lt;()&gt;&gt;)),depth=</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">)
+ty_params: [()]
+</span></code></pre><h1 id="understanding-the-context">Understanding the context</h1>
+<p>Maybe you can spot something in the debug output already. However, I first want
+to find out what all these new types mean.
+I have dealt with <code>ParamEnv</code> before, but <code>Binder</code>, <code>TraitPredicate</code> and <code>Obligation</code> are new to me.
+It looks like it's time to learn about some rustc internals. Nice!
+Learning about rustc internals usually means searching around in the
+<a href="https://rust-lang.github.io/rustc-guide/">rustc-guide</a> and in the <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/">rust compiler documentation</a>
+and putting all the information together.</p>
+<div class="explain">
+  <h2>ⓘ New concepts</h2>
+<h4>ParamEnv</h4>
+  <blockquote>
+  ParamEnv is short for Parameter Environment. It contains information about the
+  trait bounds. It can be used to check whether a type implements a certain
+  trait, for example.
+  <br/><br/>
+  <cite>
+    Source: <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/ty/struct.ParamEnv.html">rustc::ty::ParamEnv</a>
+  </cite>
+  </blockquote>
+<h4>Binder</h4>
+  <blockquote>
+  As I understand it, a `Binder` associates variables with arguments where they were defined. For
+  example in the closure `|a, b| a + b`, the `a` and `b` in the `a + b ` are bound to the closure,
+  and the closure signature `|a, b|` is a binder for the names `a` and
+  `b`.<br/>
+  This also applies to lifetime parameters.
+  <br/><br/>
+  <cite>
+    Sources:
+    <ul>
+      <li><a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/ty/struct.Binder.html">rustc::ty::Binder</a></li>
+      <li><a href="https://rust-lang.github.io/rustc-guide/appendix/background.html#free-vs-bound">rustc-guide: Free vs. Bound regions</a></li>
+      <li><a href="https://rust-lang.github.io/rustc-guide/appendix/glossary.html?highlight=binder#appendix-c-glossary">rustc-guide: Glossary</a></li>
+    </ul>
+  </cite>
+  </blockquote>
+<h4>TraitPredicate</h4>
+  <blockquote>
+  A predicate related to traits. A predicate in the rust type system describes
+  something about the given type. For example, whether it is well formed, object
+  safe or a subtype with another type.
+  As far as I understand it, a TraitPredicate is a predicate that says whether a
+  type implements a given trait.
+  <br/><br/>
+  <cite>
+    Source: <a href="https://rust-lang.github.io/rustc-guide/ty.html?highlight=predicate#beyond-types-other-kinds-of-arena-allocated-data-structures">rustc-guide: Ty</a>
+  </cite>
+  </blockquote>
+<h4>Obligation</h4>
+  <blockquote>
+  An Obligation represents some trait reference (e.g. int:Eq) for which the
+  vtable must be found. The process of finding a vtable is called "resolving"
+  the Obligation. This process consists of either identifying an impl (e.g.,
+  impl Eq for int) that provides the required vtable, or else finding a bound
+  that is in scope.
+  <br/><br/>
+  <cite>
+    Source: <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_infer/traits/struct.Obligation.html">rustc_infer::traits::Obligation</a>
+  </cite>
+  </blockquote>
+<h4>vtable</h4>
+  <blockquote>
+  A vtable is a struct that contains the function pointers to the trait's
+  associated functions. The pointers point directly to the concrete machine code
+  for each method in the implementation.
+  <br/><br/>
+  <cite>
+    Source: <a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_infer/traits/enum.ImplSource.html">rustc::traits::vtable</a>
+  </cite>
+  </blockquote>
+</div>
+<p>With all that in mind, let's review our debug output again:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#c0c5ce;">cx.param_env: ParamEnv { caller_bounds: [
+    Binder(TraitPredicate(&lt;S as Bar&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, ()&gt;&gt;)), Binder(TraitPredicate(&lt;S as std::marker::Sized&gt;))
+  ], reveal: UserFacing }
+ty: &amp;S
+obligation: Obligation(predicate=Binder(TraitPredicate(&lt;&amp;S as Bar&lt;()&gt;&gt;)),depth=</span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">)
+ty_params: [()]
+</span></code></pre>
+<p>What's especially interesting about our debug output is that the <code>Obligation</code>
+contains a <code>TraitPredicate</code> that is different to the <code>Obligation</code> in the
+<code>ParamEnv</code>:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#65737e;">// Our self-built TraitPredicate:
+</span><span style="color:#c0c5ce;">TraitPredicate(&lt;&amp;S as Bar&lt;()&gt;&gt;)
+
+</span><span style="color:#65737e;">// The TraitPredicate in ParamEnv:
+</span><span style="color:#c0c5ce;">TraitPredicate(&lt;S as Bar&lt;</span><span style="color:#b48ead;">&#39;b</span><span style="color:#c0c5ce;">, ()&gt;&gt;)
+</span></code></pre>
+<p>The reason for that is probably that we build the <code>Obligation</code> in the lint code
+ourselves, while the <code>ParamEnv</code> is the one of the actual test case.</p>
+<hr />
+<p>At this point I have been looking into this bug for more than two weeks in my
+free time. I have to say thanks to <a href="https://github.com/arielb1">@arielb1</a> who pointed me in the <a href="https://github.com/rust-lang/rust-clippy/issues/2831#issuecomment-425732417">right
+direction</a> after I <a href="https://github.com/rust-lang/rust/pull/54679">improved the output</a> of this ICE in rust.</p>
+<hr />
+<h1 id="fixing-the-bug">Fixing the bug</h1>
+<p>@arielb1 <a href="https://github.com/rust-lang/rust-clippy/issues/2831#issuecomment-425732417">confirmed my suspicion</a>: The <code>TraitPredicate</code> in the
+Obligation should contain the lifetime, too:</p>
+<blockquote>
+<p>It calls <code>input_types</code>, which drops the lifetime parameters out of <code>Bar</code>,
+turning an OK <code>&lt;S as Bar&lt;'b, ()&gt;&gt;</code> trait-ref into a not-OK <code>&lt;&amp;S as Bar&lt;()&gt;&gt;</code>
+trait ref. The not OK trait-ref has its indexes wrong because it's missing a
+lifetime - at index 0, it should have a lifetime, not a type. So you get an
+ICE.</p>
+</blockquote>
+<p>With that information, the fix was only a few hours away and turned out as a 9
+line change:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-diff" data-lang="diff"><span style="color:#c0c5ce;">diff --git a/clippy_lints/src/needless_pass_by_value.rs b/clippy_lints/src/needless_pass_by_value.rs
+index 980e2c28a..73d59d7a3 100644
+--- a/clippy_lints/src/needless_pass_by_value.rs
++++ b/clippy_lints/src/needless_pass_by_value.rs
+@@ -174,15 +174,14 @@ </span><span style="color:#8fa1b3;">impl&lt;&#39;a, &#39;tcx&gt; LateLintPass&lt;&#39;a, &#39;tcx&gt; for NeedlessPassByValue {
+</span><span style="color:#c0c5ce;">                 (
+                     preds.iter().any(|t| t.def_id() == borrow_trait),
+                     !preds.is_empty() &amp;&amp; preds.iter().all(|t| {
+</span><span style="color:#a3be8c;">+                        let ty_params = &amp;t.skip_binder().trait_ref.substs.iter().skip(1)
++                            .cloned()
++                            .collect::&lt;Vec&lt;_&gt;&gt;();
+</span><span style="color:#c0c5ce;">                         implements_trait(
+                             cx,
+                             cx.tcx.mk_imm_ref(&amp;RegionKind::ReErased, ty),
+                             t.def_id(),
+</span><span style="color:#bf616a;">-                            &amp;t.skip_binder()
+-                                .input_types()
+-                                .skip(1)
+-                                .map(|ty| ty.into())
+-                                .collect::&lt;Vec&lt;_&gt;&gt;(),
+</span><span style="color:#a3be8c;">+                            ty_params
+</span><span style="color:#c0c5ce;">                         )
+                     }),
+                 )
+</span></code></pre>
+<p>You may wonder how this is fixing the issue exactly. We first removed the
+<a href="https://doc.rust-lang.org/nightly/nightly-rustc/rustc_middle/ty/struct.TraitRef.html#method.input_types">input_types()</a> call. This means we have to find a replacement to
+get the collection of lifetimes and type parameters for the given trait
+reference <code>t</code>.</p>
+<p>Let's have a look at the source of <code>input_types()</code> and see how it gets the type
+parameters of the trait reference:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#b48ead;">pub fn </span><span style="color:#8fa1b3;">input_types</span><span style="color:#c0c5ce;">&lt;</span><span style="color:#b48ead;">&#39;a</span><span style="color:#c0c5ce;">&gt;(&amp;</span><span style="color:#b48ead;">&#39;a </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">) -&gt; impl DoubleEndedIterator&lt;Item=Ty&lt;</span><span style="color:#b48ead;">&#39;tcx</span><span style="color:#c0c5ce;">&gt;&gt; + </span><span style="color:#b48ead;">&#39;a </span><span style="color:#c0c5ce;">{
+    </span><span style="color:#65737e;">// Select only the &quot;input types&quot; from a trait-reference. For
+    // now this is all the types that appear in the
+    // trait-reference, but it should eventually exclude
+    // associated types.
+    </span><span style="color:#bf616a;">self</span><span style="color:#c0c5ce;">.substs.</span><span style="color:#96b5b4;">types</span><span style="color:#c0c5ce;">()
+}
+</span></code></pre>
+<p><a href="https://rust-lang.github.io/rustc-guide/ty.html?highlight=substs#beyond-types-other-kinds-of-arena-allocated-data-structures">Substs</a> is what we're looking for. It contains the different parameters
+of the type, including lifetimes. For example the <code>substs</code> of a <code>HashMap&lt;i32, i32&gt;</code> would more or less look like this: <code>&amp;[tcx.types.i32, tcx.types.i32]</code>.</p>
+<p>In our example, <code>S: Foo&lt;'b, ()&gt;</code>, that would be <code>[S, ReEarlyBound(0, 'b), ()]</code>.
+The first element is the name of the type parameter, <code>S</code>. The second one is the
+name of the lifetime, <code>'b</code>. The last one is unit.</p>
+<p>Calling <code>substs.types()</code> on <code>S: Foo&lt;'b, ()&gt;</code> will result in <code>[()]</code>. However,
+using <code>substs</code> directly, gives us what we want: <code>[S, ReEarlyBound(0, 'b), ()]</code>.
+Instead of calling <code>types()</code> on substs, we just iterate over the <code>substs</code>
+directly and avoid the crash.</p>
+<p>With the crash fixed, this concludes the post. I hope you were able to learn
+something new from this. Maybe I also inspired you to have a go at working on
+Clippy. If that's the case I encourage you to look through the <a href="https://github.com/rust-lang/rust-clippy/labels/good%20first%20issue">good first
+issue</a> label, pick one that seems easy to you and dig in =)</p>
+<p>You can find the final PR <a href="https://github.com/rust-lang/rust-clippy/pull/3248">here</a>.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+[
+  {
+    "title": "The Design of Everyday Things",
+    "author": "Don Norman",
+    "pages": "368"
+  },
+  {
+    "title": "A Programmer's Introduction to Mathematics",
+    "author": "Jeremy Kun",
+    "pages": "363"
+  },
+  {
+    "title": "Programming with Higher-Order Logic",
+    "author": "Dale Miller and Gopalan Nadathur",
+    "pages": "306"
+  },
+  {
+    "title": "Foundation Trilogy (Foundation, Foundation and Empire, Second Foundation)",
+    "author": "Isaac Asimov",
+    "pages": "881",
+    "readDate": "May 2020 - current"
+  },
+  {
+    "title": "Programming Rust",
+    "author": "Jim Blandy and Jason Orendorff",
+    "readDate": "February 2018 - September 2018",
+    "pages": "598"
+  },
+  {
+    "title": "Grit: The Power of Passion and Perseverance",
+    "readDate": "January 2018",
+    "author": "Angela Duckworth",
+    "pages": "353"
+  },
+  {
+    "title": "The Leprechauns of Software Engineering",
+    "readDate": "December 2017 - January 2018",
+    "author": "Laurent Bossavit",
+    "pages": "183"
+  },
+  {
+    "title": "The Unwritten Laws of Engineering",
+    "readDate": "December 2016",
+    "author": "Skakoon, James G.",
+    "pages": "69"
+  },
+  {
+    "title": "Practical Object Oriented Design in Ruby",
+    "readDate": "May/June 2014",
+    "author": "Sandi Metz",
+    "pages": "247"
+  },
+  {
+    "title": "Jump Start JavaScript",
+    "readDate": "May 2014",
+    "author": "Ara Pehlivanian and Don Nguyen",
+    "pages": "184"
+  },
+  {
+    "title": "The Passionate Programmer",
+    "readDate": "Feb 2014",
+    "author": "Chad Fowler",
+    "pages": "232"
+  },
+  {
+    "title": "Rails Anti Patterns",
+    "readDate": "Feb 2014",
+    "author": "Chad Pytel",
+    "pages": "400"
+  },
+  {
+    "title": "Design Patterns in Ruby",
+    "readDate": "Jan 2014",
+    "author": "Russ Olsen",
+    "pages": "386"
+  },
+  {
+    "title": "Apprenticeship Patterns",
+    "readDate": "Jan 2014",
+    "author": "Dave Hoover",
+    "pages": "166"
+  },
+  {
+    "title": "Cybersexism",
+    "readDate": "Dec 2013",
+    "author": "Laurie Penny",
+    "pages": "42"
+  },
+  {
+    "title": "Beginning DirectX 10 Game Programming",
+    "readDate": "2011",
+    "author": "Wendy Jones",
+    "pages": "367"
+  },
+  {
+    "title": "Code Complete",
+    "readDate": "2010",
+    "author": "Steve McConnell",
+    "pages": "940"
+  }
+]

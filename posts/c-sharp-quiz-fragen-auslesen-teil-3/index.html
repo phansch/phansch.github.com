@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>C# Quiz - Fragen auslesen (Teil 3)</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="C# Quiz - Fragen auslesen (Teil 3)">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">C# Quiz - Fragen auslesen (Teil 3)</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;c-sharp-quiz-fragen-auslesen-teil-3&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2010-07-22">22 Jul 2010</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  6  min read
+</em>
+      </p>
+      <div class="e-content"><p>Im <a href="http://phansch.net/2010/07/22/c-sharp-quiz-vorbereitung-teil-2">vorherigen Tutorialteil</a> haben wir das Fragebogenformular gebaut. Nun wollen wir die Fragen auslesen lassen.</p>
+<p>Bevor wir die Fragen auslesen und darstellen können, müssen wir uns die Frage stellen, ob wir bei einem einfachen Textformat bleiben wollen. So hat das .xml Format den Vorteil, dass es sich leichter in andere Formate umwandeln lässt. Eine Datenbank hätte den Vorteil, dass man Fragen und Antworten an einem zentralen Ort speichern kann.
+Dass das .xml Format und eine Datenbank einige Vorteile gegenüber einer einfachen Textdatei haben, liegt klar auf der Hand. Doch für welches Format sollte man sich entscheiden?</p>
+<p>Mit dem .net Framework 3.5 gibt es eine neue Möglichkeit zur Abfrage von Datenquellen wie XML-Dateien oder Datenbanken: <em>LINQ</em>. Mit LINQ ist es möglich .xml Datenquellen und SQL Server Datenbankobjekte auszulesen und zu bearbeiten. Da ein SQL Server deutlich mehr Konfiguration und Wartung bedarf als eine einfache .xml Datei, werden wir für dieses Projekt .xml Dateien verwenden.</p>
+<p>Zunächst müssen die Fragen also in eine XML Struktur umgewandelt werden.
+(Der Download zur Fragen.xml wurde entfernt, da die Datei nicht mehr existiert)</p>
+<h2 id="die-klasse-questions">Die Klasse <em>Questions</em></h2>
+<p>Nun brauchen wir eine Klasse, die die Fragen ausließt.</p>
+<p>Diese Klasse hat zunächst folgendes Grundgerüst:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">using </span><span style="color:#c0c5ce;">System;
+</span><span style="color:#b48ead;">using </span><span style="color:#c0c5ce;">System.Xml.Linq;
+</span><span style="color:#b48ead;">using </span><span style="color:#c0c5ce;">System.Linq;
+
+</span><span style="color:#b48ead;">namespace </span><span style="color:#c0c5ce;">CSharpQuiz
+{
+    </span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">QuizXml
+    </span><span style="color:#eff1f5;">{
+        </span><span style="color:#b48ead;">public string </span><span style="color:#bf616a;">Path </span><span style="color:#eff1f5;">{ </span><span style="color:#b48ead;">get</span><span style="color:#eff1f5;">; </span><span style="color:#b48ead;">set</span><span style="color:#eff1f5;">; }
+        </span><span style="color:#b48ead;">public </span><span style="color:#eff1f5;">XName </span><span style="color:#bf616a;">xmlElement </span><span style="color:#eff1f5;">{ </span><span style="color:#b48ead;">get</span><span style="color:#eff1f5;">; </span><span style="color:#b48ead;">set</span><span style="color:#eff1f5;">; }
+        </span><span style="color:#b48ead;">public </span><span style="color:#eff1f5;">XName </span><span style="color:#bf616a;">xmlSub </span><span style="color:#eff1f5;">{ </span><span style="color:#b48ead;">get</span><span style="color:#eff1f5;">; </span><span style="color:#b48ead;">set</span><span style="color:#eff1f5;">; }
+        </span><span style="color:#b48ead;">public string</span><span style="color:#eff1f5;">[] </span><span style="color:#bf616a;">arr_data </span><span style="color:#eff1f5;">{ </span><span style="color:#b48ead;">get</span><span style="color:#eff1f5;">; </span><span style="color:#b48ead;">set</span><span style="color:#eff1f5;">; }
+
+        </span><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        /// Returns the number of questions wich are stored in the .xml file
+        /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        public int Count { get; }
+
+        /// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        /// Fills the array with the questions, found in the.xml file
+        /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        public virtual void PopulateArray() {}
+
+        /// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        /// Expands the array by one
+        /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        private void ExpandArray() {}
+    }
+    class Questions : QuizXml
+    {
+        public Questions() { }
+
+        /// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        /// Contains the questions in string format
+        /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        private string[] arr_questions;
+
+        /// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        /// Returns a question
+        /// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+        /// &lt;</span><span style="color:#bf616a;">param </span><span style="color:#d08770;">name</span><span style="color:#65737e;">=</span><span style="color:#a3be8c;">&quot;index&quot;</span><span style="color:#65737e;">&gt;Index of the question to be returned&lt;/</span><span style="color:#bf616a;">param</span><span style="color:#65737e;">&gt;
+        /// &lt;</span><span style="color:#bf616a;">returns</span><span style="color:#65737e;">&gt;string question&lt;/</span><span style="color:#bf616a;">returns</span><span style="color:#65737e;">&gt;
+        public string this[int index] { get; }
+    }
+</span><span style="color:#eff1f5;">}
+</span></code></pre>
+<p>Der Konstruktor der abgeleiteten Klasse <em>Questions</em> legt sämtliche Properties fest und ruft die Methode <em>PopulateArray()</em> auf. Außerdem wird das Array initialisiert:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">public </span><span style="color:#bf616a;">Questions</span><span style="color:#c0c5ce;">()
+{
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data </span><span style="color:#c0c5ce;">= new </span><span style="color:#b48ead;">string</span><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">];
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Path </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Fragen.xml</span><span style="color:#c0c5ce;">&quot;;
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">xmlElement </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">fragen</span><span style="color:#c0c5ce;">&quot;;
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">xmlSub </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">frage</span><span style="color:#c0c5ce;">&quot;;
+
+    </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">PopulateArray</span><span style="color:#c0c5ce;">();
+
+    </span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_questions </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">base</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>Die Methode <em>PopulateArray()</em> liest die Fragen mittels <em>LINQ to XML</em> aus:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+/// Fills the array with the questions, found in the.xml file
+/// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+public virtual void PopulateArray()
+</span><span style="color:#c0c5ce;">{
+    XDocument </span><span style="color:#bf616a;">xdoc </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">XDocument</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Load</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Path</span><span style="color:#c0c5ce;">);
+
+    </span><span style="color:#b48ead;">var </span><span style="color:#bf616a;">query </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">from </span><span style="color:#bf616a;">xml </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">xdoc</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Elements</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">xmlElement</span><span style="color:#c0c5ce;">).</span><span style="color:#bf616a;">Elements</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">xmlSub</span><span style="color:#c0c5ce;">)
+                </span><span style="color:#b48ead;">select </span><span style="color:#bf616a;">xml</span><span style="color:#c0c5ce;">;
+
+    </span><span style="color:#b48ead;">foreach </span><span style="color:#c0c5ce;">(XElement </span><span style="color:#bf616a;">el </span><span style="color:#b48ead;">in </span><span style="color:#bf616a;">query</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#bf616a;">ExpandArray</span><span style="color:#c0c5ce;">();
+        </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">_id </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">Convert</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">ToInt32</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">el</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">FirstAttribute</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Value</span><span style="color:#c0c5ce;">);
+        </span><span style="color:#b48ead;">string </span><span style="color:#bf616a;">_question </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">el</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Value</span><span style="color:#c0c5ce;">;
+
+        </span><span style="color:#65737e;">//Add the question the array
+        </span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">_id</span><span style="color:#c0c5ce;">] = </span><span style="color:#bf616a;">_id </span><span style="color:#c0c5ce;">+ &quot;</span><span style="color:#a3be8c;">. </span><span style="color:#c0c5ce;">&quot; + </span><span style="color:#bf616a;">_question</span><span style="color:#c0c5ce;">;
+    }
+}
+</span></code></pre>
+<p>Damit das Array nicht überläuft, wird die Methode <em>ExpandArray()</em> aufgerufen. Die sorgt dafür, dass das Array um ein Element vergrößert wird.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+/// Expands the array by one
+/// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+private void ExpandArray()
+</span><span style="color:#c0c5ce;">{
+    </span><span style="color:#65737e;">//Creates a temporary array wich is +1 bigger than the original questions array
+    </span><span style="color:#b48ead;">string</span><span style="color:#c0c5ce;">[] </span><span style="color:#bf616a;">tempArray </span><span style="color:#c0c5ce;">= new </span><span style="color:#b48ead;">string</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Length </span><span style="color:#c0c5ce;">+ </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">];
+
+    </span><span style="color:#65737e;">//Original array gets copied to the temporary array
+    </span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">CopyTo</span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">tempArray</span><span style="color:#c0c5ce;">, </span><span style="color:#d08770;">0</span><span style="color:#c0c5ce;">);
+
+    </span><span style="color:#65737e;">//Temporary array gets assigned to the original array
+    </span><span style="color:#bf616a;">this</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">arr_data </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">tempArray</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>Die Eigenschaft <em>Count</em> gibt nur die Größe des Arrays zurück:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+/// Returns the number of questions wich are stored in the .xml file
+/// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+public int Count
+</span><span style="color:#c0c5ce;">{
+    </span><span style="color:#bf616a;">get
+    </span><span style="color:#c0c5ce;">{
+        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">arr_questions</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Length</span><span style="color:#c0c5ce;">;
+    }
+}
+</span></code></pre>
+<p>Zuletzt brauchen wir noch den Indexer:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#65737e;">/// &lt;</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+/// Returns a question
+/// &lt;/</span><span style="color:#bf616a;">summary</span><span style="color:#65737e;">&gt;
+/// &lt;</span><span style="color:#bf616a;">param </span><span style="color:#d08770;">name</span><span style="color:#65737e;">=</span><span style="color:#a3be8c;">&quot;index&quot;</span><span style="color:#65737e;">&gt;Index of the question to be returned&lt;/</span><span style="color:#bf616a;">param</span><span style="color:#65737e;">&gt;
+/// &lt;</span><span style="color:#bf616a;">returns</span><span style="color:#65737e;">&gt;string question&lt;/</span><span style="color:#bf616a;">returns</span><span style="color:#65737e;">&gt;
+public string this[int index]
+</span><span style="color:#c0c5ce;">{
+    </span><span style="color:#bf616a;">get
+    </span><span style="color:#c0c5ce;">{
+        </span><span style="color:#b48ead;">return </span><span style="color:#bf616a;">arr_questions</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">index</span><span style="color:#c0c5ce;">];
+    }
+}
+</span></code></pre><h2 id="anwendung-der-klasse-im-fragebogen">Anwendung der Klasse im Fragebogen</h2>
+<p>Aufgrund des Indexers können wir die Frage 1 mittels</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#c0c5ce;">Questions </span><span style="color:#bf616a;">q </span><span style="color:#c0c5ce;">= new Questions();
+</span><span style="color:#bf616a;">label_frage</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Text </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">q</span><span style="color:#c0c5ce;">[</span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">];
+</span></code></pre>
+<p>aufrufen. Der übergebene Wert steht für eine ID aus der Fragen.xml Datei. Deshalb müssen wir nicht bei 0 anfangen, sondern können die erste Frage auch mit <em>f[1]</em> ausgeben lassen. Wir benötigen auch einen <em>FragenIndex</em>, der zu Anfang auf 1 gesetzt wird.</p>
+<p>Die Methode ShowQuestion() lässt eine bestimmte Frage ausgeben und erhöht danach den FragenIndex. Wenn das Ende erreicht ist, wird die Methode <em>EndReached()</em> aufgerufen.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">ShowQuestion</span><span style="color:#c0c5ce;">()
+{
+    Questions </span><span style="color:#bf616a;">questions </span><span style="color:#c0c5ce;">= new Questions();
+    </span><span style="color:#b48ead;">if </span><span style="color:#c0c5ce;">(</span><span style="color:#bf616a;">questions</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Count </span><span style="color:#c0c5ce;">&gt; </span><span style="color:#bf616a;">questionIndex</span><span style="color:#c0c5ce;">)
+    {
+        </span><span style="color:#65737e;">//Display the question
+        </span><span style="color:#bf616a;">label_question</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Text </span><span style="color:#c0c5ce;">= </span><span style="color:#bf616a;">questions</span><span style="color:#c0c5ce;">[</span><span style="color:#bf616a;">questionIndex</span><span style="color:#c0c5ce;">];
+
+        </span><span style="color:#65737e;">//Increase the index
+        </span><span style="color:#bf616a;">questionIndex</span><span style="color:#c0c5ce;">++;
+    }
+    </span><span style="color:#b48ead;">else
+    </span><span style="color:#c0c5ce;">{
+        </span><span style="color:#bf616a;">EndReached</span><span style="color:#c0c5ce;">();
+    }
+}
+
+</span><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">EndReached</span><span style="color:#c0c5ce;">()
+{
+    </span><span style="color:#bf616a;">button_next</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Enabled </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">label_question</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Text </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">Ende des Fragebogens erreicht.</span><span style="color:#c0c5ce;">&quot;;
+    </span><span style="color:#bf616a;">button_restart</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Visible </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">true</span><span style="color:#c0c5ce;">;
+}
+</span></code></pre>
+<p>Wann soll nun eine neue Frage geladen werden?</p>
+<ul>
+<li>Beim Start des Programms</li>
+<li>Beim Klick auf den <em>Weiter-Button</em></li>
+</ul>
+<p>Dazu brauchen wir die zwei EventHandler <em>Form1_Load</em> und <em>button_weiter_Click</em>. Diese beiden EventHandler werden die Methode <em>ShowQuestion()</em> aufrufen.</p>
+<p>Wer den ersten Teil gelesen hat, wird sich an unsere definierten Anforderungen erinnern. <strong>Wir wollen den Test wiederholbar gestalten.</strong>
+Dazu müssen wir einen neuen Button in der Form hinzufügen:</p>
+<!--[![Fragebogen](http://wpimages.phansch.de/2010/06/quiz_form-150x150.jpg)](http://wpimages.phansch.de/2010/06/quiz_form.jpg)-->
+<p>Den Wiederholen Button setzen wir zunächst über die IDE auf <em>Visible = false</em>.</p>
+<p>Jetzt brauchen wir nur noch die Methode <em>Restart()</em>:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-cs" data-lang="cs"><span style="color:#b48ead;">private void </span><span style="color:#8fa1b3;">Restart</span><span style="color:#c0c5ce;">()
+{
+    </span><span style="color:#bf616a;">questionIndex </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">1</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">button_next</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Enabled </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">button_restart</span><span style="color:#c0c5ce;">.</span><span style="color:#bf616a;">Visible </span><span style="color:#c0c5ce;">= </span><span style="color:#d08770;">false</span><span style="color:#c0c5ce;">;
+    </span><span style="color:#bf616a;">ShowQuestion</span><span style="color:#c0c5ce;">();
+}
+</span></code></pre>
+<p><em>Restart()</em> wird über das Click-Event des Restart-Buttons aufgerufen.</p>
+<p>Wir haben nun eine dynamische Lösung zum Auslesen von .xml Dateien die entsprechend formatiert sind. Die Fragen können auch beliebig geändert werden. Im nächsten Teil dieser Reihe werden wir schauen, wie wir die Antworten bereitstellen können.</p>
+<p>Die bisherige Lösung als zip-Datei: Nicht mehr verfügbar.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

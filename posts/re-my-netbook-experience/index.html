@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>RE: My netbook experience</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="RE: My netbook experience">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">RE: My netbook experience</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;re-my-netbook-experience&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2012-12-28">28 Dec 2012</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  5  min read
+</em>
+      </p>
+      <div class="e-content"><p><a href="http://phansch.net/2012/01/01/my-netbook-experience/">A year ago</a>, I wrote about my first experiences with the <em>Asus EeePC 1215N</em>. It's time that I do another review of my netbook usage.</p>
+<p>I've been running Windows 8 for about two weeks before I removed it. I was unable to connect to my university's eduroam network due to faulty drivers. 
+Before that, my netbook was running on Windows 7. Running Windows 7 was quite effortless. The reason I gave Windows 8 a try was keyboard accessibility. The new <span class="key">Win</span> + <span class="key">X</span> keyboard shortcut is awesome. The new task manager and file transfer dialog are nice as well. But those just didn't cut it.</p>
+<p>The thing is, that my netbook crashed down <em>twice</em>, from 1m height. Because of that, my touch-pad broke and now it stops working a few minutes after start-up. With Windows, I had to bring a mouse with me every time I wanted to use the netbook for longer.
+After Windows 8, I decided to give Linux another try. I heard about <a href="http://xmonad.org">XMonad</a>, a tiling window manager, a couple times before, so it was time to reevaluate my netbook usage.</p>
+<h2 id="what-i-wanted">What I wanted</h2>
+<ul>
+<li>A fast and lightweight system</li>
+<li>Long battery life</li>
+<li>Simple application launcher</li>
+<li>Easy note-taking – without a distracting Internet browser</li>
+<li>Simple 2D game programming</li>
+<li>Everything should be accessible by the keyboard, due to a broken touch-pad</li>
+<li>As much screen real estate as possible</li>
+</ul>
+<h2 id="my-setup">My setup</h2>
+<h4 id="linux-mint-mate">Linux Mint (MATE)</h4>
+<p>Frankly, it doesn't really matter what distribution you are using. I opted for Linux Mint because it comes with proper media support and working wireless drivers. After trying the Cinnamon and the MATE desktop, I must say that the Cinnamon desktop felt a bit sluggish compared to the MATE desktop.
+I also tried a minimal Debian setup, but I couldn't get the wireless working. If wireless worked out of the box on Debian I probably would have sticked with it.</p>
+<h4 id="xmonad">XMonad</h4>
+<p>I have been using XMonad for over a month now. I really like it. There are no window decorations and there is no mouse required to do anything.
+Windows are closed with <span class="key">Win</span> + <span class="key">Shift</span> + <span class="key">C</span> and that's basically it. Depending on the current layout, the size of the active window can be increased with <span class="key">Win</span> + <span class="key">H</span> and decreased with <span class="key">Win</span> + <span class="key">L</span>. To switch between windows, I use <span class="key">Win</span> + <span class="key">Tab</span>.</p>
+<p>My XMonad config just adds a few custom keyboard shortcuts:</p>
+<ul>
+<li><span class="key">Win</span> + <span class="key">Shift</span> + <span class="key">Enter</span> open <code>gnome-terminal</code></li>
+<li><span class="key">Win</span> + <span class="key">Shift</span> + <span class="key">P</span> open <code>dmenu</code></li>
+<li><span class="key">Win</span> + <span class="key">Shift</span> + <span class="key">V</span> open <code>virtualbox</code></li>
+<li><span class="key">Win</span> + <span class="key">S</span> Shutdown </li>
+<li><span class="key">Win</span> + <span class="key">Shift</span> + <span class="key">S</span> Suspend</li>
+</ul>
+<p>If you want to see how XMonad can be used, take a look at the <a href="http://www.haskell.org/haskellwiki/Xmonad/Config_archive#Configs_for_the_current_XMonad_release_.280.9..2A.29">config archive</a>.</p>
+<h4 id="filesystem-access-to-google-drive">Filesystem access to Google Drive</h4>
+<p>Sadly there is no official Google Drive client for Linux. Therefore you have to rely on third party developers. 
+To access Google Drive on Linux, you have two options:</p>
+<ol>
+<li><a href="https://github.com/Grive/grive">Grive</a></li>
+<li><a href="https://www.insynchq.com/">Insync</a></li>
+</ol>
+<p>The main difference between both is that Grive doesn't sync automatically. You have to tell it to sync. Grive also doesn't support symbolic links.
+Insync, on the other hand, is a fully functional Google Drive client. Although, the GUI is not working for me. I just keep the application running in the background and it will do the syncing. </p>
+<h4 id="sublime-text-2-for-writing-and-web-stuff">Sublime Text 2 for writing and web stuff</h4>
+<p>I <a href="http://phansch.net/2012/12/12/running-love2d-from-sublimetext2-on-windows">recently</a> talked about setting up custom Build Systems for Sublime Text 2. Currently I have a build system to build a Love2D project, one for <code>pdflatex</code> and a build system to preview a markdown file in google chrome. I have a small set of shortcuts that I regularly use. I think they are common knowledge, but here are they anyway:</p>
+<ul>
+<li><span class="key">Shift</span> + <span class="key" title="Right Mouse Button">RMB</span> to select columns</li>
+<li><span class="key">Shift</span> + <span class="key">Alt</span> + <span class="key">up</span> or <span class="key">down</span> to select columns</li>
+<li><span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">P</span> to open the Command Palette</li>
+<li><span class="key">Ctrl</span> + <span class="key">B</span> to use the current build system on the current file.</li>
+<li><span class="key">F6</span> for spell-checking</li>
+</ul>
+<p>I also put the settings for ST2 on Google Drive. On a new machine, I can then create symlinks to Google Drive and have the settings and plugins quickly available.</p>
+<h4 id="netbeans-for-java-programming-class">NetBeans for Java programming class</h4>
+<p>While Sublime Text 2 is an awesome piece of software, I am pretty lazy. At some point, I want to use ST2 to do all the Java stuff for university.
+Until then, I'll be using NetBeans. In NetBeans I got rid of a lot of unnecessary UI. I also disabled a lot of plugins to make NetBeans start up faster. It still takes 20 seconds, but that was a huge improvement already.</p>
+<h2 id="what-requires-fixing">What requires fixing</h2>
+<p>There are a couple things left to do, that could save some time. </p>
+<ul>
+<li>My git login is not saved to the gnome keyring. Have to login for every push</li>
+<li>I still struggle with navigating websites by keyboard. </li>
+<li>Use Sublime Text to work on Java assignments.</li>
+<li>A few Google Chrome plugins don't sync their settings.</li>
+</ul>
+<hr />
+<p>To wrap things up, I can say that I am really happy with my setup. It was a bumpy road to get there but I think it pays off. The battery lasts for around 4 hours with wireless. For note-taking I use Sublime Text 2 and save notes as markdown. With XMonad, pretty much everything is accomplishable by keyboard shortcuts. And I finally have enough screen space available to do some programming on my netbook.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "discovery",
+    "url": "https://github.com/rust-embedded/discovery"
+  },
+  {
+    "name": "highfive",
+    "url": "https://github.com/rust-lang/highfive"
+  },
+  {
+    "name": "http-types",
+    "url": "https://github.com/http-rs/http-types"
+  },
+  {
+    "name": "tide",
+    "url": "https://github.com/http-rs/tide"
+  },
+  {
+    "name": "ansible-role-chruby",
+    "url": "https://github.com/ferrarimarco/ansible-role-chruby"
+  },
+  {
+    "name": "rust-ecosystem",
+    "url": "https://github.com/EmbarkStudios/rust-ecosystem"
+  },
+  {
+    "name": "rustc-test",
+    "url": "https://github.com/messense/rustc-test"
+  },
+  {
+    "name": "annotate-snippets-rs",
+    "url": "https://github.com/rust-lang/annotate-snippets-rs"
+  },
+  {
+    "name": "book",
+    "url": "https://github.com/rust-lang/book"
+  },
+  {
+    "name": "jsonapi-rust",
+    "url": "https://github.com/michiel/jsonapi-rust"
+  },
+  {
+    "name": "compiletest-rs",
+    "url": "https://github.com/laumann/compiletest-rs"
+  },
+  {
+    "name": "hubcaps",
+    "url": "https://github.com/softprops/hubcaps"
+  },
+  {
+    "name": "internals.rust-lang.org",
+    "url": "https://internals.rust-lang.org/"
+  },
+  {
+    "name": "libsyntax2",
+    "url": "https://github.com/matklad/libsyntax2"
+  },
+  {
+    "name": "maud",
+    "url": "https://github.com/lfairy/maud"
+  },
+  {
+    "name": "maud-book",
+    "url": "https://github.com/lfairy/maud-book"
+  },
+  {
+    "name": "mdBook",
+    "url": "https://github.com/rust-lang-nursery/mdBook"
+  },
+  {
+    "name": "reference",
+    "url": "https://github.com/rust-lang-nursery/reference"
+  },
+  {
+    "name": "rust",
+    "url": "https://github.com/rust-lang/rust"
+  },
+  {
+    "name": "rust-clippy",
+    "url": "https://github.com/rust-lang/rust-clippy"
+  },
+  {
+    "name": "rustc-dev-guide",
+    "url": "https://github.com/rust-lang-nursery/rustc-dev-guide"
+  },
+  {
+    "name": "rustfix",
+    "url": "https://github.com/rust-lang-nursery/rustfix"
+  },
+  {
+    "name": "rustfmt",
+    "url": "https://github.com/rust-lang/rustfmt"
+  },
+  {
+    "name": "tide",
+    "url": "https://github.com/rustasync/tide"
+  },
+  {
+    "name": "unidiff-rs",
+    "url": "https://github.com/messense/unidiff-rs"
+  },
+  {
+    "name": "vim-snippets",
+    "url": "https://github.com/honza/vim-snippets"
+  },
+  {
+    "name": "www.rust-lang.org",
+    "url": "https://github.com/rust-lang/www.rust-lang.org"
+  }
+]

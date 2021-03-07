@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Steam auf Ubuntu Linux</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Steam auf Ubuntu Linux">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Steam auf Ubuntu Linux</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;steam-auf-ubuntu-linux&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2010-07-06">06 Jul 2010</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  1  min read
+</em>
+      </p>
+      <div class="e-content"><p>Counter Strike und viele andere Spiele sind auf Linux schon länger kein Problem mehr. In diesem Tutorial wird beschrieben, wie man Steam unter <a href="http://www.ubuntu.com/">Ubuntu</a> Linux installiert.</p>
+<p>Zunächst wird <a href="http://www.winehq.org/">Wine</a> benötigt, um Windows Programme auszuführen:</p>
+<p>Um die aktuelle Version von Wine zu installieren, werden der Reihe nach diese Befehle in das Terminal eingegeben:</p>
+<pre style="background-color:#2b303b;">
+<code>#Wine Quellen hinzufügen
+sudo add-apt-repository ppa:ubuntu-wine/ppa
+
+#Quellen aktualisieren
+sudo apt-get update
+
+#Wine installieren
+sudo apt-get install wine
+</code></pre>
+<p>Anschließend wird <a href="http://wiki.winehq.org/winetricks">winetricks</a> installiert um Steam schnell und problemlos zu installieren zu können:</p>
+<pre style="background-color:#2b303b;">
+<code>wget http://www.kegel.com/wine/winetricks
+</code></pre>
+<p>Nun können wir Steam bequem über winetricks installieren:</p>
+<pre style="background-color:#2b303b;">
+<code>sh winetricks steam
+</code></pre>
+<p>Steam sollte nach der Installation problemlos funktionieren.
+Für viele Steam Spiele, wie z.B. Counter Strike 1.6, werden übrigens die proprietären 3D Treiber der entsprechenden Hersteller benötigt.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Rift macro system</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="The Rift macro system">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">The Rift macro system</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;the-rift-macro-system&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2012-02-03">03 Feb 2012</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><p>As you may or may not know, I have a gaming section over at games.phansch.de (no longer maintained) where I keep stuff for various games.
+Most importantly, I wrote a macro translator that translates Rift macros written in English, to German and the other way around. Today, I want to talk about the pitfalls of Rift's macro and command system and possible solutions. </p>
+<h3 id="introduction">Introduction</h3>
+<p>When I started playing Rift, I would usually use the English client because I preferred the English forums over the German forums for its up-to-date guides and tutorials. Still, I was playing on a German server because I preferred to play with people who speak my native language (being lazy here!).</p>
+<p>As mentioned, I was always more in touch with the international community than the German community, except for my guild. I was <a href="https://phansch.net/posts/the-rift-macro-system/#">quite active on telarapedia (link dead unfortunately)</a>, for example. The downside of using the English client was, that communicating with my guild was sometimes difficult. So I eventually switched to the German client. And here the trouble begins.</p>
+<p>I quickly noticed that all my macros stopped working. Apparently Trion localized parts of the macro syntax into German! So I started to figure out what was going on ~</p>
+<h3 id="what-s-so-wrong">What’s so wrong</h3>
+<p>The way Rift macros are localized into the additional supported languages (German and French) is kind of weird.</p>
+<p>First of all, when using a localized client, the macro system expects the localized ability/item names, not the English ones, which is fine. Furthermore, certain key modifiers have been localized. For example, <em>[ctrl]</em> becomes <em>[strg]</em> in German. And most importantly all the emotes are localized.</p>
+<p>And here the real trouble begins. Some parts aren't localized. Take the _/cas_t command. It works in the German client as well and there doesn't seem to be a translation for it. As well as the <em>suppressmacrofailures</em> command. However, there once was a German translation available for it but stopped working a few updates ago.</p>
+<!--[![](http://wpimages.phansch.de/2012/02/macro.jpg)](http://wpimages.phansch.de/2012/02/macro.jpg)-->
+<p>Then there are certain emotes in the German client that allow you to use both the English and the German command: <em>/dance</em> and <em>/tanzen</em> will both work in the German client! These are just a few examples I stumbled across when I was writing up the <a href="http://telarapedia.gamepedia.com/Commands">Commandlist</a> over at Telarapedia during beta. </p>
+<h3 id="possible-solutions">Possible solutions</h3>
+<p>The most obvious solution would be for Trion to streamline the command and macro system. Adding a documentation of what is possible and what isn't, is needed anyway. The <em>/help</em> command which just prints the list of commands is just not enough. However, that will require a lot of work. And the small macro system probably isn't worth the work. It works fine, as long as people don't change the client language.</p>
+<p>For me, there's also the option to move to an English speaking server. And I might end up doing that soon.</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

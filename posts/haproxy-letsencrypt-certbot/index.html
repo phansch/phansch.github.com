@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Setting up SSL Certificates for HAProxy with certbot</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Setting up SSL Certificates for HAProxy with certbot">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Setting up SSL Certificates for HAProxy with certbot</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;haproxy-letsencrypt-certbot&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2017-10-18">18 Oct 2017</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  4  min read
+</em>
+      </p>
+      <div class="e-content"><p>Here's how to automatically setup SSL Certificates for <a href="http://www.haproxy.org/">HAProxy</a> using <a href="https://certbot.eff.org/">certbot</a> and <a href="https://letsencrypt.org/">Let's Encrypt</a>, without having to restart HAProxy.</p>
+<p>This article assumes that you have certbot already installed and HAProxy already running.</p>
+<h2 id="certbot-command">Certbot command</h2>
+<p>As we are using HAProxy, we can't just run <code>sudo certbot --haproxy</code> like for nginx because certbot doesn't officially support HAProxy, yet. Instead we have to use the <code>certonly</code> command and the <code>--standalone</code> option to run a standalone webserver.</p>
+<p>We also want to include the certbot command in a script later on, so we need to supply all further options via the command line. The basic certbot command we will use, looks like this:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">certbot</span><span style="color:#c0c5ce;"> certonly</span><span style="color:#bf616a;"> --standalone --agree-tos --non-interactive </span><span style="color:#c0c5ce;">\
+</span><span style="color:#bf616a;">-m</span><span style="color:#c0c5ce;"> yourmail@host.org</span><span style="color:#bf616a;"> -d</span><span style="color:#c0c5ce;"> domain
+</span></code></pre>
+<p>If you try to run the command on the machine where HAProxy is running, it will tell you that port 80 is already in use, because that's the port HAProxy is listening on.
+To circumvent that, we will have to tell the standalone server to use another port:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">certbot</span><span style="color:#c0c5ce;"> certonly</span><span style="color:#bf616a;"> --standalone --agree-tos --non-interactive </span><span style="color:#c0c5ce;">\
+</span><span style="color:#bf616a;">-m</span><span style="color:#c0c5ce;"> yourmail@host.org</span><span style="color:#bf616a;"> -d</span><span style="color:#c0c5ce;"> domain</span><span style="color:#bf616a;"> --preferred-challenges</span><span style="color:#c0c5ce;"> http \
+</span><span style="color:#bf616a;">--http-01-port</span><span style="color:#c0c5ce;"> 9785
+</span></code></pre>
+<p>We will also have to tell certbot to keep the certificate until it expires and that it should be renewed when we add new domains to it:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">certbot</span><span style="color:#c0c5ce;"> certonly</span><span style="color:#bf616a;"> --standalone --agree-tos --non-interactive </span><span style="color:#c0c5ce;">\
+</span><span style="color:#bf616a;">-m</span><span style="color:#c0c5ce;"> yourmail@host.org</span><span style="color:#bf616a;"> -d</span><span style="color:#c0c5ce;"> domain</span><span style="color:#bf616a;"> --preferred-challenges</span><span style="color:#c0c5ce;"> http \
+</span><span style="color:#bf616a;">--http-01-port</span><span style="color:#c0c5ce;"> 9785</span><span style="color:#bf616a;"> --renew-with-new-domains </span><span style="color:#c0c5ce;">\
+</span><span style="color:#bf616a;">--keep-until-expiring
+</span></code></pre>
+<p>With the certbot part out of the way, we can continue with the HAProxy configuration.</p>
+<h2 id="haproxy-configuration">HAProxy configuration</h2>
+<p>For HAProxy, we begin with setting up a minimal SSL configuration for our example frontend:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-conf" data-lang="conf"><span style="color:#bf616a;">frontend </span><span style="color:#c0c5ce;">www-https
+  </span><span style="color:#bf616a;">bind </span><span style="color:#c0c5ce;">*:</span><span style="color:#d08770;">443</span><span style="color:#c0c5ce;"> ssl crt /etc/haproxy/ssl-certs/cert.pem
+  </span><span style="color:#bf616a;">reqadd </span><span style="color:#c0c5ce;">X-Forwarded-Proto:\ https
+</span></code></pre>
+<p>We will also tell HAProxy to direct all requests to the standalone webserver to the correct port of the standalone webserver.</p>
+<p>Our frontend is now done and looks like this:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-conf" data-lang="conf"><span style="color:#c0c5ce;">
+</span><span style="color:#bf616a;">frontend </span><span style="color:#c0c5ce;">www-https
+  </span><span style="color:#bf616a;">bind </span><span style="color:#c0c5ce;">*:</span><span style="color:#d08770;">443</span><span style="color:#c0c5ce;"> ssl crt /etc/haproxy/ssl-certs/cert.pem
+  </span><span style="color:#bf616a;">reqadd </span><span style="color:#c0c5ce;">X-Forwarded-Proto:\ https
+
+  # Let the letsencrypt backend handle requests to the
+  # acme-challenge url
+  </span><span style="color:#bf616a;">acl </span><span style="color:#c0c5ce;">letsencrypt-req path_beg /.well-known/acme-challenge/
+  </span><span style="color:#bf616a;">use_backend </span><span style="color:#c0c5ce;">letsencrypt </span><span style="color:#b48ead;">if</span><span style="color:#c0c5ce;"> letsencrypt-req
+
+  </span><span style="color:#65737e;"># ... etc.
+
+</span></code></pre>
+<p>The letsencrypt backend sets the server to the local certbot standalone server:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-sh" data-lang="sh"><span style="color:#bf616a;">backend</span><span style="color:#c0c5ce;"> letsencrypt
+   </span><span style="color:#bf616a;">server</span><span style="color:#c0c5ce;"> letsencrypt 127.0.0.1:9785
+</span></code></pre>
+<p>Be sure to validate the config with <code>haproxy -c -f /path/to/your/haproxy.cfg</code> to check for mistakes.</p>
+<p>Now we can reload the HAProxy config and try to run the certbot command from above again. It should work, but we aren't done yet.</p>
+<h2 id="putting-it-all-together">Putting it all together</h2>
+<p>The next step is to create a script that will execute the certbot command and copy the generated certificate to the directory where HAProxy is looking for it.</p>
+<p>The script will be called <code>cert_renew</code> and it will take a list of domains as an argument.</p>
+<pre style="background-color:#2b303b;">
+<code class="language-sh" data-lang="sh"><span style="color:#65737e;">#!/bin/bash
+
+# This script takes a list of domains as arguments
+# and will setup a single certificate for all of them.
+
+</span><span style="color:#bf616a;">cert_name</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">generic_cert</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#bf616a;">haproxy_cert_dir</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">/etc/haproxy/ssl-certs</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#bf616a;">email</span><span style="color:#c0c5ce;">=&quot;</span><span style="color:#a3be8c;">you@host.org</span><span style="color:#c0c5ce;">&quot;
+
+</span><span style="color:#bf616a;">domains</span><span style="color:#c0c5ce;">=&quot;&quot;
+</span><span style="color:#b48ead;">for</span><span style="color:#c0c5ce;"> domain </span><span style="color:#b48ead;">in </span><span style="color:#c0c5ce;">&quot;$</span><span style="color:#bf616a;">@</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#b48ead;">do
+  </span><span style="color:#bf616a;">domains</span><span style="color:#c0c5ce;">+=&quot;</span><span style="color:#a3be8c;">-d </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">domain </span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#b48ead;">done
+
+</span><span style="color:#bf616a;">certbot</span><span style="color:#c0c5ce;"> certonly</span><span style="color:#bf616a;"> --standalone --agree-tos --non-interactive </span><span style="color:#c0c5ce;">\
+</span><span style="color:#bf616a;">-m </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">email --preferred-challenges</span><span style="color:#c0c5ce;"> http \
+</span><span style="color:#bf616a;">--http-01-port</span><span style="color:#c0c5ce;"> 9785</span><span style="color:#bf616a;"> --cert-name </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">cert_name </span><span style="color:#c0c5ce;">\
+</span><span style="color:#bf616a;">--renew-with-new-domains --keep-until-expiring </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">domains
+
+mkdir -p </span><span style="color:#c0c5ce;">$</span><span style="color:#bf616a;">haproxy_cert_dir
+
+</span><span style="color:#65737e;"># Combine the certificate chain and private key and put it
+# into the correct HAProxy directory
+</span><span style="color:#c0c5ce;">cd /etc/letsencrypt/live/$</span><span style="color:#bf616a;">cert_name
+cat</span><span style="color:#c0c5ce;"> fullchain.pem privkey.pem &gt; &quot;$</span><span style="color:#bf616a;">haproxy_cert_dir</span><span style="color:#a3be8c;">/cert.pem</span><span style="color:#c0c5ce;">&quot;
+
+</span><span style="color:#96b5b4;">echo </span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">Reloading haproxy</span><span style="color:#c0c5ce;">&quot;
+</span><span style="color:#bf616a;">sudo</span><span style="color:#c0c5ce;"> systemctl reload haproxy
+</span></code></pre>
+<p>Using it like <code>cert_renew domain1.org domain2.net</code> will setup one certificate for both domains at <code>/etc/haproxy/ssl-certs/cert.pem</code> and reload HAProxy.</p>
+<h2 id="setting-up-the-cronjob">Setting up the Cronjob</h2>
+<p>Next, we will save the script at <code>/usr/local/bin/cert_renew</code> and setup the cronjob, so that it runs twice per day:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-conf" data-lang="conf"><span style="color:#d08770;">5 7</span><span style="color:#c0c5ce;">,</span><span style="color:#d08770;">17 </span><span style="color:#c0c5ce;">* * * root /bin/bash -c </span><span style="color:#a3be8c;">&#39;/usr/local/bin/cert_renew domain1.io 2&gt;&amp;1 | /usr/bin/logger -t certbot&#39;
+</span></code></pre>
+<p>With that done, we only have to change the cronjob entry when we add new domains and never have to worry about expiring certificates again.</p>
+<h2 id="sources">Sources</h2>
+<p>This post builds on a few other blog posts which have been really helpful. These are:</p>
+<ul>
+<li><a href="https://blog.bigdinosaur.org/finally-moving-to-letsencrypt-with-haproxy-varnish-and-nginx/">This great post</a> by Lee Hutchinson</li>
+<li><a href="https://scotthelme.co.uk/lets-encrypt-smart-renew/">Scott Helme's post</a> and the comments below</li>
+<li><a href="https://skarlso.github.io/2017/02/15/how-to-https-with-hugo-letsencrypt-haproxy/">This post</a> by Skarlso, too</li>
+</ul>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

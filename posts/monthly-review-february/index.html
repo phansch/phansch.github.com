@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Monthly review: February</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="Monthly review: February">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">Monthly review: February</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;monthly-review-february&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2020-03-03">03 Mar 2020</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  2  min read
+</em>
+      </p>
+      <div class="e-content"><h2 id="sponsors">Sponsors</h2>
+<p>I'm incredibly thankful to the following people for sponsoring my open source
+work this past month: <a href="https://github.com/repi">@repi</a>, <a href="https://github.com/oli-obk">@oli-obk</a> and <a href="https://github.com/yaahc">@yaahc</a>.</p>
+<p>If you like what I'm doing and want to support my work, please consider
+sponsoring me on <a href="https://www.patreon.com/philhansch">Patreon</a> or <a href="https://phansch.net/thanks">via other
+means</a> 💙</p>
+<h2 id="what-i-ve-worked-on">What I've worked on</h2>
+<p>February has been quite a non-productive month from the outside. Maybe it's the
+winter blues finally catching up to me, but that's for the next section of the
+post.</p>
+<p>It indeed doesn't look like a lot in terms of merged PRs this month. The only
+merged PR is to the <code>rustc-guide</code> where I've added an <a href="https://github.com/rust-lang/rustc-guide/pull/590/files#diff-334e46ef0ebca8ba3936db3ac8ae0d7dR3">introductory
+section</a> to the <em>Name Resolution</em> chapter.</p>
+<p>I've been learning about name resolution in rustc because I've been looking into
+making some improvements to a rustc diagnostic that is emitted exactly during
+name resolution. So that instead of this:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#d08770;">12 </span><span style="color:#c0c5ce;">|  </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">_ = HashNap::new();
+   |          ^^^^^^^
+   |          |
+   |          </span><span style="color:#b48ead;">use</span><span style="color:#c0c5ce;"> of undeclared </span><span style="color:#b48ead;">type </span><span style="color:#c0c5ce;">or module `HashNap`
+</span></code></pre>
+<p>You will get an additional suggestion of the most likely alternative:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#d08770;">12 </span><span style="color:#c0c5ce;">|  </span><span style="color:#b48ead;">let </span><span style="color:#c0c5ce;">_ = HashNap::new();
+   |          ^^^^^^^
+   |          |
+   |          </span><span style="color:#b48ead;">use</span><span style="color:#c0c5ce;"> of undeclared </span><span style="color:#b48ead;">type </span><span style="color:#c0c5ce;">or module `HashNap`
+   |          help: a </span><span style="color:#b48ead;">struct </span><span style="color:#c0c5ce;">with a similar name exists: `HashMap`
+</span></code></pre>
+<p>This PR has taken most of my time and energy in February. I want to finish it
+this month and continue with work around name resolution.</p>
+<h2 id="reflections">Reflections</h2>
+<p>I did not get further into embedded development as I ran into issues with my
+tools, which I was hoping to avoid by jumping into embedded development.</p>
+<p>Instead of doing more embedded development, I've started looking into
+<code>librustc_resolve</code>. Specifically <a href="https://github.com/rust-lang/rust/pull/68850">a PR to improve some diagnostics</a>
+as mentioned above.  This PR has apparently triggered some sort of impostor
+feeling in me. While working on this PR I noticed two things:</p>
+<ol>
+<li>In the beginning I had absolutely no idea what <code>librustc_resolve</code> is about,
+lowering my confidence in completing this PR</li>
+<li>My low confidence in completing the PR also produced feelings of guilt when
+asking otherwise busy contributors for help</li>
+</ol>
+<p>In the future I hope this feeling will go away as I dig further into rustc.
+Until then, I plan to 'just' push through these feelings, keeping my main goal
+in the back of my head: Making diagnostics and lints better for rust users.</p>
+<h2 id="goals">Goals</h2>
+<p>For this March I have the following goals:</p>
+<ul>
+<li>Finishing up <a href="https://github.com/rust-lang/rust/pull/68850">the mentioned PR</a></li>
+<li>Further improving the name resolution chapter of the rustc-guide</li>
+<li>Potentially do more work around <code>librustc_resolve</code> diagnostics</li>
+</ul>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

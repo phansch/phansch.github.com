@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>One Hundred Rust PRs later</title>
+
+    <meta name="author" content="Philipp Hansch" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="alternate" type="application/atom+xml" title="phansch.net - Feed" href="http://phansch.net/atom.xml" />
+    <link rel="stylesheet" type="text/css" href="/assets/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/default.css" />
+    
+<meta name="twitter:site" content="phansch.net">
+<meta name="twitter:creator" content="@phansch">
+<meta name="twitter:title" content="One Hundred Rust PRs later">
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;phansch.net&#x2F;assets/images/twitter-card-image.jpg">
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <nav class="my-top-bar">
+      
+        <a title="About" href="/" rel="author">About</a> ╵
+        <a title="Blog" class="active" href="/writing">Blog</a> ╵
+        <a title="Reading List" href="/reading">Reading</a> ╵
+        <a title="100+ Rust PRs" href="/onehundred/rust">100+ Rust PRs</a> ╵
+        <a title="Sponsor me" href="/thanks">Sponsor me</a>
+      
+    </nav>
+
+    <a id="top"></a>
+
+    <section class="main">
+      
+  <div class="post">
+    <article class="col h-entry">
+      <h1 class="p-name">One Hundred Rust PRs later</h1>
+      <p class="meta">
+      — <a href="https:&#x2F;&#x2F;phansch.net&#x2F;posts&#x2F;onehundred-rust-prs&#x2F;" class="u-url" title="Permalink">
+          <em>
+            <time class="dt-published" datetime="2019-02-18">18 Feb 2019</time>
+          </em>
+      </a>,
+      <em>
+  
+  
+  
+  5  min read
+</em>
+      </p>
+      <div class="e-content"><p>It's hard for me to believe but it's already been <strong>over a year</strong> since I
+seriously committed to learning Rust and I have now reached my initial goal of
+100 open source contributions to the Rust ecosystem. You can see the full list
+<a href="https://phansch.net/onehundred/rust/">here</a>.</p>
+<div class="onehundred-widget">
+  <div class="progressbar">
+    <div class="value" style="width: 278%; max-width: 100%">
+      <div class="text">278 / 100</div>
+    </div>
+  </div>
+</div>
+<p>I want to use this blog post to review the work I've done, talk about
+the challenges I've come across and how I've tried to deal with them. I'm afraid
+I haven't blogged in a long time and this is a bit longer than usual.</p>
+<h1 id="clippy">Clippy!</h1>
+<p>I decided to work on Clippy for a couple of reasons:</p>
+<ul>
+<li>I love helping people and Clippy is the perfect force multiplier for that</li>
+<li>It's quick to iterate on bug fixes and new lints - Running the UI test suite
+takes only 1 minute on my machine</li>
+<li>It had a lot of reach, with at the time ~2000 GH stars (now at 3000+)</li>
+<li>Clippy had (and still has) the <a href="https://github.com/rust-lang/rust-clippy/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22good+first+issue%22">good first issue</a> label that made finding
+tasks super easy</li>
+<li>The other contributors were super responsive and helpful</li>
+<li>As a jumping point towards more advanced rustc internals</li>
+</ul>
+<p>I had done some small documentation contributions and was watching other people
+contribute new lints and such. With the beginning of 2018 I decided to focus
+on Rust in my free time as much as possible. It was also a sort of experiment on
+whether I had the grit to stay with a longer-term project.</p>
+<h2 id="january-to-march">January to March</h2>
+<p>At the beginning of January 2018, my first big Clippy contribution was <a href="https://github.com/rust-lang/rust-clippy/pull/2340">a
+Lint</a> that detects empty lines after outer attributes, such as:</p>
+<pre style="background-color:#2b303b;">
+<code class="language-rust" data-lang="rust"><span style="color:#c0c5ce;">#[</span><span style="color:#bf616a;">deny</span><span style="color:#c0c5ce;">(missing_docs)]
+
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">something_to_document</span><span style="color:#c0c5ce;">() { ... }
+</span><span style="color:#b48ead;">fn </span><span style="color:#8fa1b3;">more_to_document</span><span style="color:#c0c5ce;">() { ... }
+</span></code></pre>
+<p>The rationale for this lint is that the attribute was <em>probably</em> meant to be an
+inner attribute because it has empty lines that follow. In the process of
+writing that lint I learned that there are a <em>lot</em> of things to consider when
+linting Rust code and the lint resulted in a few false-positives that I also
+fixed.</p>
+<p>I think this experience made me aware of how much potential for improvements
+there is in Clippy and I decided to spend more time on bug fixing than adding
+new lints from then on.</p>
+<h2 id="april-to-june">April to June</h2>
+<p>To prevent Clippy crashing on essential ecosystem crates, I <a href="https://github.com/rust-lang/rust-clippy/pull/2764">added an
+integration test suite to Clippy</a> that makes sure Clippy doesn't crash
+when it's executed on them.</p>
+<p>In May I <a href="https://github.com/rust-lang/rust-clippy/pull/2733">expanded the existing build script</a> to include a check that ensures
+a recent nightly release is used to build Clippy. As of now, this has been
+removed again because Clippy is now distributed via <a href="https://rustup.rs/">Rustup</a>.</p>
+<h2 id="july-to-november">July to November</h2>
+<p>From August to November 2018 I rewrote a 300 line python script in Rust to make
+it work cross-platform: <a href="https://github.com/rust-lang/rust-clippy/pull/2985">#2985</a>, <a href="https://github.com/rust-lang/rust-clippy/pull/3320">#3320</a>, <a href="https://github.com/rust-lang/rust-clippy/pull/3325">#3325</a>,
+<a href="https://github.com/rust-lang/rust-clippy/pull/3327">#3327</a>, <a href="https://github.com/rust-lang/rust-clippy/pull/3388">#3388</a>, <a href="https://github.com/rust-lang/rust-clippy/pull/3399">#3399</a>, <a href="https://github.com/rust-lang/rust-clippy/pull/3408">#3408</a>.<br />
+If you've contributed a Clippy lint before,
+chances are that you've used one of these versions. The rewrite is probably
+worth its own blog post at some point.</p>
+<h2 id="december-to-february-2019">December to February 2019</h2>
+<p>In December I <a href="https://github.com/laumann/compiletest-rs/pull/151">added Rustfix support to the compiletest-rs
+library</a>, which in turn <a href="https://github.com/rust-lang/rust-clippy/pull/3519">allows Clippy</a> to test its
+code suggestions. This will prevent suggestion regressions, improve future
+suggestions and help pave the path to a reliable Clippy ⟺ Rustfix integration.
+This is an ongoing effort and if you want to help out with this, there is an
+open <a href="https://github.com/rust-lang/rust-clippy/issues/3630">tracking issue</a> with some instructions.</p>
+<p>In January 2019 I <a href="https://github.com/rust-lang/rust-clippy/pull/3648">added a lint</a> that detects whether a function can be <code>const</code> or
+not. This lint is currently in the <code>nursery</code> group as the <code>const_fn</code> feature is
+not fully stabilized yet. You can give it a try by using
+<code>#![warn(clippy::missing_const_for_fn)]</code> if you are on beta or nightly.</p>
+<h2 id="other-contributions">Other contributions</h2>
+<ul>
+<li>Not going into further detail, I also <a href="https://github.com/rust-lang/rust-clippy/pulls?utf8=%E2%9C%93&amp;q=is%3Apr+sort%3Aupdated-desc+author%3Aphansch+is%3Aclosed+Fix+in%3Atitle">fixed about 20 bugs and crashes</a>
+in Clippy over this time. Of those, <a href="https://github.com/rust-lang/rust-clippy/pull/2763">this one</a> is probably my favorite
+fix. I also <a href="https://phansch.net/2018/10/10/fixing-a-clippy-crash/">wrote a blog post</a> about one of them.</li>
+<li>I <a href="https://github.com/softprops/hubcaps/pull/142">added</a> the ability to create GitHub review comments to <a href="https://github.com/softprops/hubcaps">hubcaps</a></li>
+<li>I <a href="https://github.com/rust-lang/rust/pull/56792">made the tests</a> of rustc's <code>compiletest</code> runnable via <code>./x.py</code></li>
+</ul>
+<h1 id="did-it-work">Did it work?</h1>
+<p>I specifically started this project to improve my grit for longer-term projects
+and I would say that it worked. Together with other things, working on Clippy
+helped me to increase my focus to stick through harder tasks.</p>
+<p>Working on crashes where I know next to nothing in the beginning is <em>really</em>
+hard motivation wise. In one case it has caused me to step away for a couple of
+weeks. This is something that I want to still work on.</p>
+<p>I also want to solidify more fundamentals. When I go to the Rust Berlin learners
+meetup I sometimes feel like I can't explain some things properly. I suppose one
+problem of fixing bugs in Clippy is that there's not a lot of general Rust
+knowledge to learn. It's more about very specific rustc or Clippy internals.</p>
+<h1 id="what-s-next">What's next?</h1>
+<p>For the reasons mentioned at the beginning, I will absolutely continue working
+on Clippy and focus on improving its reliability. I am currently reworking the
+contribution guidelines to lower the bar of entry for new contributors and then
+want to get back to fixing bugs and crashes.</p>
+<p>However, I also want to improve my fundamentals. To do that, I'm expanding my
+Anki card collection to be able to recall more from memory and going through
+TRPL a second time.</p>
+<p>On to the next hundred contributions!</p>
+</div>
+    </article>
+    <hr />
+    <div class="about-the-author">
+      <img src="/assets/images/avatar.jpeg" height="200px" alt="avatar" class="avatar" />
+      <div>
+        <h2>Philipp Hansch</h2>
+        <h4 class="subtitle">Full Stack Developer</h4>
+        <p>
+        Philipp is a full stack developer currently heavily involved with Rust. Most notably he's a member of the Clippy team where he helps with bugfixing and documentation. You can follow him on <a href="https://twitter.com/philhansch">Twitter</a> and find him on <a href="https://github.com/phansch">GitHub</a> as well as <a href="https://patreon.com/philhansch">Patreon</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+    </section>
+
+    <footer>
+      <div id="footer-content">
+        <p>
+          <a href="mailto:hi@phansch.net" rel="me" title="hi@phansch.net">mail</a> ::
+          <a href="http://twitter.com/philhansch" rel="me" title="Follow me on Twitter">twitter</a> ::
+          <a href="http://github.com/phansch" rel="me" title="Code">git</a> ::
+          <a href="/archive/" title="More posts">archive</a> ::
+          <a href="/atom.xml" title="RSS">feed</a> ::
+          <a href="https://gist.github.com/phansch/db18a595d2f5f1ef16646af72fe1fb0e" title="Improved YARD Cheatsheet">yard cheatsheet</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
